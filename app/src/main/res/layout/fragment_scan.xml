@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+  ~     Copyright (C) 2024-present StellarSand
+  ~
+  ~     This program is free software: you can redistribute it and/or modify
+  ~     it under the terms of the GNU General Public License as published by
+  ~     the Free Software Foundation, either version 3 of the License, or
+  ~     (at your option) any later version.
+  ~
+  ~     This program is distributed in the hope that it will be useful,
+  ~     but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~     GNU General Public License for more details.
+  ~
+  ~     You should have received a copy of the GNU General Public License
+  ~     along with this program.  If not, see <https://www.gnu.org/licenses/>.
+  -->
+
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/scanCoordLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragments.main.ScanFragment">
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/password_box"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/margin_16"
+        android:layout_marginTop="@dimen/margin_16"
+        app:passwordToggleEnabled="true">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/password_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/scan_your_password"
+            android:textAlignment="viewStart"
+            android:textColor="?attr/colorOnSurface"
+            android:textSize="@dimen/text_17"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="78dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="@dimen/margin_20"
+            android:paddingBottom="120dp">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/checkBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginHorizontal="@dimen/margin_30"
+                android:layout_marginTop="@dimen/margin_16"
+                android:enabled="false"
+                app:icon="@drawable/ic_check"
+                app:iconGravity="textStart"
+                android:text="@string/check"
+                android:textSize="@dimen/text_16"/>
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/progressIndicator"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/checkBtn"
+                android:scaleX="1.4"
+                android:scaleY="1.4"
+                app:lottie_rawRes="@raw/lottie_progress_indicator"
+                app:lottie_loop="true"
+                app:lottie_autoPlay="true"
+                android:visibility="invisible"
+                tools:visibility="visible"
+                app:lottie_colorFilter="?attr/colorPrimary"/>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/foundInBreachTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/progressIndicator"
+                android:layout_marginStart="@dimen/margin_6.5"
+                android:layout_marginTop="@dimen/margin_8"
+                android:drawableStart="@drawable/ic_found"
+                android:drawablePadding="@dimen/margin_12"
+                android:text="@string/found_in_breach"
+                android:textSize="@dimen/text_17"
+                style="@style/MediumBoldText"/>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/foundInBreachSubtitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="@id/foundInBreachTitle"
+                app:layout_constraintTop_toBottomOf="@id/foundInBreachTitle"
+                android:layout_marginStart="@dimen/margin_30"
+                android:layout_marginTop="@dimen/margin_2.5"
+                android:paddingStart="@dimen/margin_8"
+                android:paddingEnd="@dimen/margin_8"
+                android:text="@string/na"
+                android:textColor="?attr/colorControlNormal"
+                android:textSize="@dimen/text_17"
+                style="@style/MediumBoldText"/>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/timesFoundTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/foundInBreachSubtitle"
+                android:layout_marginStart="@dimen/margin_6.5"
+                android:layout_marginTop="@dimen/margin_25"
+                android:drawableStart="@drawable/ic_times_found"
+                android:drawablePadding="@dimen/margin_12"
+                android:text="@string/times_found"
+                android:textSize="@dimen/text_17"
+                style="@style/MediumBoldText"/>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/timesFoundSubtitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="@id/timesFoundTitle"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/timesFoundTitle"
+                android:layout_marginStart="@dimen/margin_40"
+                android:layout_marginEnd="@dimen/margin_20"
+                android:layout_marginTop="@dimen/margin_2.5"
+                android:paddingHorizontal="@dimen/margin_4"
+                android:text="@string/na"
+                android:textColor="?attr/colorControlNormal"
+                android:textSize="@dimen/text_17"/>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/suggestionTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/timesFoundSubtitle"
+                android:layout_marginStart="@dimen/margin_6.5"
+                android:layout_marginTop="@dimen/margin_25"
+                android:drawableStart="@drawable/ic_suggestion"
+                android:drawablePadding="@dimen/margin_12"
+                android:text="@string/suggestion"
+                android:textSize="@dimen/text_17"
+                style="@style/MediumBoldText"/>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/suggestionSubtitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="@id/suggestionTitle"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/suggestionTitle"
+                android:layout_marginStart="@dimen/margin_40"
+                android:layout_marginEnd="@dimen/margin_20"
+                android:layout_marginTop="@dimen/margin_2.5"
+                android:paddingHorizontal="@dimen/margin_4"
+                android:text="@string/na"
+                android:textColor="?attr/colorControlNormal"
+                android:textSize="@dimen/text_17"/>
+
+            <include
+                layout="@layout/divider_horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                app:layout_constraintTop_toBottomOf="@id/suggestionSubtitle"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginHorizontal="@dimen/margin_4"
+                android:layout_marginTop="@dimen/margin_20"/>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/infoText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="@id/divider"
+                app:layout_constraintEnd_toEndOf="@id/divider"
+                app:layout_constraintTop_toBottomOf="@id/divider"
+                android:layout_marginTop="@dimen/margin_20"
+                android:drawableStart="@drawable/ic_info"
+                android:drawablePadding="@dimen/margin_12"
+                android:text="@string/passwords_stays_private"
+                android:textColor="?attr/colorOnSurface"
+                android:textSize="@dimen/text_17"/>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tapHereBtn"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="@id/infoText"
+                app:layout_constraintEnd_toEndOf="@id/infoText"
+                app:layout_constraintTop_toBottomOf="@id/infoText"
+                android:paddingStart="@dimen/margin_35"
+                android:paddingEnd="@dimen/margin_8"
+                android:paddingVertical="@dimen/margin_8"
+                android:text="@string/tap_here"
+                android:textSize="@dimen/text_17"
+                android:textColor="@color/color_url"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?android:attr/selectableItemBackground"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/scanMultipleFab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_marginEnd="@dimen/margin_16"
+        android:layout_marginBottom="@dimen/margin_20"
+        android:src="@drawable/ic_scan_multiple_fab"
+        android:contentDescription="@string/scan_multi_pwds"
+        app:layout_behavior="com.google.android.material.floatingactionbutton.FloatingActionButton$Behavior"/>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

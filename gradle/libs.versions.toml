@@ -1,0 +1,30 @@
+[versions]
+androidGradle = "8.4.0"
+androidKotlin = "1.9.23"
+appcompat = "1.6.1"
+coreKtx = "1.13.1"
+material3 = "1.12.0"
+navigationKtx = "2.7.7"
+retrofit2 = "2.11.0"
+lottie = "6.4.0"
+androidfastscrollKt = "v1.0.3"
+
+[libraries]
+androidx-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appcompat" }
+androidx-core-ktx = { module = "androidx.core:core-ktx", version.ref = "coreKtx" }
+material3 = { module = "com.google.android.material:material", version.ref = "material3" }
+androidx-navigation-runtime-ktx = { module = "androidx.navigation:navigation-runtime-ktx", version.ref = "navigationKtx" }
+androidx-navigation-fragment-ktx = { module = "androidx.navigation:navigation-fragment-ktx", version.ref = "navigationKtx" }
+androidx-navigation-ui-ktx = { module = "androidx.navigation:navigation-ui-ktx", version.ref = "navigationKtx" }
+retrofit2 = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit2" }
+retrofit2-converter-scalars = { module = "com.squareup.retrofit2:converter-scalars", version.ref = "retrofit2" }
+lottie = { module = "com.airbnb.android:lottie", version.ref = "lottie" }
+androidFastScrollKt = { module = "com.github.StellarSand:AndroidFastScroll-kt", version.ref = "androidfastscrollKt" }
+
+[bundles]
+navigation = ["androidx-navigation-runtime-ktx", "androidx-navigation-fragment-ktx", "androidx-navigation-ui-ktx"]
+retrofit2 = ["retrofit2", "retrofit2-converter-scalars"]
+
+[plugins]
+android-application = { id = "com.android.application", version.ref = "androidGradle" }
+android-kotlin = { id = "org.jetbrains.kotlin.android", version.ref = "androidKotlin" }

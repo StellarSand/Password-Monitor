@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+  ~     Copyright (C) 2024-present StellarSand
+  ~
+  ~     This program is free software: you can redistribute it and/or modify
+  ~     it under the terms of the GNU General Public License as published by
+  ~     the Free Software Foundation, either version 3 of the License, or
+  ~     (at your option) any later version.
+  ~
+  ~     This program is distributed in the hope that it will be useful,
+  ~     but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~     GNU General Public License for more details.
+  ~
+  ~     You should have received a copy of the GNU General Public License
+  ~     along with this program.  If not, see <https://www.gnu.org/licenses/>.
+  -->
+
+<resources>
+
+    <string name="app_wiki_url" translatable="false">https://github.com/StellarSand/Password-Monitor/wiki</string>
+    <string name="app_privacy_policy_url" translatable="false">https://github.com/StellarSand/Password-Monitor/blob/master/PRIVACY.md</string>
+    <string name="app_issues_url" translatable="false">https://github.com/StellarSand/Password-Monitor/issues</string>
+    <string name="app_github_url" translatable="false">https://github.com/StellarSand/Password-Monitor</string>
+
+    <!--Support bottom sheet-->
+    <string name="liberapay_url" translatable="false">https://liberapay.com/stellarsand</string>
+    <string name="paypal_url" translatable="false">https://www.paypal.com/paypalme/stellarsand</string>
+    <string name="kofi_url" translatable="false">https://ko-fi.com/stellarsand</string>
+
+    <!--Licenses bottom sheet-->
+    <string name="retrofit_license_url" translatable="false">https://github.com/square/retrofit/blob/master/LICENSE.txt</string>
+    <string name="lottie_android_license_url" translatable="false">https://github.com/airbnb/lottie-android/blob/master/LICENSE</string>
+    <string name="lottie_files_license_url" translatable="false">https://lottiefiles.com/page/license</string>
+    <string name="fastscroll_license_url" translatable="false">https://github.com/StellarSand/AndroidFastScroll-kt/blob/master/LICENSE</string>
+    <string name="liberapay_icon_license_url" translatable="false">https://liberapay.com/about/logos</string>
+    <string name="paypal_icon_license_url" translatable="false">https://commons.wikimedia.org/wiki/Category:SVG_PayPal_logos</string>
+    <string name="kofi_icon_license_url" translatable="false">https://more.ko-fi.com/brand-assets</string>
+
+</resources>

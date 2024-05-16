@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+  ~     Copyright (C) 2024-present StellarSand
+  ~
+  ~     This program is free software: you can redistribute it and/or modify
+  ~     it under the terms of the GNU General Public License as published by
+  ~     the Free Software Foundation, either version 3 of the License, or
+  ~     (at your option) any later version.
+  ~
+  ~     This program is distributed in the hope that it will be useful,
+  ~     but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~     GNU General Public License for more details.
+  ~
+  ~     You should have received a copy of the GNU General Public License
+  ~     along with this program.  If not, see <https://www.gnu.org/licenses/>.
+  -->
+
+<resources>
+
+    <string name="app_name" translatable="false">Password Monitor</string>
+    <string name="na" translatable="false">-</string>
+
+    <string name="bottom_sheet_title" translatable="false">Bottom Sheet Title</string>
+
+    <!--Support methods-->
+    <string name="liberapay" translatable="false">Liberapay</string>
+    <string name="paypal" translatable="false">PayPal</string>
+    <string name="kofi" translatable="false">Ko-fi</string>
+
+    <!--Licenses title-->
+    <string name="retrofit" translatable="false">Retrofit</string>
+    <string name="lottie_android" translatable="false">lottie-android</string>
+    <string name="lottie_files" translatable="false">LottieFiles</string>
+    <string name="fastscroll" translatable="false">AndroidFastScroll-kt</string>
+    <string name="liberapay_icon" translatable="false">Liberapay icon</string>
+    <string name="paypal_icon" translatable="false">PayPal icon</string>
+    <string name="kofi_icon" translatable="false">Ko-fi icon</string>
+
+    <string name="copyright_square" translatable="false">Copyright \u00A9 2013 Square, Inc.</string>
+    <string name="copyright_fastscroll" translatable="false">Copyright \u00A9 2023-present StellarSand</string>
+
+</resources>

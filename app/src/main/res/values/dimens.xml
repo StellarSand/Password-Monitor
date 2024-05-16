@@ -1,0 +1,45 @@
+<!--
+  ~     Copyright (C) 2024-present StellarSand
+  ~
+  ~     This program is free software: you can redistribute it and/or modify
+  ~     it under the terms of the GNU General Public License as published by
+  ~     the Free Software Foundation, either version 3 of the License, or
+  ~     (at your option) any later version.
+  ~
+  ~     This program is distributed in the hope that it will be useful,
+  ~     but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~     GNU General Public License for more details.
+  ~
+  ~     You should have received a copy of the GNU General Public License
+  ~     along with this program.  If not, see <https://www.gnu.org/licenses/>.
+  -->
+
+<resources>
+
+    <!--Margins & paddings-->
+    <dimen name="margin_75">75dp</dimen>
+    <dimen name="margin_40">40dp</dimen>
+    <dimen name="margin_35">35dp</dimen>
+    <dimen name="margin_32">32dp</dimen>
+    <dimen name="margin_30">30dp</dimen>
+    <dimen name="margin_25">25dp</dimen>
+    <dimen name="margin_22">22dp</dimen>
+    <dimen name="margin_20">20dp</dimen>
+    <dimen name="margin_16">16dp</dimen>
+    <dimen name="margin_12">12dp</dimen>
+    <dimen name="margin_10">10dp</dimen>
+    <dimen name="margin_8">8dp</dimen>
+    <dimen name="margin_6.5">6.5dp</dimen>
+    <dimen name="margin_4">4dp</dimen>
+    <dimen name="margin_2.5">2.5dp</dimen>
+
+    <!--Text-->
+    <dimen name="text_20">20sp</dimen>
+    <dimen name="text_19">19sp</dimen>
+    <dimen name="text_18">18sp</dimen>
+    <dimen name="text_17">17sp</dimen>
+    <dimen name="text_16">16sp</dimen>
+    <dimen name="text_15">15sp</dimen>
+
+</resources>

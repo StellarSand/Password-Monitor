@@ -1,0 +1,102 @@
+<!--
+  ~     Copyright (C) 2024-present StellarSand
+  ~
+  ~     This program is free software: you can redistribute it and/or modify
+  ~     it under the terms of the GNU General Public License as published by
+  ~     the Free Software Foundation, either version 3 of the License, or
+  ~     (at your option) any later version.
+  ~
+  ~     This program is distributed in the hope that it will be useful,
+  ~     but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~     GNU General Public License for more details.
+  ~
+  ~     You should have received a copy of the GNU General Public License
+  ~     along with this program.  If not, see <https://www.gnu.org/licenses/>.
+  -->
+
+<resources>
+
+    <!--
+    Ensure proper encoding of characters when translating to other languages.
+    example: ä as \u00E4, é as \u00E9 etc.
+    -->
+
+    <string name="app_version">Version</string>
+
+    <!--Bottom nav view-->
+    <string name="scan">Scan</string>
+    <string name="settings">Settings</string>
+
+    <!--#########################################################################################-->
+
+    <!--Scan fragment-->
+    <string name="scan_your_password">Scan your password</string>
+    <string name="check">Check</string>
+    <string name="details">Details</string>
+    <string name="found_in_breach">Found in breach</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="times_found">Number of times found</string>
+    <string name="suggestion">Suggestion</string>
+    <string name="breached_suggestion">This password has been compromised in a data breach and should never be used.\nIf you\'ve ever used it anywhere, change it immediately.</string>
+    <string name="not_breached_suggestion">Your password wasn\'t identified in a data breach.\nThis doesn\'t necessarily mean it\'s a secure password.</string>
+    <string name="passwords_stays_private">Your password remains confidential and is never shared with anyone.
+        \nCurious about how this is achieved?</string>
+    <string name="tap_here">Tap here for a detailed explanation.</string>
+
+    <!--#########################################################################################-->
+
+    <!--Multi password activity-->
+    <string name="view">View</string>
+    <string name="sort">Sort</string>
+
+    <!--#########################################################################################-->
+
+    <!--Settings fragment-->
+    <string name="appearance">Appearance</string>
+    <string name="theme">Theme</string>
+    <string name="material_you">Material You\n(requires app restart)</string>
+    <string name="privacy">Privacy</string>
+    <string name="block_screenshots">Block screenshots in app</string>
+    <string name="incognito_keyboard">Incognito keyboard</string>
+    <string name="about">About</string>
+    <string name="privacy_policy">Privacy Policy</string>
+    <string name="third_party_licenses">Third party licenses</string>
+    <string name="report_issue">Report an issue</string>
+    <string name="support">Support</string>
+    <string name="view_on_github">View on GitHub</string>
+
+    <!--#########################################################################################-->
+
+    <!--Bottom sheet-->
+    <string name="cancel">Cancel</string>
+    <string name="retry">Retry</string>
+    <string name="done">Done</string>
+
+    <!--No Network/Internet-->
+    <string name="no_network_title">No Network/Internet</string>
+    <string name="no_network_subtitle">Connect to Wi-Fi or mobile data and retry.
+        If already connected, make sure it has an internet connection.</string>
+
+    <!--Test multiple passwords-->
+    <string name="scan_multi_pwds">Scan multiple passwords</string>
+    <string name="add">Add</string>
+    <string name="select_file">Select file</string>
+
+    <!--Add multiple passwords-->
+    <string name="add_multi_pwds">Add multiple passwords</string>
+
+    <!--Theme-->
+    <string name="follow_system">Follow system</string>
+    <string name="light">Light</string>
+    <string name="dark">Dark</string>
+
+    <!--#########################################################################################-->
+
+    <!--Snackbars-->
+    <string name="no_browsers">No browsers installed on this device</string>
+    <string name="something_went_wrong">Something went wrong</string>
+    <string name="nothing_to_share">Nothing to share</string>
+
+</resources>

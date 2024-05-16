@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+  ~     Copyright (C) 2024-present StellarSand
+  ~
+  ~     This program is free software: you can redistribute it and/or modify
+  ~     it under the terms of the GNU General Public License as published by
+  ~     the Free Software Foundation, either version 3 of the License, or
+  ~     (at your option) any later version.
+  ~
+  ~     This program is distributed in the hope that it will be useful,
+  ~     but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~     GNU General Public License for more details.
+  ~
+  ~     You should have received a copy of the GNU General Public License
+  ~     along with this program.  If not, see <https://www.gnu.org/licenses/>.
+  -->
+
+<resources>
+
+    <color name="color_primary">#A3C9FE</color>
+    <color name="color_onPrimary">#00315C</color>
+    <color name="color_primaryContainer">#1F4876</color>
+    <color name="color_onPrimaryContainer">#D3E4FF</color>
+    <color name="color_secondary">#BCC7DB</color>
+    <color name="color_onSecondary">#263141</color>
+    <color name="color_secondaryContainer">#3C4758</color>
+    <color name="color_onSecondaryContainer">#D8E3F8</color>
+    <color name="color_tertiary">#D9BDE3</color>
+    <color name="color_onTertiary">#3C2947</color>
+    <color name="color_tertiaryContainer">#543F5E</color>
+    <color name="color_onTertiaryContainer">#F5D9FF</color>
+    <color name="color_error">#FFB4AB</color>
+    <color name="color_onError">#690005</color>
+    <color name="color_errorContainer">#93000A</color>
+    <color name="color_onErrorContainer">#FFDAD6</color>
+    <color name="color_background">#111318</color>
+    <color name="color_onBackground">#E1E2E8</color>
+    <color name="color_surface">#111318</color>
+    <color name="color_onSurface">#E1E2E8</color>
+    <color name="color_surfaceVariant">#43474E</color>
+    <color name="color_onSurfaceVariant">#C3C6CF</color>
+    <color name="color_outline">#8D9199</color>
+    <color name="color_outlineVariant">#43474E</color>
+    <color name="color_scrim">#000000</color>
+    <color name="color_inverseSurface">#E1E2E8</color>
+    <color name="color_inverseOnSurface">#2E3035</color>
+    <color name="color_inversePrimary">#3A608F</color>
+    <color name="color_primaryFixed">#D3E4FF</color>
+    <color name="color_onPrimaryFixed">#001C38</color>
+    <color name="color_primaryFixedDim">#A3C9FE</color>
+    <color name="color_onPrimaryFixedVariant">#1F4876</color>
+    <color name="color_secondaryFixed">#D8E3F8</color>
+    <color name="color_onSecondaryFixed">#111C2B</color>
+    <color name="color_secondaryFixedDim">#BCC7DB</color>
+    <color name="color_onSecondaryFixedVariant">#3C4758</color>
+    <color name="color_tertiaryFixed">#F5D9FF</color>
+    <color name="color_onTertiaryFixed">#261430</color>
+    <color name="color_tertiaryFixedDim">#D9BDE3</color>
+    <color name="color_onTertiaryFixedVariant">#543F5E</color>
+    <color name="color_surfaceDim">#111318</color>
+    <color name="color_surfaceBright">#37393E</color>
+    <color name="color_surfaceContainerLowest">#0C0E13</color>
+    <color name="color_surfaceContainerLow">#191C20</color>
+    <color name="color_surfaceContainer">#1D2024</color>
+    <color name="color_surfaceContainerHigh">#272A2F</color>
+    <color name="color_surfaceContainerHighest">#32353A</color>
+    <color name="color_primary_mediumContrast">#AACDFF</color>
+    <color name="color_onPrimary_mediumContrast">#00172F</color>
+    <color name="color_primaryContainer_mediumContrast">#6E93C5</color>
+    <color name="color_onPrimaryContainer_mediumContrast">#000000</color>
+    <color name="color_secondary_mediumContrast">#C0CBE0</color>
+    <color name="color_onSecondary_mediumContrast">#0B1725</color>
+    <color name="color_secondaryContainer_mediumContrast">#8691A4</color>
+    <color name="color_onSecondaryContainer_mediumContrast">#000000</color>
+    <color name="color_tertiary_mediumContrast">#DDC1E7</color>
+    <color name="color_onTertiary_mediumContrast">#210E2B</color>
+    <color name="color_tertiaryContainer_mediumContrast">#A188AB</color>
+    <color name="color_onTertiaryContainer_mediumContrast">#000000</color>
+    <color name="color_error_mediumContrast">#FFBAB1</color>
+    <color name="color_onError_mediumContrast">#370001</color>
+    <color name="color_errorContainer_mediumContrast">#FF5449</color>
+    <color name="color_onErrorContainer_mediumContrast">#000000</color>
+    <color name="color_background_mediumContrast">#111318</color>
+    <color name="color_onBackground_mediumContrast">#E1E2E8</color>
+    <color name="color_surface_mediumContrast">#111318</color>
+    <color name="color_onSurface_mediumContrast">#FBFAFF</color>
+    <color name="color_surfaceVariant_mediumContrast">#43474E</color>
+    <color name="color_onSurfaceVariant_mediumContrast">#C7CBD3</color>
+    <color name="color_outline_mediumContrast">#9FA3AB</color>
+    <color name="color_outlineVariant_mediumContrast">#7F838B</color>
+    <color name="color_scrim_mediumContrast">#000000</color>
+    <color name="color_inverseSurface_mediumContrast">#E1E2E8</color>
+    <color name="color_inverseOnSurface_mediumContrast">#272A2F</color>
+    <color name="color_inversePrimary_mediumContrast">#204977</color>
+    <color name="color_primaryFixed_mediumContrast">#D3E4FF</color>
+    <color name="color_onPrimaryFixed_mediumContrast">#001227</color>
+    <color name="color_primaryFixedDim_mediumContrast">#A3C9FE</color>
+    <color name="color_onPrimaryFixedVariant_mediumContrast">#053764</color>
+    <color name="color_secondaryFixed_mediumContrast">#D8E3F8</color>
+    <color name="color_onSecondaryFixed_mediumContrast">#061220</color>
+    <color name="color_secondaryFixedDim_mediumContrast">#BCC7DB</color>
+    <color name="color_onSecondaryFixedVariant_mediumContrast">#2C3747</color>
+    <color name="color_tertiaryFixed_mediumContrast">#F5D9FF</color>
+    <color name="color_onTertiaryFixed_mediumContrast">#1B0925</color>
+    <color name="color_tertiaryFixedDim_mediumContrast">#D9BDE3</color>
+    <color name="color_onTertiaryFixedVariant_mediumContrast">#422F4D</color>
+    <color name="color_surfaceDim_mediumContrast">#111318</color>
+    <color name="color_surfaceBright_mediumContrast">#37393E</color>
+    <color name="color_surfaceContainerLowest_mediumContrast">#0C0E13</color>
+    <color name="color_surfaceContainerLow_mediumContrast">#191C20</color>
+    <color name="color_surfaceContainer_mediumContrast">#1D2024</color>
+    <color name="color_surfaceContainerHigh_mediumContrast">#272A2F</color>
+    <color name="color_surfaceContainerHighest_mediumContrast">#32353A</color>
+    <color name="color_primary_highContrast">#FBFAFF</color>
+    <color name="color_onPrimary_highContrast">#000000</color>
+    <color name="color_primaryContainer_highContrast">#AACDFF</color>
+    <color name="color_onPrimaryContainer_highContrast">#000000</color>
+    <color name="color_secondary_highContrast">#FBFAFF</color>
+    <color name="color_onSecondary_highContrast">#000000</color>
+    <color name="color_secondaryContainer_highContrast">#C0CBE0</color>
+    <color name="color_onSecondaryContainer_highContrast">#000000</color>
+    <color name="color_tertiary_highContrast">#FFF9FB</color>
+    <color name="color_onTertiary_highContrast">#000000</color>
+    <color name="color_tertiaryContainer_highContrast">#DDC1E7</color>
+    <color name="color_onTertiaryContainer_highContrast">#000000</color>
+    <color name="color_error_highContrast">#FFF9F9</color>
+    <color name="color_onError_highContrast">#000000</color>
+    <color name="color_errorContainer_highContrast">#FFBAB1</color>
+    <color name="color_onErrorContainer_highContrast">#000000</color>
+    <color name="color_background_highContrast">#111318</color>
+    <color name="color_onBackground_highContrast">#E1E2E8</color>
+    <color name="color_surface_highContrast">#111318</color>
+    <color name="color_onSurface_highContrast">#FFFFFF</color>
+    <color name="color_surfaceVariant_highContrast">#43474E</color>
+    <color name="color_onSurfaceVariant_highContrast">#FBFAFF</color>
+    <color name="color_outline_highContrast">#C7CBD3</color>
+    <color name="color_outlineVariant_highContrast">#C7CBD3</color>
+    <color name="color_scrim_highContrast">#000000</color>
+    <color name="color_inverseSurface_highContrast">#E1E2E8</color>
+    <color name="color_inverseOnSurface_highContrast">#000000</color>
+    <color name="color_inversePrimary_highContrast">#002B51</color>
+    <color name="color_primaryFixed_highContrast">#DAE8FF</color>
+    <color name="color_onPrimaryFixed_highContrast">#000000</color>
+    <color name="color_primaryFixedDim_highContrast">#AACDFF</color>
+    <color name="color_onPrimaryFixedVariant_highContrast">#00172F</color>
+    <color name="color_secondaryFixed_highContrast">#DCE7FC</color>
+    <color name="color_onSecondaryFixed_highContrast">#000000</color>
+    <color name="color_secondaryFixedDim_highContrast">#C0CBE0</color>
+    <color name="color_onSecondaryFixedVariant_highContrast">#0B1725</color>
+    <color name="color_tertiaryFixed_highContrast">#F7DFFF</color>
+    <color name="color_onTertiaryFixed_highContrast">#000000</color>
+    <color name="color_tertiaryFixedDim_highContrast">#DDC1E7</color>
+    <color name="color_onTertiaryFixedVariant_highContrast">#210E2B</color>
+    <color name="color_surfaceDim_highContrast">#111318</color>
+    <color name="color_surfaceBright_highContrast">#37393E</color>
+    <color name="color_surfaceContainerLowest_highContrast">#0C0E13</color>
+    <color name="color_surfaceContainerLow_highContrast">#191C20</color>
+    <color name="color_surfaceContainer_highContrast">#1D2024</color>
+    <color name="color_surfaceContainerHigh_highContrast">#272A2F</color>
+    <color name="color_surfaceContainerHighest_highContrast">#32353A</color>
+
+    <color name="color_scrollbar">#717274</color>
+    <color name="color_url">#42A5F5</color>
+
+    <color name="color_found_in_breach">#FF8980</color>
+    <color name="color_not_found_in_breach">#4ADC8C</color>
+
+</resources>

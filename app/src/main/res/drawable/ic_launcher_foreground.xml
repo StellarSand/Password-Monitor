@@ -1,0 +1,29 @@
+<!--
+  ~     Copyright (C) 2024-present StellarSand
+  ~
+  ~     This program is free software: you can redistribute it and/or modify
+  ~     it under the terms of the GNU General Public License as published by
+  ~     the Free Software Foundation, either version 3 of the License, or
+  ~     (at your option) any later version.
+  ~
+  ~     This program is distributed in the hope that it will be useful,
+  ~     but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~     GNU General Public License for more details.
+  ~
+  ~     You should have received a copy of the GNU General Public License
+  ~     along with this program.  If not, see <https://www.gnu.org/licenses/>.
+  -->
+
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="960"
+    android:viewportHeight="960">
+  <group android:scaleX="0.47142857"
+      android:scaleY="0.47142857"
+      android:translateX="253.71428"
+      android:translateY="253.71428">
+      <path android:fillColor="@android:color/white" android:pathData="M400.77 633.08h158.46q15.37 0 25.76-10.4 10.39-10.39 10.39-25.76V478.46q0-15.36-10.39-25.76-10.39-10.39-25.76-10.39h-3.46v-40q0-31.46-21.96-53.42-21.96-21.97-53.42-21.97-31.47 0-53.43 21.97Q405 370.85 405 402.31v40h-4.23q-15.37 0-25.76 10.39-10.39 10.4-10.39 25.76v118.46q0 15.37 10.39 25.76 10.39 10.4 25.76 10.4zm39.62-190.77v-40q0-17 11.5-28.5t28.5-11.5q17 0 28.5 11.5t11.5 28.5v40h-80zM480 854.84q-6.23 0-12.23-1t-11.62-3q-126.53-45-201.34-159.57Q180 576.69 180 444V263.85q0-22.79 13.11-41.03 13.1-18.23 33.89-26.43l227.69-85q12.85-4.62 25.31-4.62 12.46 0 25.31 4.62l227.69 85q20.79 8.2 33.89 26.43Q780 241.06 780 263.85V444q0 132.69-74.81 247.27-74.81 114.57-201.34 159.57-5.62 2-11.62 3-6 1-12.23 1zm0-58.84q104-33 172-132t68-220V263.46q0-3.84-2.12-6.92-2.11-3.08-5.96-4.62l-227.69-85q-1.92-0.77-4.23-0.77-2.31 0-4.23 0.77l-227.69 85q-3.85 1.54-5.96 4.62-2.12 3.08-2.12 6.92V444q0 121 68 220t172 132zm0-315.23z"/>
+  </group>
+</vector>

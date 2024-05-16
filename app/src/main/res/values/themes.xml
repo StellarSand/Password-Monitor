@@ -1,0 +1,47 @@
+<!--
+  ~     Copyright (C) 2024-present StellarSand
+  ~
+  ~     This program is free software: you can redistribute it and/or modify
+  ~     it under the terms of the GNU General Public License as published by
+  ~     the Free Software Foundation, either version 3 of the License, or
+  ~     (at your option) any later version.
+  ~
+  ~     This program is distributed in the hope that it will be useful,
+  ~     but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~     GNU General Public License for more details.
+  ~
+  ~     You should have received a copy of the GNU General Public License
+  ~     along with this program.  If not, see <https://www.gnu.org/licenses/>.
+  -->
+
+<resources>
+
+    <!--App light theme-->
+    <style name="AppTheme" parent="BaseAppStyle">
+        <item name="android:windowLightStatusBar">true</item>
+    </style>
+
+    <!--Theme chips-->
+    <style name="FollowSystemChipTheme" parent="BaseThemeChipStyle">
+        <item name="closeIcon">@drawable/ic_system_default</item>
+        <item name="android:text">@string/follow_system</item>
+    </style>
+
+    <style name="LightChipTheme" parent="BaseThemeChipStyle">
+        <item name="closeIcon">@drawable/ic_light</item>
+        <item name="android:text">@string/light</item>
+    </style>
+
+    <style name="DarkChipTheme" parent="BaseThemeChipStyle">
+        <item name="closeIcon">@drawable/ic_dark</item>
+        <item name="android:text">@string/dark</item>
+    </style>
+
+    <!--Bottom sheet theme-->
+    <style name="BottomSheetTheme" parent="@style/ThemeOverlay.Material3.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/CustomBottomSheet</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+    </style>
+
+</resources>
