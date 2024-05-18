@@ -1,0 +1,10 @@
+Bu uygulama <a href="https://haveibeenpwned.com">Have I Been Pwned?</a> ile sorunsuz bir şekilde entegre olarak şifrelerinizin kamuya açık veri ihlallerinde tehlikeye girip girmediğini doğrulamanıza yardımcı olur.
+Parolalarınız gizli kalır ve asla hiçbir yerde paylaşılmaz.
+
+Özellikler
+
+- Tamamen açık kaynak
+- Material Design 3 & Material You
+- Hem açık hem de koyu temayı destekler
+- Reklam yok
+- Kişisel veri toplama yok

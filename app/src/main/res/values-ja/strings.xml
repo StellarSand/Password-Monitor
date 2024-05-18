@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+  ~     Copyright (C) 2024-present StellarSand
+  ~
+  ~     This program is free software: you can redistribute it and/or modify
+  ~     it under the terms of the GNU General Public License as published by
+  ~     the Free Software Foundation, either version 3 of the License, or
+  ~     (at your option) any later version.
+  ~
+  ~     This program is distributed in the hope that it will be useful,
+  ~     but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~     GNU General Public License for more details.
+  ~
+  ~     You should have received a copy of the GNU General Public License
+  ~     along with this program.  If not, see <https://www.gnu.org/licenses/>.
+  -->
+
+<resources>
+
+    <string name="app_version">バージョン</string>
+
+    <!--Bottom nav view-->
+    <string name="scan">スキャン</string>
+    <string name="settings">設定</string>
+
+    <!--#########################################################################################-->
+
+    <!--Scan fragment-->
+    <string name="scan_your_password">パスワードをスキャンする</string>
+    <string name="check">チェック</string>
+    <string name="details">詳細</string>
+    <string name="found_in_breach">違反が発覚</string>
+    <string name="yes">はい</string>
+    <string name="no">いいえ</string>
+    <string name="times_found">発見回数</string>
+    <string name="suggestion">提案</string>
+    <string name="breached_suggestion">このパスワードはデータ流出事件で漏洩したものであり、決して使用してはならない。\n一度でも使用したことがある場合は、直ちに変更してください。</string>
+    <string name="not_breached_suggestion">あなたのパスワードはデータ漏洩で特定されませんでした。\nこれは必ずしも安全なパスワードであることを意味しません。</string>
+    <string name="passwords_stays_private">あなたのパスワードは秘密保持され、誰とも共有されることはありません。
+        \nこれがどのように実現されているのか興味がありますか？</string>
+    <string name="tap_here">詳しい説明はこちらをタップ。</string>
+
+    <!--#########################################################################################-->
+
+    <!--Multi password activity-->
+    <string name="view">表示</string>
+    <string name="sort">ソート</string>
+
+    <!--#########################################################################################-->
+
+    <!--Settings fragment-->
+    <string name="appearance">外観</string>
+    <string name="theme">テーマ</string>
+    <string name="material_you">マテリアルユー\n(アプリの再起動が必要)</string>
+    <string name="privacy">プライバシー</string>
+    <string name="block_screenshots">アプリでスクリーンショットをブロック</string>
+    <string name="incognito_keyboard">インコグニートキーボード</string>
+    <string name="about">約</string>
+    <string name="privacy_policy">プライバシーポリシー</string>
+    <string name="report_issue">問題を報告する</string>
+    <string name="support">サポート</string>
+    <string name="third_party_licenses">サードパーティライセンス</string>
+    <string name="view_on_github">GitHubを見る</string>
+
+    <!--#########################################################################################-->
+
+    <!--Bottom sheet-->
+    <string name="cancel">キャンセル</string>
+    <string name="retry">リトライ</string>
+    <string name="done">完了</string>
+
+    <!--No Network/Internet-->
+    <string name="no_network_title">ネットワーク/インターネットなし</string>
+    <string name="no_network_subtitle">Wi-Fiまたはモバイルデータに接続し、再試行してください。
+        すでに接続されている場合は、インターネットに接続されていることを確認してください。</string>
+
+    <!--Scan multiple passwords-->
+    <string name="scan_multi_pwds">複数のパスワードをスキャンする</string>
+    <string name="add">追加</string>
+    <string name="select_file">ファイルを選ぶ</string>
+
+    <!--Add multiple passwords-->
+    <string name="add_multi_pwds">複数のパスワードを追加する</string>
+
+    <!--Theme-->
+    <string name="follow_system">フォローシステム</string>
+    <string name="light">光</string>
+    <string name="dark">闇</string>
+
+    <!--#########################################################################################-->
+
+    <!--Snackbars-->
+    <string name="no_browsers">このデバイスにブラウザがインストールされていません</string>
+    <string name="something_went_wrong">何かが間違っていた</string>
+
+</resources>

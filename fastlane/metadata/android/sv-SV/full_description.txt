@@ -1,0 +1,10 @@
+Den här appen integreras sömlöst med <a href="https://haveibeenpwned.com">Have I Been Pwned?</a> för att hjälpa dig att verifiera om dina lösenord har äventyrats i några offentligt avslöjade dataintrång.
+Dina lösenord förblir privata och delas aldrig någonstans.
+
+Funktioner:
+
+- Helt öppen källkod
+- Material design 3 & Material You
+- Stöder både ljust och mörkt tema
+- Inga annonser
+- Ingen insamling av personuppgifter

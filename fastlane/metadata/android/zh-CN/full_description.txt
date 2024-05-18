@@ -1,0 +1,10 @@
+本应用程序与 <a href="https://haveibeenpwned.com">Have I Been Pwned?</a> 无缝集成，帮助您验证您的密码是否在任何公开披露的数据泄露事件中被泄露。
+您的密码保持私密，绝不会在任何地方共享。
+
+功能特点
+
+- 完全开源
+- Material design 3 和 Material You
+- 支持浅色和深色主题
+- 无广告
+- 不收集个人数据

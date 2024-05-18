@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+  ~     Copyright (C) 2024-present StellarSand
+  ~
+  ~     This program is free software: you can redistribute it and/or modify
+  ~     it under the terms of the GNU General Public License as published by
+  ~     the Free Software Foundation, either version 3 of the License, or
+  ~     (at your option) any later version.
+  ~
+  ~     This program is distributed in the hope that it will be useful,
+  ~     but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~     GNU General Public License for more details.
+  ~
+  ~     You should have received a copy of the GNU General Public License
+  ~     along with this program.  If not, see <https://www.gnu.org/licenses/>.
+  -->
+
+<resources>
+
+    <string name="app_version">版本</string>
+
+    <!--Bottom nav view-->
+    <string name="scan">扫描</string>
+    <string name="settings">设置</string>
+
+    <!--#########################################################################################-->
+
+    <!--Scan fragment-->
+    <string name="scan_your_password">扫描密码</string>
+    <string name="check">检查</string>
+    <string name="details">详细信息</string>
+    <string name="found_in_breach">发现违反</string>
+    <string name="yes">是</string>
+    <string name="no">没有</string>
+    <string name="times_found">发现次数</string>
+    <string name="suggestion">建议</string>
+    <string name="breached_suggestion">该密码已在一次数据泄露事件中泄露，绝对不能使用。\n如果您曾在任何地方使用过该密码，请立即更改。</string>
+    <string name="not_breached_suggestion">你的密码没有在数据泄露事件中被发现。\n这并不一定意味着密码是安全的。</string>
+    <string name="passwords_stays_private">您的密码是保密的，绝不会与任何人共享。
+        \n想知道如何做到这一点吗？</string>
+    <string name="tap_here">点击此处查看详细说明。</string>
+
+    <!--#########################################################################################-->
+
+    <!--Multi password activity-->
+    <string name="view">查看</string>
+    <string name="sort">排序</string>
+
+    <!--#########################################################################################-->
+
+    <!--Settings fragment-->
+    <string name="appearance">外观</string>
+    <string name="theme">主题</string>
+    <string name="material_you">莫奈取色\n（需重启本应用）</string>
+    <string name="privacy">隐私权</string>
+    <string name="block_screenshots">阻止应用程序中的屏幕截图</string>
+    <string name="incognito_keyboard">启用密码键盘</string>
+    <string name="about">关于</string>
+    <string name="privacy_policy">隐私政策</string>
+    <string name="report_issue">报告问题</string>
+    <string name="support">支持</string>
+    <string name="third_party_licenses">第三方许可证</string>
+    <string name="view_on_github">在 GitHub 上查看</string>
+
+    <!--#########################################################################################-->
+
+    <!--Bottom sheet-->
+    <string name="cancel">取消</string>
+    <string name="retry">重试</string>
+    <string name="done">已完成</string>
+
+    <!--No Network/Internet-->
+    <string name="no_network_title">无网络/互联网</string>
+    <string name="no_network_subtitle">连接到 Wi-Fi 或移动数据，然后重试。
+        如果已经连接，请确保有互联网连接。</string>
+
+    <!--Scan multiple passwords-->
+    <string name="scan_multi_pwds">扫描多个密码</string>
+    <string name="add">添加</string>
+    <string name="select_file">选择文件</string>
+
+    <!--Add multiple passwords-->
+    <string name="add_multi_pwds">添加多个密码</string>
+
+    <!--Theme-->
+    <string name="follow_system">跟随系统</string>
+    <string name="light">明亮</string>
+    <string name="dark">黑暗</string>
+
+    <!--#########################################################################################-->
+
+    <!--Snackbars-->
+    <string name="no_browsers">此设备未安装浏览器</string>
+    <string name="something_went_wrong">出了问题</string>
+
+</resources>

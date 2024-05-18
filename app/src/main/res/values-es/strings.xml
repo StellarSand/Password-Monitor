@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+  ~     Copyright (C) 2024-present StellarSand
+  ~
+  ~     This program is free software: you can redistribute it and/or modify
+  ~     it under the terms of the GNU General Public License as published by
+  ~     the Free Software Foundation, either version 3 of the License, or
+  ~     (at your option) any later version.
+  ~
+  ~     This program is distributed in the hope that it will be useful,
+  ~     but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~     GNU General Public License for more details.
+  ~
+  ~     You should have received a copy of the GNU General Public License
+  ~     along with this program.  If not, see <https://www.gnu.org/licenses/>.
+  -->
+
+<resources>
+
+    <!--
+    Ensure proper encoding of characters
+        á = \u00E1
+        é = \u00E9
+        í = \u00ED
+        ñ = \u00F1
+        ó = \u00F3
+        ú = \u00FA
+    -->
+
+    <string name="app_version">Versi\u00F3n</string>
+
+    <!--Bottom nav view-->
+    <string name="scan">Escanear</string>
+    <string name="settings">Ajustes</string>
+
+    <!--#########################################################################################-->
+
+    <!--Scan fragment-->
+    <string name="scan_your_password">Escanea tu contrase\u00F1a</string>
+    <string name="check">Consulte</string>
+    <string name="details">Detalles</string>
+    <string name="found_in_breach">Incumplimiento</string>
+    <string name="yes">S\u00ED</string>
+    <string name="no">No</string>
+    <string name="times_found">N\u00FAmero de veces encontrado</string>
+    <string name="suggestion">Sugerencias</string>
+    <string name="breached_suggestion">Esta contrase\u00F1a ha sido comprometida en una violaci\u00F3n de datos y nunca debe ser utilizada.\nSi alguna vez la has utilizado en alg\u00FAn sitio, c\u00E1mbiala inmediatamente.</string>
+    <string name="not_breached_suggestion">Su contrase\u00F1a no ha sido identificada en una filtraci\u00F3n de datos.\nEsto no significa necesariamente que sea una contrase\u00F1a segura.</string>
+    <string name="passwords_stays_private">Su contrase\u00F1a es confidencial y nunca se comparte con nadie.
+        \nTienes curiosidad por saber c\u00F3mo se consigue esto?</string>
+    <string name="tap_here">Pulse aqu\u00ED para obtener una explicaci\u00F3n detallada.</string>
+
+    <!--#########################################################################################-->
+
+    <!--Multi password activity-->
+    <string name="view">Ver</string>
+    <string name="sort">Ordenar</string>
+
+    <!--#########################################################################################-->
+
+    <!--Settings fragment-->
+    <string name="appearance">Apariencia</string>
+    <string name="theme">Tem\u00E1tica</string>
+    <string name="material_you">Material You\n(requiere reiniciar la app)</string>
+    <string name="privacy">Privacidad</string>
+    <string name="block_screenshots">Bloquear capturas de pantalla en la app</string>
+    <string name="incognito_keyboard">Teclado de inc\u00F3gnito</string>
+    <string name="about">Acerca de</string>
+    <string name="privacy_policy">Pol\u00EDtica de privacidad</string>
+    <string name="report_issue">Reportar un problema</string>
+    <string name="support">Ayuda</string>
+    <string name="third_party_licenses">Licencias de terceros</string>
+    <string name="view_on_github">Vista sobre GitHub</string>
+
+    <!--#########################################################################################-->
+
+    <!--Bottom sheet-->
+    <string name="cancel">Cancelar</string>
+    <string name="retry">Reintentar</string>
+    <string name="done">Hecho</string>
+
+    <!--No Network/Internet-->
+    <string name="no_network_title">Sin Network/Internet</string>
+    <string name="no_network_subtitle">Conéctese a Wi-Fi o a datos m\u00F3viles y vuelva a intentarlo.
+        Si ya est\u00E1 conectado, aseg\u00FArese de que tiene conexi\u00F3n a Internet.</string>
+
+    <!--Scan multiple passwords-->
+    <string name="scan_multi_pwds">Escanear varias contrase\u00F1as</string>
+    <string name="add">A\u00F1adir</string>
+    <string name="select_file">Seleccionar archivo</string>
+
+    <!--Add multiple passwords-->
+    <string name="add_multi_pwds">A\u00F1adir varias contrase\u00F1as</string>
+
+    <!--Theme-->
+    <string name="follow_system">Sistema de seguimiento</string>
+    <string name="light">Luz</string>
+    <string name="dark">Oscuro</string>
+
+    <!--#########################################################################################-->
+
+    <!--Snackbars-->
+    <string name="no_browsers">No hay navegadores instalados en este dispositivo</string>
+    <string name="something_went_wrong">Algo sali\u00F3 mal</string>
+
+</resources>

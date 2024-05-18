@@ -137,7 +137,7 @@ class ScanFragment : Fragment() {
         
         // Fab
         fragmentBinding.scanMultipleFab.setOnClickListener {
-            ScanMultiPwdBottomSheet().show(parentFragmentManager, "TestMultiplePwdBottomSheet")
+            ScanMultiPwdBottomSheet().show(parentFragmentManager, "ScanMultiplePwdBottomSheet")
         }
     }
     

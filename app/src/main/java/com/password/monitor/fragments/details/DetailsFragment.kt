@@ -33,6 +33,7 @@ import com.password.monitor.databinding.FragmentScanBinding
 import com.password.monitor.fragments.bottomsheets.NoNetworkBottomSheet
 import com.password.monitor.utils.HashUtils
 import com.password.monitor.utils.HashUtils.Companion.generateSHA1Hash
+import com.password.monitor.utils.HashUtils.Companion.getHashCount
 import com.password.monitor.utils.IntentUtils
 import com.password.monitor.utils.NetworkUtils
 import com.password.monitor.utils.NetworkUtils.Companion.hasInternet
@@ -85,6 +86,7 @@ class DetailsFragment : Fragment() {
             hashPrefix = take(5).uppercase() // First 5 chars
             hashSuffix = substring(5).uppercase() // Rest of the hash
         }
+        
         checkPassword()
         
         // Tap here
@@ -130,7 +132,7 @@ class DetailsFragment : Fragment() {
                 
                 if (hashesResponse.isSuccessful) {
                     val responseBody = hashesResponse.body()
-                    val count = HashUtils.getHashCount(responseBody, hashSuffix)
+                    val count = getHashCount(responseBody, hashSuffix)
                     fragmentBinding.progressIndicator.visibility = View.INVISIBLE
                     displayResult(count)
                 }

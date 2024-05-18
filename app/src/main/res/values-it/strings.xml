@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+  ~     Copyright (C) 2024-present StellarSand
+  ~
+  ~     This program is free software: you can redistribute it and/or modify
+  ~     it under the terms of the GNU General Public License as published by
+  ~     the Free Software Foundation, either version 3 of the License, or
+  ~     (at your option) any later version.
+  ~
+  ~     This program is distributed in the hope that it will be useful,
+  ~     but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~     GNU General Public License for more details.
+  ~
+  ~     You should have received a copy of the GNU General Public License
+  ~     along with this program.  If not, see <https://www.gnu.org/licenses/>.
+  -->
+
+<resources>
+
+    <!--
+    Ensure proper encoding of characters
+        à = \u00E0
+        è = \u00E8
+        í = \u00ED
+        ó = \u00F3
+        ù = \u00F9
+    -->
+
+    <string name="app_version">Versione</string>
+
+    <!--Bottom nav view-->
+    <string name="scan">Scansione</string>
+    <string name="settings">Impostazioni</string>
+
+    <!--#########################################################################################-->
+
+    <!--Scan fragment-->
+    <string name="scan_your_password">Scansione della password</string>
+    <string name="check">Controllo</string>
+    <string name="details">Dettagli</string>
+    <string name="found_in_breach">Trovato in violazione</string>
+    <string name="yes">S\u00ED</string>
+    <string name="no">No</string>
+    <string name="times_found">Numero di volte in cui \u00E8 stato trovato</string>
+    <string name="suggestion">Suggerimenti</string>
+    <string name="breached_suggestion">Questa password \u00E8 stata compromessa da una violazione dei dati e non deve mai essere utilizzata.\nSe l\'avete mai usata, cambiatela immediatamente.</string>
+    <string name="not_breached_suggestion">La vostra password non \u00E8 stata identificata in una violazione dei dati.\nQuesto non significa necessariamente che sia una password sicura.</string>
+    <string name="passwords_stays_private">La password rimane riservata e non viene mai condivisa con nessuno.
+        \nSiete curiosi di sapere come si ottiene questo risultato?</string>
+    <string name="tap_here">Per una spiegazione dettagliata, toccare qui.</string>
+
+    <!--#########################################################################################-->
+
+    <!--Multi password activity-->
+    <string name="view">Vista</string>
+    <string name="sort">Ordinamento</string>
+
+    <!--#########################################################################################-->
+
+    <!--Settings fragment-->
+    <string name="appearance">Aspetto</string>
+    <string name="theme">Tema</string>
+    <string name="material_you">Material You\n(richiede il riavvio dell\'app)</string>
+    <string name="privacy">Privacy</string>
+    <string name="block_screenshots">Blocca gli screenshot nell\'app</string>
+    <string name="incognito_keyboard">Tastiera in incognito</string>
+    <string name="about">Info</string>
+    <string name="privacy_policy">Politica sulla Riservatezza</string>
+    <string name="report_issue">Segnala un problema</string>
+    <string name="support">Supporto</string>
+    <string name="third_party_licenses">Licenze di terze parti</string>
+    <string name="view_on_github">Vedi su GitHub</string>
+
+    <!--#########################################################################################-->
+
+    <!--Bottom sheet-->
+    <string name="cancel">Annulla</string>
+    <string name="retry">Riprova</string>
+    <string name="done">Fatto</string>
+
+    <!--No Network/Internet-->
+    <string name="no_network_title">Nessuna rete/internet</string>
+    <string name="no_network_subtitle">Collegarsi alla rete Wi-Fi o ai dati mobili e riprovare.
+        Se \u00E8 gi\u00E0 connesso, assicurarsi che abbia una connessione a Internet.</string>
+
+    <!--Scan multiple passwords-->
+    <string name="scan_multi_pwds">Scansione di pi\u00F9 password</string>
+    <string name="add">Aggiungi</string>
+    <string name="select_file">Seleziona file</string>
+
+    <!--Add multiple passwords-->
+    <string name="add_multi_pwds">Aggiungere pi\u00F9 password</string>
+
+    <!--Theme-->
+    <string name="follow_system">Segui il sistema</string>
+    <string name="light">Chiaro</string>
+    <string name="dark">Scuro</string>
+
+    <!--#########################################################################################-->
+
+    <!--Snackbars-->
+    <string name="no_browsers">Nessun browser installato sul dispositivo</string>
+    <string name="something_went_wrong">Qualcosa \u00E8 andato storto</string>
+
+</resources>

@@ -1,0 +1,10 @@
+Cette application s'intègre parfaitement à <a href="https://haveibeenpwned.com">Have I Been Pwned?</a> pour vous aider à vérifier si vos mots de passe ont été compromis lors de violations de données rendues publiques.
+Vos mots de passe restent privés et ne sont jamais partagés.
+
+Caractéristiques :
+
+- Entièrement open source
+- Material design 3 & Material You
+- Prend en charge les thèmes clairs et foncés
+- Pas de publicité
+- Pas de collecte de données personnelles

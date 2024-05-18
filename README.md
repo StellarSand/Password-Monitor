@@ -4,7 +4,7 @@
 
 Ensure your password safety by scanning for potential breaches.
 
-<img src="https://img.shields.io/f-droid/v/com.password.monitor?logo=FDroid&color=green&style=for-the-badge" alt="F-Droid Version"> <img src="https://img.shields.io/endpoint?url=https://play.cuzi.workers.dev/play?i=com.password.monitor&m=$version&logo=GooglePlay&color=3BCCFF&label=Google%20Play&style=for-the-badge" alt="Google Play Version"> <img src="https://img.shields.io/github/v/release/StellarSand/Password-Monitor?logo=GitHub&color=212121&label=GitHub&style=for-the-badge" alt="GitHub Version">
+<img src="https://img.shields.io/f-droid/v/com.password.monitor?logo=FDroid&color=green&style=for-the-badge" alt="F-Droid Version"> <img src="https://img.shields.io/github/v/release/StellarSand/Password-Monitor?logo=GitHub&color=212121&label=GitHub&style=for-the-badge" alt="GitHub Version">
 
 
 
@@ -24,11 +24,8 @@ Ensure your password safety by scanning for potential breaches.
 
 
 ## Overview
-Two things that should always be strong: Coffee ☕ and Passwords 🔑.
-
-In our digital age, where data breaches and hacks have skyrocketed, robust passwords are vital for safeguarding our online accounts. Using a password manager like [Bitwarden](https://bitwarden.com/) or [KeePass](https://keepass.info/) is strongly recommended for storing and generating unique, strong passwords. However, preferences vary, and even if you're using a password manager, it's crucial to ensure that your passwords haven't been compromised in data breaches.
- 
-This app seamlessly integrates with [Have I Been Pwned?](https://haveibeenpwned.com) to check if your password has been compromised in any known breaches, without actually sending your password to it.
+This app seamlessly integrates with [Have I Been Pwned?](https://haveibeenpwned.com) to help you verify whether your passwords have been compromised in any publicly disclosed data breaches.
+<br>Your passwords stay private and are never shared anywhere. Check [ensuring the privacy of your passwords](#ensuring-the-privacy-of-your-passwords)
 
 
 
@@ -38,17 +35,24 @@ This app seamlessly integrates with [Have I Been Pwned?](https://haveibeenpwned.
 - Supports both light and dark theme
 - No ads
 - No collection of personal data
-- Supported languages: English, Dutch, French, German, Italian, Japanese, Spanish, Swedish, Turkish
+- Supported languages: 
+   - English
+   - Chinese
+   - Dutch
+   - French
+   - German
+   - Italian
+   - Japanese
+   - Spanish
+   - Swedish
+   - Turkish
 
 
 
 ## Screenshots
-
 <img src="/fastlane/metadata/android/en-US/images/phoneScreenshots/1.png" width="200"/>  <img src="/fastlane/metadata/android/en-US/images/phoneScreenshots/2.png" width="200"/>
 
 <img src="/fastlane/metadata/android/en-US/images/phoneScreenshots/3.png" width="200"/>  <img src="/fastlane/metadata/android/en-US/images/phoneScreenshots/4.png" width="200"/>
-
-<img src="/fastlane/metadata/android/en-US/images/phoneScreenshots/5.png" width="200"/>  <img src="/fastlane/metadata/android/en-US/images/phoneScreenshots/6.png" width="200"/>
 
 
 
@@ -56,17 +60,63 @@ This app seamlessly integrates with [Have I Been Pwned?](https://haveibeenpwned.
 [<img src="https://fdroid.gitlab.io/artwork/badge/get-it-on.png"
 alt="Get it on F-Droid"
 height="80">](https://f-droid.org/packages/com.password.monitor)
-[<img src="https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png"
-alt="Get it on Google Play"
-height="80">](https://play.google.com/store/apps/details?id=com.password.monitor)
-[<img src="https://camo.githubusercontent.com/70bffd8873ab81e1bb0bccc44e488c3a989e3bd5/68747470733a2f2f692e6962622e636f2f71306d6463345a2f6765742d69742d6f6e2d6769746875622e706e67"
+[<img src="https://raw.githubusercontent.com/Kunzisoft/Github-badge/main/get-it-on-github.png"
 alt="Get it on GitHub"
 height="80">](https://github.com/StellarSand/Password-Monitor/releases/latest)
+
+### Verify integrity if downloaded from GitHub
+To verify the integrity of the `.apk`/`.aab` files, if downloaded from GitHub, perform the following steps:
+
+<details>
+  <summary><b>Windows</b></summary>
+
+1. Open Powershell by searching for it in the `Start menu` OR by pressing `Win + R` and typing `powershell`
+2. Change directory to the downloaded path
+   ```
+   cd "C:\path\to\downloaded\file"
+   ```
+   Example:
+   ```
+   cd "C:\Users\JohnDoe\Downloads"
+   ```
+3. Compute the SHA-256 Hash
+   ```
+   Get-FileHash -Algorithm SHA256 -Path "filename"
+   ```
+   Example:
+   ```
+   Get-FileHash -Algorithm SHA256 -Path "PasswordMonitor_v1.5.0.apk"
+   ```
+4. The computed hash value should be exactly the same as the one provided in the `.sha256` file on GitHub.
+</details>
+
+<details>
+  <summary><b>Linux & macOS</b></summary>
+
+1. Open terminal
+2. Change directory to the downloaded path
+   ```
+   cd /path/to/downloaded/file
+   ```
+   Example:
+   ```
+   cd /home/JohnDoe/Downloads/
+   ```
+3. Compute the SHA-256 Hash
+   ```
+   sha256sum filename
+   ```
+   Example:
+   ```
+   sha256sum PasswordMonitor_v1.5.0.apk
+   ```
+4. The computed hash value should be exactly the same as the one provided in the `.sha256` file on GitHub.
+</details>
 
 
 
 ## Changelog
-All notable changes to this project will be documented in the [changelog](https://github.com/StellarSand/Password-Monitor/blob/master/CHANGELOG.md).
+All notable changes are documented in the [changelog](https://github.com/StellarSand/Password-Monitor/blob/master/CHANGELOG.md).
 
 
 

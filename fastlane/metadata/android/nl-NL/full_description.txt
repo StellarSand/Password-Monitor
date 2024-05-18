@@ -1,0 +1,10 @@
+Deze app integreert naadloos met <a href="https://haveibeenpwned.com">Have I Been Pwned?</a> om je te helpen controleren of je wachtwoorden zijn gecompromitteerd in openbaar gemaakte datalekken.
+Je wachtwoorden blijven privé en worden nooit ergens gedeeld.
+
+Kenmerken:
+
+- Volledig open source
+- Material design 3 & Material You
+- Ondersteunt zowel licht als donker thema
+- Geen advertenties
+- Geen verzameling van persoonlijke gegevens

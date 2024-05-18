@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+  ~     Copyright (C) 2024-present StellarSand
+  ~
+  ~     This program is free software: you can redistribute it and/or modify
+  ~     it under the terms of the GNU General Public License as published by
+  ~     the Free Software Foundation, either version 3 of the License, or
+  ~     (at your option) any later version.
+  ~
+  ~     This program is distributed in the hope that it will be useful,
+  ~     but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~     GNU General Public License for more details.
+  ~
+  ~     You should have received a copy of the GNU General Public License
+  ~     along with this program.  If not, see <https://www.gnu.org/licenses/>.
+  -->
+
+<resources>
+
+    <!--
+    Ensure proper encoding of characters
+        ä = \u00E4
+        ß = \u00DF
+        ü = \u00FC
+        Ü = \u00DC
+        ö = \u00F6
+    -->
+
+    <string name="app_version">Version</string>
+
+    <!--Bottom nav view-->
+    <string name="scan">Scannen</string>
+    <string name="settings">Einstellungen</string>
+
+    <!--#########################################################################################-->
+
+    <!--Scan fragment-->
+    <string name="scan_your_password">Scannen Sie Ihr Passwort</string>
+    <string name="check">Siehe</string>
+    <string name="details">Details</string>
+    <string name="found_in_breach">Verst\u00F6\u00DFe festgestellt</string>
+    <string name="yes">Ja</string>
+    <string name="no">Nein</string>
+    <string name="times_found">Anzahl der gefundenen F\u00E4lle</string>
+    <string name="suggestion">Empfehlungen</string>
+    <string name="breached_suggestion">Dieses Kennwort wurde bei einem Datenschutzversto\u00DF kompromittiert und sollte niemals verwendet werden.\nWenn Sie es jemals irgendwo benutzt haben, \u00E4ndern Sie es sofort.</string>
+    <string name="not_breached_suggestion">Ihr Passwort wurde nicht bei einem Datenschutzversto\u00DF entdeckt.\nDas bedeutet nicht unbedingt, dass es ein sicheres Passwort ist.</string>
+    <string name="passwords_stays_private">Ihr Passwort bleibt vertraulich und wird niemals an Dritte weitergegeben.
+        \nSind Sie neugierig, wie dies erreicht wird?</string>
+    <string name="tap_here">Tippen Sie hier, um eine ausf\u00FChrliche Erkl\u00E4rung zu erhalten.</string>
+
+    <!--#########################################################################################-->
+
+    <!--Multi password activity-->
+    <string name="view">Siehe</string>
+    <string name="sort">Sortieren</string>
+
+    <!--#########################################################################################-->
+
+    <!--Settings fragment-->
+    <string name="appearance">Aussehen</string>
+    <string name="theme">Thema</string>
+    <string name="material_you">Material You\n(app neustart erforderlich)</string>
+    <string name="privacy">Datenschutz</string>
+    <string name="block_screenshots">Screenshots in der app blockieren</string>
+    <string name="incognito_keyboard">Inkognito tastatur</string>
+    <string name="about">\u00DCber</string>
+    <string name="privacy_policy">Datenschutzbestimmungen</string>
+    <string name="report_issue">Ein Problem melden</string>
+    <string name="support">Unterst\u00FCtzung</string>
+    <string name="third_party_licenses">Lizenzen von drittanbietern</string>
+    <string name="view_on_github">Auf GitHub anschauen</string>
+
+    <!--#########################################################################################-->
+
+    <!--Bottom sheet-->
+    <string name="cancel">Abbrechen</string>
+    <string name="retry">Wiederholung</string>
+    <string name="done">Erledigt</string>
+
+    <!--No Network/Internet-->
+    <string name="no_network_title">Kein Netzwerk/Internet</string>
+    <string name="no_network_subtitle">Verbinden Sie sich mit Wi-Fi oder mobilen Daten und versuchen Sie es erneut.
+        Wenn bereits eine Verbindung besteht, vergewissern Sie sich, dass das Gerät eine Internetverbindung hat.</string>
+
+    <!--Scan multiple passwords-->
+    <string name="scan_multi_pwds">Mehrere Passw\u00F6rter scannen</string>
+    <string name="add">Hinzuf\u00FCgen</string>
+    <string name="select_file">Datei aussuchen</string>
+
+    <!--Add multiple passwords-->
+    <string name="add_multi_pwds">Mehrere Passw\u00F6rter hinzuf\u00FCgen</string>
+
+    <!--Theme-->
+    <string name="follow_system">System verfolgen</string>
+    <string name="light">Hell</string>
+    <string name="dark">Dunkel</string>
+
+    <!--#########################################################################################-->
+
+    <!--Snackbars-->
+    <string name="no_browsers">Es ist kein browser auf diesem ger\u00E4t installiert</string>
+    <string name="something_went_wrong">Etwas ist schief gelaufen</string>
+
+</resources>

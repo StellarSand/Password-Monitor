@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+  ~     Copyright (C) 2024-present StellarSand
+  ~
+  ~     This program is free software: you can redistribute it and/or modify
+  ~     it under the terms of the GNU General Public License as published by
+  ~     the Free Software Foundation, either version 3 of the License, or
+  ~     (at your option) any later version.
+  ~
+  ~     This program is distributed in the hope that it will be useful,
+  ~     but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~     GNU General Public License for more details.
+  ~
+  ~     You should have received a copy of the GNU General Public License
+  ~     along with this program.  If not, see <https://www.gnu.org/licenses/>.
+  -->
+
+<resources>
+
+    <!--
+    Ensure proper encoding of characters
+        à = \u00E0
+        À = \u00C0
+        è = \u00E8
+        é = \u00E9
+        ê = \u00EA
+        É = \u00C9
+        û = \u00FB
+    -->
+
+    <string name="app_version">Version</string>
+
+    <!--Bottom nav view-->
+    <string name="scan">Scan</string>
+    <string name="settings">Param\u00E8tres</string>
+
+    <!--#########################################################################################-->
+
+    <!--Scan fragment-->
+    <string name="scan_your_password">Scannez votre mot de passe</string>
+    <string name="check">V\u00E9rifier</string>
+    <string name="details">Des d\u00E9tails</string>
+    <string name="found_in_breach">Trouv\u00E9 en infraction</string>
+    <string name="yes">Oui</string>
+    <string name="no">Non</string>
+    <string name="times_found">Nombre de fois trouv\u00E9es</string>
+    <string name="suggestion">Suggestion</string>
+    <string name="breached_suggestion">Ce mot de passe a \u00E9t\u00E9 compromis lors d\'une violation de donn\u00E9es et ne doit jamais \u00EAtre utilis\u00E9.\nSi vous l\'avez d\u00E9j\u00E0 utilis\u00E9 quelque part, changez-le imm\u00E9diatement.</string>
+    <string name="not_breached_suggestion">Votre mot de passe n\'a pas \u00E9t\u00E9 identifi\u00E9 lors d\'une violation de donn\u00E9es.\nCela ne signifie pas n\u00E9cessairement qu\'il s\'agit d\'un mot de passe s\u00FBr.</string>
+    <string name="passwords_stays_private">Votre mot de passe reste confidentiel et n\'est jamais communiqu\u00E9 \u00E0 qui que ce soit.
+        \nCurieux de savoir comment cela se passe ?</string>
+    <string name="tap_here">Cliquez ici pour une explication d\u00E9taill\u00E9e.</string>
+
+    <!--#########################################################################################-->
+
+    <!--Multi password activity-->
+    <string name="view">Voir</string>
+    <string name="sort">Trier</string>
+
+    <!--#########################################################################################-->
+
+    <!--Settings fragment-->
+    <string name="appearance">Apparence</string>
+    <string name="theme">Th\u00E8me</string>
+    <string name="material_you">Material You\n(n\u00E9cessite le red\u00E9marrage de l\'app)</string>
+    <string name="privacy">Vie priv\u00E9e</string>
+    <string name="block_screenshots">Bloquer les captures d\'\u00E9cran dans l\'app</string>
+    <string name="incognito_keyboard">Clavier inconnu</string>
+    <string name="about">\u00C0 propos</string>
+    <string name="privacy_policy">Politique de confidentialit\u00E9</string>
+    <string name="report_issue">Signaler un probl\u00E8me</string>
+    <string name="support">Soutien</string>
+    <string name="third_party_licenses">Licences de code tiers</string>
+    <string name="view_on_github">voir le projet sur GitHub</string>
+
+    <!--#########################################################################################-->
+
+    <!--Bottom sheet-->
+    <string name="cancel">Annuler</string>
+    <string name="retry">Retry</string>
+    <string name="done">Termin\u00E9</string>
+
+    <!--No Network/Internet-->
+    <string name="no_network_title">Pas de r\u00E9seau/Internet</string>
+    <string name="no_network_subtitle">Connectez-vous au Wi-Fi ou aux donn\u00E9es mobiles et r\u00E9essayez.
+        S\'il est d\u00E9j\u00E0 connect\u00E9, assurez-vous qu\'il dispose d\'une connexion internet.</string>
+
+    <!--Scan multiple passwords-->
+    <string name="scan_multi_pwds">Scanner plusieurs mots de passe</string>
+    <string name="add">Ajouter</string>
+    <string name="select_file">Choisir le dossier</string>
+
+    <!--Add multiple passwords-->
+    <string name="add_multi_pwds">Ajouter plusieurs mots de passe</string>
+
+    <!--Theme-->
+    <string name="follow_system">Th\u00E8me du syst\u00E8me</string>
+    <string name="light">Lumineux</string>
+    <string name="dark">Sombre</string>
+
+    <!--#########################################################################################-->
+
+    <!--Snackbars-->
+    <string name="no_browsers">Aucun navigateur n\'est install\u00E9 sur cet appareil</string>
+    <string name="something_went_wrong">Quelque chose n\'a pas fonctionn\u00E9</string>
+
+</resources>

@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+  ~     Copyright (C) 2024-present StellarSand
+  ~
+  ~     This program is free software: you can redistribute it and/or modify
+  ~     it under the terms of the GNU General Public License as published by
+  ~     the Free Software Foundation, either version 3 of the License, or
+  ~     (at your option) any later version.
+  ~
+  ~     This program is distributed in the hope that it will be useful,
+  ~     but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~     GNU General Public License for more details.
+  ~
+  ~     You should have received a copy of the GNU General Public License
+  ~     along with this program.  If not, see <https://www.gnu.org/licenses/>.
+  -->
+
+<resources>
+
+    <!--
+    Ensure proper encoding of characters
+        ä = \u00E4
+        Ä = \u00C4
+        å = \u00E5
+        Å = \u00C5
+        ö = \u00F6
+    -->
+
+    <string name="app_version">Version</string>
+
+    <!--Bottom nav view-->
+    <string name="scan">Skanna</string>
+    <string name="settings">Inst\u00E4llningar</string>
+
+    <!--#########################################################################################-->
+
+    <!--Scan fragment-->
+    <string name="scan_your_password">Skanna ditt l\u00F6senord</string>
+    <string name="check">Kontrollera</string>
+    <string name="details">Detaljer</string>
+    <string name="found_in_breach">Hittades i \u00F6vertr\u00E4delse</string>
+    <string name="yes">Ja</string>
+    <string name="no">Nej</string>
+    <string name="times_found">Antal g\u00E5nger hittad</string>
+    <string name="suggestion">F\u00F6rslag</string>
+    <string name="breached_suggestion">Det h\u00E4r l\u00F6senordet har blivit utsatt f\u00F6r ett dataintr\u00E5ng och ska aldrig anv\u00E4ndas.\nOm du n\u00E5gonsin har anv\u00E4nt det n\u00E5gonstans ska du \u00E4ndra det omedelbart.</string>
+    <string name="not_breached_suggestion">Ditt l\u00F6senord har inte identifierats i ett dataintr\u00E5ng. Det betyder inte n\u00F6dv\u00E4ndigtvis att det \u00E4r ett s\u00E4kert l\u00F6senord.</string>
+    <string name="passwords_stays_private">Ditt l\u00F6senord f\u00F6rblir konfidentiellt och delas aldrig med n\u00E5gon.
+        \n\u00C4r du nyfiken p\u00E5 hur detta uppn\u00E5s?</string>
+    <string name="tap_here">Tryck h\u00E4r f\u00F6r en detaljerad f\u00F6rklaring.</string>
+
+    <!--#########################################################################################-->
+
+    <!--Multi password activity-->
+    <string name="view">Utsikt</string>
+    <string name="sort">Sortera</string>
+
+    <!--#########################################################################################-->
+
+    <!--Settings fragment-->
+    <string name="appearance">Utseende</string>
+    <string name="theme">Tema</string>
+    <string name="material_you">Material You\n(kr\u00E4ver omstart av app)</string>
+    <string name="privacy">Integritet</string>
+    <string name="block_screenshots">Blockera sk\u00E4rmdumpar i appen</string>
+    <string name="incognito_keyboard">Inkognito tangentbord</string>
+    <string name="about">Om</string>
+    <string name="privacy_policy">Integritetspolicy</string>
+    <string name="report_issue">Rapportera ett problem</string>
+    <string name="support">St\u00F6d</string>
+    <string name="third_party_licenses">Licenser fr\u00E5n tredje part</string>
+    <string name="view_on_github">Visa p\u00E5 GitHub</string>
+
+    <!--#########################################################################################-->
+
+    <!--Bottom sheet-->
+    <string name="cancel">Avbryt</string>
+    <string name="retry">F\u00F6rs\u00F6k igen</string>
+    <string name="done">Klar</string>
+
+    <!--No Network/Internet-->
+    <string name="no_network_title">Inget n\u00E4tverk/internet</string>
+    <string name="no_network_subtitle">Anslut till Wi-Fi eller mobildata och f\u00F6rs\u00F6k igen.
+        Om du redan \u00E4r ansluten, kontrollera att den har en internetanslutning.</string>
+
+    <!--Scan multiple passwords-->
+    <string name="scan_multi_pwds">Skanna flera l\u00F6senord</string>
+    <string name="add">L\u00E4gg till</string>
+    <string name="select_file">V\u00E4lj fil</string>
+
+    <!--Add multiple passwords-->
+    <string name="add_multi_pwds">L\u00E4gg till flera l\u00F6senord</string>
+
+    <!--Theme-->
+    <string name="follow_system">F\u00F6lj systemet</string>
+    <string name="light">Ljus</string>
+    <string name="dark">M\u00F6rk</string>
+
+    <!--#########################################################################################-->
+
+    <!--Snackbars-->
+    <string name="no_browsers">Inga webbl\u00E4sare installerade p\u00E5 den h\u00E4r enheten</string>
+    <string name="something_went_wrong">N\u00E5got gick fel</string>
+
+</resources>

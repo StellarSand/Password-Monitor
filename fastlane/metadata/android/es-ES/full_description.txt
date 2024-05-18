@@ -1,0 +1,10 @@
+Esta aplicación se integra perfectamente con <a href="https://haveibeenpwned.com">Have I Been Pwned?</a> para ayudarte a verificar si tus contraseñas se han visto comprometidas en alguna filtración de datos divulgada públicamente.
+Sus contraseñas se mantienen privadas y nunca se comparten en cualquier lugar.
+
+Características:
+
+- Totalmente de código abierto
+- Material Design 3 y Material You
+- Soporta temas claros y oscuros
+- Sin anuncios
+- No recopila datos personales

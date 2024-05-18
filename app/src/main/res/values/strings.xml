@@ -62,9 +62,9 @@
     <string name="incognito_keyboard">Incognito keyboard</string>
     <string name="about">About</string>
     <string name="privacy_policy">Privacy Policy</string>
-    <string name="third_party_licenses">Third party licenses</string>
     <string name="report_issue">Report an issue</string>
     <string name="support">Support</string>
+    <string name="third_party_licenses">Third party licenses</string>
     <string name="view_on_github">View on GitHub</string>
 
     <!--#########################################################################################-->
@@ -79,7 +79,7 @@
     <string name="no_network_subtitle">Connect to Wi-Fi or mobile data and retry.
         If already connected, make sure it has an internet connection.</string>
 
-    <!--Test multiple passwords-->
+    <!--Scan multiple passwords-->
     <string name="scan_multi_pwds">Scan multiple passwords</string>
     <string name="add">Add</string>
     <string name="select_file">Select file</string>
@@ -97,6 +97,5 @@
     <!--Snackbars-->
     <string name="no_browsers">No browsers installed on this device</string>
     <string name="something_went_wrong">Something went wrong</string>
-    <string name="nothing_to_share">Nothing to share</string>
 
 </resources>

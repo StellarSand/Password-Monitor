@@ -82,9 +82,12 @@ class NoNetworkBottomSheet(
         }
         
         // Retry
-        footerBinding.positiveButton.setOnClickListener {
-            dismiss()
-            positiveButtonClickListener.invoke()
+        footerBinding.positiveButton.apply {
+            isVisible = true
+            setOnClickListener {
+                dismiss()
+                positiveButtonClickListener.invoke()
+            }
         }
         
         // Exit/Cancel
