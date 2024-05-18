@@ -4,7 +4,7 @@
 
 Ensure your password safety by scanning for potential breaches.
 
-<img src="https://img.shields.io/f-droid/v/com.password.monitor?logo=FDroid&color=green&style=for-the-badge" alt="F-Droid Version"> <img src="https://img.shields.io/github/v/release/StellarSand/Password-Monitor?logo=GitHub&color=212121&label=GitHub&style=for-the-badge" alt="GitHub Version">
+<img src="https://img.shields.io/f-droid/v/com.password.monitor?logo=FDroid&color=green&style=for-the-badge" alt="F-Droid Version"> <img src="https://img.shields.io/endpoint?url=https://play.cuzi.workers.dev/play?i=com.password.monitor&m=$version&logo=GooglePlay&color=3BCCFF&label=Google%20Play&style=for-the-badge" alt="Google Play Version"> <img src="https://img.shields.io/github/v/release/StellarSand/Password-Monitor?logo=GitHub&color=212121&label=GitHub&style=for-the-badge" alt="GitHub Version">
 
 
 
@@ -57,9 +57,14 @@ This app seamlessly integrates with [Have I Been Pwned?](https://haveibeenpwned.
 
 
 ## Download
+**Disclaimer**: The Google Play account is not owned by me.
+
 [<img src="https://fdroid.gitlab.io/artwork/badge/get-it-on.png"
 alt="Get it on F-Droid"
 height="80">](https://f-droid.org/packages/com.password.monitor)
+[<img src="https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png"
+alt="Get it on Google Play"
+height="80">](https://play.google.com/store/apps/details?id=com.password.monitor)
 [<img src="https://raw.githubusercontent.com/Kunzisoft/Github-badge/main/get-it-on-github.png"
 alt="Get it on GitHub"
 height="80">](https://github.com/StellarSand/Password-Monitor/releases/latest)
@@ -146,6 +151,7 @@ New pull requests can be submitted [here](https://github.com/StellarSand/Passwor
 
 ## Credits
 - [Troy Hunt](https://github.com/troyhunt) & [Cloudflare](https://www.cloudflare.com/) for the Have I Been Pwned API.
+- [parveshnarwal](https://github.com/parveshnarwal) for publishing the app on Google Play.
 
 
 
