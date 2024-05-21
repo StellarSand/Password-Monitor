@@ -1,10 +1,10 @@
-This app seamlessly integrates with <a href="https://haveibeenpwned.com">Have I Been Pwned?</a> to help you verify whether your passwords have been compromised in any publicly disclosed data breaches.
-Your passwords stay private and are never shared anywhere.
+Diese App ist nahtlos mit <a href="https://haveibeenpwned.com">Have I Been Pwned?</a> integriert und hilft Ihnen zu überprüfen, ob Ihre Passwörter bei öffentlich bekannt gewordenen Datenschutzverletzungen kompromittiert wurden.
+Ihre Passwörter bleiben privat und werden nirgendwo weitergegeben.
 
-Features:
+Merkmale:
 
-- Fully open source
+- Vollständig quelloffen
 - Material design 3 & Material You
-- Supports both light and dark theme
-- No ads
-- No collection of personal data
+- Unterstützt sowohl helles als auch dunkles Design
+- Keine Werbung
+- Keine Sammlung von persönlichen Daten
