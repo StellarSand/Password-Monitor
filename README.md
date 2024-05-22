@@ -4,6 +4,8 @@
 
 Ensure your password safety by scanning for potential breaches.
 
+**Will be available on F-Droid very soon :)**
+
 <img src="https://img.shields.io/f-droid/v/com.password.monitor?logo=FDroid&color=green&style=for-the-badge" alt="F-Droid Version"> <img src="https://img.shields.io/endpoint?url=https://play.cuzi.workers.dev/play?i=com.password.monitor&m=$version&logo=GooglePlay&color=3BCCFF&label=Google%20Play&style=for-the-badge" alt="Google Play Version"> <img src="https://img.shields.io/github/v/release/StellarSand/Password-Monitor?logo=GitHub&color=212121&label=GitHub&style=for-the-badge" alt="GitHub Version">
 
 
