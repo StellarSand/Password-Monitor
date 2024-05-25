@@ -47,7 +47,7 @@ class NetworkUtils {
             return try {
                 withContext(Dispatchers.IO) {
                     val socket = Socket()
-                    socket.connect(InetSocketAddress("f-droid.org", 443), 5000)
+                    socket.connect(InetSocketAddress("haveibeenpwned.com", 443), 5000)
                     socket.close()
                     true
                 }

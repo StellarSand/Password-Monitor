@@ -27,8 +27,7 @@ class HashUtils {
         
         fun generateSHA1Hash(password: String): String {
             val messageDigest = MessageDigest.getInstance("SHA-1")
-            val bytes =
-                messageDigest.digest(password.toByteArray())
+            val bytes = messageDigest.digest(password.toByteArray())
             return bytes.joinToString("") { "%02x".format(it) }
         }
         
