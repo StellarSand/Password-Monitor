@@ -231,22 +231,6 @@
             android:drawablePadding="@dimen/margin_16" />
 
         <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/licenses"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingHorizontal="@dimen/margin_30"
-            android:paddingVertical="@dimen/margin_16"
-            android:clickable="true"
-            android:focusable="true"
-            android:foreground="?android:attr/selectableItemBackground"
-            android:text="@string/third_party_licenses"
-            android:textAlignment="viewStart"
-            android:textColor="?attr/colorOnSurface"
-            android:textSize="@dimen/text_16"
-            app:drawableStartCompat="@drawable/ic_licenses"
-            android:drawablePadding="@dimen/margin_16" />
-
-        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/viewOnGit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -262,6 +246,22 @@
             android:textColor="?attr/colorOnSurface"
             android:textSize="@dimen/text_16"
             app:drawableStartCompat="@drawable/ic_view_on_github"
+            android:drawablePadding="@dimen/margin_16" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/licenses"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="@dimen/margin_30"
+            android:paddingVertical="@dimen/margin_16"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:text="@string/third_party_licenses"
+            android:textAlignment="viewStart"
+            android:textColor="?attr/colorOnSurface"
+            android:textSize="@dimen/text_16"
+            app:drawableStartCompat="@drawable/ic_licenses"
             android:drawablePadding="@dimen/margin_16" />
 
     </LinearLayout>

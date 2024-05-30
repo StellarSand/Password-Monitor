@@ -4,8 +4,6 @@
 
 Ensure your password safety by scanning for potential breaches.
 
-**Will be available on F-Droid very soon :)**
-
 <img src="https://img.shields.io/f-droid/v/com.password.monitor?logo=FDroid&color=green&style=for-the-badge" alt="F-Droid Version"> <img src="https://img.shields.io/endpoint?url=https://play.cuzi.workers.dev/play?i=com.password.monitor&m=$version&logo=GooglePlay&color=3BCCFF&label=Google%20Play&style=for-the-badge" alt="Google Play Version"> <img src="https://img.shields.io/github/v/release/StellarSand/Password-Monitor?logo=GitHub&color=212121&label=GitHub&style=for-the-badge" alt="GitHub Version">
 
 
@@ -67,6 +65,10 @@ height="80">](https://f-droid.org/packages/com.password.monitor)
 [<img src="https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png"
 alt="Get it on Google Play"
 height="80">](https://play.google.com/store/apps/details?id=com.password.monitor)
+
+[<img src="https://gitlab.com/IzzyOnDroid/repo/-/raw/master/assets/IzzyOnDroid.png"
+alt="Get it on IzzyOnDroid"
+height="80">](https://apt.izzysoft.de/fdroid/index/apk/com.password.monitor?repo=main)
 [<img src="https://raw.githubusercontent.com/Kunzisoft/Github-badge/main/get-it-on-github.png"
 alt="Get it on GitHub"
 height="80">](https://github.com/StellarSand/Password-Monitor/releases/latest)
@@ -92,7 +94,7 @@ To verify the integrity of the `.apk`/`.aab` files, if downloaded from GitHub, p
    ```
    Example:
    ```
-   Get-FileHash -Algorithm SHA256 -Path "PasswordMonitor_v1.5.0.apk"
+   Get-FileHash -Algorithm SHA256 -Path "PasswordMonitor_v1.0.0.apk"
    ```
 4. The computed hash value should be exactly the same as the one provided in the `.sha256` file on GitHub.
 </details>
@@ -115,7 +117,7 @@ To verify the integrity of the `.apk`/`.aab` files, if downloaded from GitHub, p
    ```
    Example:
    ```
-   sha256sum PasswordMonitor_v1.5.0.apk
+   sha256sum PasswordMonitor_v1.0.0.apk
    ```
 4. The computed hash value should be exactly the same as the one provided in the `.sha256` file on GitHub.
 </details>

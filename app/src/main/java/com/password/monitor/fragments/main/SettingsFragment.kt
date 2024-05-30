@@ -108,12 +108,6 @@ class SettingsFragment : Fragment() {
                         mainActivity.activityBinding.mainBottomNav)
             }
         
-        // Licenses
-        fragmentBinding.licenses
-            .setOnClickListener {
-                LicensesBottomSheet().show(parentFragmentManager, "LicensesBottomSheet")
-            }
-        
         // Report an issue
         fragmentBinding.reportIssue.setOnClickListener {
             openURL(mainActivity,
@@ -134,6 +128,12 @@ class SettingsFragment : Fragment() {
                         getString(R.string.app_github_url),
                         mainActivity.activityBinding.mainCoordLayout,
                         mainActivity.activityBinding.mainBottomNav)
+            }
+        
+        // Third party licenses
+        fragmentBinding.licenses
+            .setOnClickListener {
+                LicensesBottomSheet().show(parentFragmentManager, "LicensesBottomSheet")
             }
         
     }
