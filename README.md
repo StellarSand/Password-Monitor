@@ -2,7 +2,7 @@
 
 # Password Monitor
 
-Ensure your password safety by scanning for potential breaches.
+Ensure your password safety by scanning in real data breaches.
 
 <img src="https://img.shields.io/f-droid/v/com.password.monitor?logo=FDroid&color=green&style=for-the-badge" alt="F-Droid Version"> <img src="https://img.shields.io/endpoint?url=https://play.cuzi.workers.dev/play?i=com.password.monitor&m=$version&logo=GooglePlay&color=blue&label=Google%20Play&style=for-the-badge" alt="Google Play Version">
 
