@@ -145,8 +145,8 @@ Privacy policy is located [here](https://github.com/StellarSand/Password-Monitor
 
 ## Issues
 If you find bugs or have suggestions, please report it to the [issue tracker](https://github.com/StellarSand/Password-Monitor/issues).
-
-Please search for existing issues before opening a new one. Any duplicates will be closed immediately.
+- Make sure you're on the latest version before reporting any issues.
+- Please search for existing issues before opening a new one. Any duplicates will be closed.
 
 
 
