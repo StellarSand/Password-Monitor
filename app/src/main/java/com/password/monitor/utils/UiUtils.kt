@@ -21,6 +21,7 @@ import android.app.Activity
 import android.content.Context
 import android.os.Build
 import android.view.View
+import android.view.Window
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -50,6 +51,16 @@ class UiUtils {
             }
         }
         
+        fun setNavBarContrastEnforced(window: Window) {
+            if (Build.VERSION.SDK_INT >= 29) {
+                window.isNavigationBarContrastEnforced = false
+            }
+        }
+        
+        fun convertDpToPx(context: Context, dp: Float): Int {
+            return (dp * context.resources.displayMetrics.density).toInt()
+        }
+        
         fun setFoundInBreachSubtitleText(context: Context,
                                          isFound: Boolean = false,
                                          reset: Boolean = false,
@@ -72,8 +83,7 @@ class UiUtils {
                 else {
                     setCompoundDrawablesWithIntrinsicBounds(null,
                                                             null,
-                                                            ContextCompat.getDrawable(context,
-                                                                                      icon),
+                                                            ContextCompat.getDrawable(context, icon),
                                                             null)
                 }
             }

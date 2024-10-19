@@ -18,6 +18,7 @@
 package com.password.monitor.activities
 
 import android.os.Bundle
+import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import com.password.monitor.R
 import com.password.monitor.appmanager.ApplicationManager
@@ -25,6 +26,7 @@ import com.password.monitor.databinding.ActivityDetailsBinding
 import com.password.monitor.fragments.details.DetailsFragment
 import com.password.monitor.preferences.PreferenceManager
 import com.password.monitor.utils.UiUtils.Companion.blockScreenshots
+import com.password.monitor.utils.UiUtils.Companion.setNavBarContrastEnforced
 
 class DetailsActivity : AppCompatActivity() {
     
@@ -32,6 +34,8 @@ class DetailsActivity : AppCompatActivity() {
     lateinit var passwordLine: String
     
     override fun onCreate(savedInstanceState: Bundle?) {
+        enableEdgeToEdge()
+        setNavBarContrastEnforced(window)
         super.onCreate(savedInstanceState)
         activityBinding = ActivityDetailsBinding.inflate(layoutInflater)
         setContentView(activityBinding.root)

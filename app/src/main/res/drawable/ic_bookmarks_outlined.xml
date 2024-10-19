@@ -1,5 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
-
 <!--
   ~     Copyright (C) 2024-present StellarSand
   ~
@@ -17,7 +15,6 @@
   ~     along with this program.  If not, see <https://www.gnu.org/licenses/>.
   -->
 
-<selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:color="?attr/colorPrimary" android:state_checked="true"/>
-    <item android:color="?attr/colorOutlineVariant" android:state_checked="false"/>
-</selector>
+<vector xmlns:android="http://schemas.android.com/apk/res/android" android:width="24dp" android:height="24dp" android:viewportWidth="960" android:viewportHeight="960" android:tint="?attr/colorControlNormal">
+    <path android:fillColor="@android:color/white" android:pathData="M480 720l-168 72q-40 17-76-6.5T200 719V200q0-33 23.5-56.5T280 120h400q33 0 56.5 23.5T760 200v519q0 43-36 66.5t-76 6.5l-168-72zm0-88l200 86V200H280v518l200-86zm0-432H280h400-200z"/>
+</vector>

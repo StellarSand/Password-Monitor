@@ -22,6 +22,7 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import androidx.activity.OnBackPressedCallback
+import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.MenuProvider
 import androidx.navigation.NavController
@@ -33,6 +34,7 @@ import com.password.monitor.preferences.PreferenceManager
 import com.password.monitor.preferences.PreferenceManager.Companion.GRID_VIEW
 import com.password.monitor.preferences.PreferenceManager.Companion.SORT_ASC
 import com.password.monitor.utils.UiUtils.Companion.blockScreenshots
+import com.password.monitor.utils.UiUtils.Companion.setNavBarContrastEnforced
 
 class MultiPwdActivity : AppCompatActivity(), MenuProvider {
     
@@ -44,6 +46,8 @@ class MultiPwdActivity : AppCompatActivity(), MenuProvider {
     var isAscSort = false
     
     override fun onCreate(savedInstanceState: Bundle?) {
+        enableEdgeToEdge()
+        setNavBarContrastEnforced(window)
         super.onCreate(savedInstanceState)
         addMenuProvider(this)
         onBackPressedDispatcher.addCallback(this, onBackPressedCallback)

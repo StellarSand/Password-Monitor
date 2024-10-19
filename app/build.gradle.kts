@@ -21,7 +21,7 @@ plugins {
 }
 
 kotlin {
-    jvmToolchain(17)
+    jvmToolchain(21)
 }
 
 android {
@@ -57,19 +57,10 @@ android {
 }
 
 dependencies {
-    implementation(libs.androidx.appcompat)
-    implementation(libs.androidx.core.ktx)
+    implementation(libs.bundles.androidxCoreComponents)
     implementation(libs.material3)
-    
-    // Navigation components
     implementation(libs.bundles.navigation)
-    
-    // Retrofit2
     implementation(libs.bundles.retrofit2)
-    
-    // Lottie
     implementation(libs.lottie)
-    
-    // Fastscroll-kt
     implementation(libs.androidFastScrollKt)
 }

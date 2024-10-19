@@ -18,6 +18,8 @@
   -->
 
 <resources>
+
+    <!--Dark theme colors-->
     <color name="color_primary">#B5D086</color>
     <color name="color_onPrimary">#233600</color>
     <color name="color_primaryContainer">#384D12</color>
@@ -160,7 +162,7 @@
     <color name="color_surfaceContainerHigh_highContrast">#292B23</color>
     <color name="color_surfaceContainerHighest_highContrast">#34362E</color>
 
-    <color name="color_scrollbar">#717274</color>
+    <color name="color_scrollbar">#726B70</color>
     <color name="color_url">#42A5F5</color>
 
     <color name="color_found_in_breach">#FF8980</color>

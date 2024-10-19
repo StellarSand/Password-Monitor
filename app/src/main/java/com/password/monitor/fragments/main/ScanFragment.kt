@@ -17,26 +17,21 @@
 
 package com.password.monitor.fragments.main
 
-import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
-import android.content.Intent
 import android.os.Bundle
-import android.text.Editable
 import android.text.InputType.TYPE_TEXT_VARIATION_PASSWORD
-import android.text.TextWatcher
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.AccelerateDecelerateInterpolator
-import androidx.core.content.ContextCompat
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.inputmethod.EditorInfoCompat.IME_FLAG_NO_PERSONALIZED_LEARNING
 import androidx.core.view.isVisible
+import androidx.core.view.updateLayoutParams
+import androidx.core.view.updatePadding
 import androidx.core.widget.doOnTextChanged
 import androidx.lifecycle.lifecycleScope
-import com.google.android.material.snackbar.BaseTransientBottomBar
-import com.google.android.material.snackbar.Snackbar
-import com.google.android.material.textview.MaterialTextView
 import com.password.monitor.R
 import com.password.monitor.activities.MainActivity
 import com.password.monitor.appmanager.ApplicationManager
@@ -49,14 +44,13 @@ import com.password.monitor.utils.HashUtils.Companion.getHashCount
 import com.password.monitor.utils.IntentUtils.Companion.openURL
 import com.password.monitor.utils.NetworkUtils.Companion.hasInternet
 import com.password.monitor.utils.NetworkUtils.Companion.hasNetwork
-import com.password.monitor.utils.UiUtils
+import com.password.monitor.utils.UiUtils.Companion.convertDpToPx
 import com.password.monitor.utils.UiUtils.Companion.setFoundInBreachSubtitleText
 import com.password.monitor.utils.UiUtils.Companion.showSnackbar
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import retrofit2.awaitResponse
-import java.security.MessageDigest
 
 class ScanFragment : Fragment() {
     
@@ -82,6 +76,36 @@ class ScanFragment : Fragment() {
         naString = getString(R.string.na)
         breachedSuggestionString = getString(R.string.breached_suggestion)
         notBreachedSuggestionString = getString(R.string.not_breached_suggestion)
+        
+        // Adjust UI components for edge to edge
+        ViewCompat.setOnApplyWindowInsetsListener(fragmentBinding.scanCoordLayout) { v, windowInsets ->
+            val insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars())
+            v.updateLayoutParams<ViewGroup.MarginLayoutParams> {
+                leftMargin = insets.left
+                topMargin = insets.top
+                rightMargin = insets.right
+                bottomMargin = insets.bottom
+            }
+            WindowInsetsCompat.CONSUMED
+        }
+        ViewCompat.setOnApplyWindowInsetsListener(fragmentBinding.passwordBox) { v, windowInsets ->
+            val insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars()
+                                                        or WindowInsetsCompat.Type.displayCutout())
+            v.updatePadding(left = insets.left, right = insets.right)
+            v.updateLayoutParams<ViewGroup.MarginLayoutParams> {
+                topMargin = insets.top + convertDpToPx(requireContext(), 12f)
+            }
+            WindowInsetsCompat.CONSUMED
+        }
+        ViewCompat.setOnApplyWindowInsetsListener(fragmentBinding.scanMultipleFab) { v, windowInsets ->
+            val insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars()
+                                                        or WindowInsetsCompat.Type.displayCutout())
+            v.updateLayoutParams<ViewGroup.MarginLayoutParams> {
+                rightMargin = insets.right + convertDpToPx(requireContext(), 16f)
+                bottomMargin = insets.bottom + convertDpToPx(requireContext(), 25f)
+            }
+            WindowInsetsCompat.CONSUMED
+        }
         
         fragmentBinding.passwordText.apply {
             if ((requireContext().applicationContext as ApplicationManager).preferenceManager.getBoolean(INCOG_KEYBOARD)) {

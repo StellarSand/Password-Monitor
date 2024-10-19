@@ -19,6 +19,7 @@
 
 <resources>
 
+    <!--Light theme colors-->
     <color name="seed">#556B2F</color>
     <color name="color_primary">#4F6628</color>
     <color name="color_onPrimary">#FFFFFF</color>
@@ -162,7 +163,7 @@
     <color name="color_surfaceContainerHigh_highContrast">#E8E9DD</color>
     <color name="color_surfaceContainerHighest_highContrast">#E3E3D8</color>
 
-    <color name="color_scrollbar">#B8B8B8</color>
+    <color name="color_scrollbar">#A19CA0</color>
     <color name="color_url">#1976D2</color>
 
     <color name="color_found_in_breach">#E62E2E</color>

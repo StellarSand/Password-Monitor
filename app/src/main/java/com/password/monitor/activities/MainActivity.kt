@@ -21,12 +21,14 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.WindowManager
 import androidx.activity.OnBackPressedCallback
+import androidx.activity.enableEdgeToEdge
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import com.password.monitor.appmanager.ApplicationManager
 import com.password.monitor.preferences.PreferenceManager.Companion.BLOCK_SS
 import com.password.monitor.R
 import com.password.monitor.databinding.ActivityMainBinding
+import com.password.monitor.utils.UiUtils.Companion.setNavBarContrastEnforced
 
 class MainActivity : AppCompatActivity() {
     
@@ -36,6 +38,8 @@ class MainActivity : AppCompatActivity() {
     private var selectedItem = 0
     
     override fun onCreate(savedInstanceState: Bundle?) {
+        enableEdgeToEdge()
+        setNavBarContrastEnforced(window)
         super.onCreate(savedInstanceState)
         onBackPressedDispatcher.addCallback(this, onBackPressedCallback)
         activityBinding = ActivityMainBinding.inflate(layoutInflater)
