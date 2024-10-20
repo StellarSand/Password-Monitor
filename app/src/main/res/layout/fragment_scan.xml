@@ -113,8 +113,7 @@
                 android:paddingEnd="@dimen/margin_8"
                 android:text="@string/na"
                 android:textColor="?attr/colorControlNormal"
-                android:textSize="@dimen/text_17"
-                style="@style/MediumBoldText"/>
+                android:textSize="@dimen/text_17"/>
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/timesFoundTitle"

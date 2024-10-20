@@ -22,17 +22,19 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.core.widget.doOnTextChanged
+import androidx.lifecycle.lifecycleScope
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import com.password.monitor.R
 import com.password.monitor.activities.MultiPwdActivity
 import com.password.monitor.appmanager.ApplicationManager
 import com.password.monitor.databinding.BottomSheetAddMultiPwdBinding
 import com.password.monitor.databinding.BottomSheetFooterBinding
 import com.password.monitor.databinding.BottomSheetHeaderBinding
 import com.password.monitor.models.MultiPwdItem
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 class AddMultiPwdBottomSheet : BottomSheetDialogFragment() {
     
@@ -48,6 +50,7 @@ class AddMultiPwdBottomSheet : BottomSheetDialogFragment() {
     
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         
+        var job: Job? = null
         val footerBinding = BottomSheetFooterBinding.bind(bottomSheetBinding.root)
         
         // Title
@@ -55,16 +58,19 @@ class AddMultiPwdBottomSheet : BottomSheetDialogFragment() {
         
         // Edit text
         bottomSheetBinding.multiPwdText.doOnTextChanged { charSequence, _, _, _ ->
-            footerBinding.positiveButton.apply {
-               if (!isEnabled && charSequence!!.isNotEmpty()) isEnabled = true
-            }
+            job?.cancel()
+            job =
+                lifecycleScope.launch {
+                    delay(300)
+                    footerBinding.positiveButton.apply {
+                        isEnabled = charSequence!!.isNotEmpty()
+                    }
+                }
         }
         
         // Done
         footerBinding.positiveButton.apply {
             isVisible = true
-            icon = ContextCompat.getDrawable(requireContext(), R.drawable.ic_check)
-            text = getString(R.string.done)
             setOnClickListener {
                 val itemList =
                     bottomSheetBinding.multiPwdText.text!!.split("\n")

@@ -64,12 +64,10 @@ class MultiPwdActivity : AppCompatActivity(), MenuProvider {
         // Disable screenshots and screen recordings
         blockScreenshots(this, preferenceManager.getBoolean(PreferenceManager.BLOCK_SS))
         
-        activityBinding.multiPwdToolbar.apply {
+        activityBinding.multiPwdBottomAppBar.apply {
             setSupportActionBar(this)
             setNavigationOnClickListener { onBackPressedDispatcher.onBackPressed() }
         }
-        
-        supportActionBar?.setDisplayShowTitleEnabled(false)
     }
     
     override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {

@@ -56,7 +56,7 @@ class ThemeBottomSheet : BottomSheetDialogFragment() {
         // Show "follow system" option only on SDK 29 and above
         bottomSheetBinding.followSystem.isVisible = Build.VERSION.SDK_INT >= 29
         
-        // Radio group
+        // Chip group
         bottomSheetBinding.themeChipGroup.apply {
         
             // Default checked chip

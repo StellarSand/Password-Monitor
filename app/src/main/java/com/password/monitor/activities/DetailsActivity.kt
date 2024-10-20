@@ -46,12 +46,10 @@ class DetailsActivity : AppCompatActivity() {
         blockScreenshots(this,
                                 (applicationContext as ApplicationManager).preferenceManager.getBoolean(PreferenceManager.BLOCK_SS))
         
-        activityBinding.detailsToolbar.apply {
+        activityBinding.detailsBottomAppBar.apply {
             setSupportActionBar(this)
             setNavigationOnClickListener { onBackPressedDispatcher.onBackPressed() }
         }
-        
-        supportActionBar?.title = getString(R.string.details)
         
         supportFragmentManager.beginTransaction()
             .replace(R.id.activity_host_fragment, DetailsFragment())

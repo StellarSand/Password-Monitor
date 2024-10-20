@@ -17,44 +17,48 @@
   ~     along with this program.  If not, see <https://www.gnu.org/licenses/>.
   -->
 
-<LinearLayout
+<com.google.android.material.card.MaterialCardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:layout_marginStart="@dimen/margin_10"
-    android:layout_marginEnd="@dimen/margin_10"
+    android:layout_marginHorizontal="@dimen/margin_12"
     android:layout_marginTop="@dimen/margin_4"
     android:layout_marginBottom="@dimen/margin_12"
-    android:paddingStart="@dimen/margin_8"
-    android:paddingEnd="@dimen/margin_8"
-    android:paddingTop="@dimen/margin_10"
-    android:paddingBottom="@dimen/margin_8"
-    android:background="@drawable/shape_outline">
+    android:backgroundTint="@android:color/transparent">
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/license_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/margin_8"
-        android:layout_marginBottom="@dimen/margin_4"
-        android:clickable="true"
-        android:focusable="true"
-        android:text="@string/retrofit"
-        android:textAlignment="viewStart"
-        android:textColor="@color/color_url"
-        android:textSize="@dimen/text_20" />
-
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/license_desc"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_8"
-        android:layout_marginBottom="@dimen/margin_4"
-        android:paddingStart="@dimen/margin_10"
-        android:paddingEnd="@dimen/margin_8"
-        android:text="@string/apache_2_0_license"
-        android:textColor="?attr/colorOnSurface"
-        android:textSize="@dimen/text_16" />
+        android:orientation="vertical"
+        android:paddingHorizontal="@dimen/margin_8"
+        android:paddingTop="@dimen/margin_10"
+        android:paddingBottom="@dimen/margin_8">
 
-</LinearLayout>
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/license_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_8"
+            android:layout_marginBottom="@dimen/margin_4"
+            android:clickable="true"
+            android:focusable="true"
+            android:text="@string/retrofit"
+            android:textAlignment="viewStart"
+            android:textColor="@color/color_url"
+            android:textSize="@dimen/text_20" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/license_desc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_8"
+            android:layout_marginBottom="@dimen/margin_4"
+            android:paddingStart="@dimen/margin_10"
+            android:paddingEnd="@dimen/margin_8"
+            android:text="@string/apache_2_0_license"
+            android:textColor="?attr/colorOnSurface"
+            android:textSize="@dimen/text_16" />
+
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>

@@ -88,12 +88,12 @@
     </style>
 
     <style name="LightChipTheme" parent="BaseThemeChipStyle">
-        <item name="closeIcon">@drawable/ic_light</item>
+        <item name="closeIcon">@drawable/ic_theme_light</item>
         <item name="android:text">@string/light</item>
     </style>
 
     <style name="DarkChipTheme" parent="BaseThemeChipStyle">
-        <item name="closeIcon">@drawable/ic_dark</item>
+        <item name="closeIcon">@drawable/ic_theme_dark</item>
         <item name="android:text">@string/dark</item>
     </style>
 

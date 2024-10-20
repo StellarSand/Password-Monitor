@@ -67,13 +67,13 @@ class UiUtils {
                                          textView: MaterialTextView) {
             val (displayText, icon) =
                 if (isFound) {
-                    Pair("${context.getString(R.string.yes)} \t", R.drawable.ic_found_in_breach)
+                    Pair("${context.getString(R.string.yes)}\t", R.drawable.ic_found_in_breach)
                 }
                 else if (reset) {
                     Pair(context.getString(R.string.na), 0)
                 }
                 else {
-                    Pair("${context.getString(R.string.no)} \t", R.drawable.ic_not_found_in_breach)
+                    Pair("${context.getString(R.string.no)}\t", R.drawable.ic_not_found_in_breach)
                 }
             textView.apply {
                 text = displayText

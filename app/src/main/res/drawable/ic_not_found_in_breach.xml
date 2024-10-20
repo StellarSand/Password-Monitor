@@ -16,5 +16,5 @@
   -->
 
 <vector xmlns:android="http://schemas.android.com/apk/res/android" android:width="24dp" android:height="24dp" android:viewportWidth="960" android:viewportHeight="960" android:tint="@color/color_not_found_in_breach">
-    <path android:fillColor="@android:color/white" android:pathData="M840 320q32 0 56 24t24 56v80q0 7-2 15t-4 15L794 792q-9 20-30 34t-44 14H280V320L520 82q15-15 35.5-17.5T595 72q19 10 28 28t4 37l-45 183h258zm-480 34v406h360l120-280v-80H480l54-220-174 174zM160 840q-33 0-56.5-23.5T80 760V400q0-33 23.5-56.5T160 320h120v80H160v360h120v80H160zm200-80V354v406z"/>
+    <path android:fillColor="@android:color/white" android:pathData="M438 508l-56-56q-12-12-28-12t-28 12q-12 12-12 28.5t12 28.5l84 85q12 12 28 12t28-12l170-170q12-12 12-28.5T636 367q-12-12-28.5-12T579 367L438 508zm42 368q-7 0-13-1t-12-3q-135-45-215-166.5T160 444V255q0-25 14.5-45t37.5-29l240-90q14-5 28-5t28 5l240 90q23 9 37.5 29t14.5 45v189q0 140-80 261.5T505 872q-6 2-12 3t-13 1zm0-80q104-33 172-132t68-220V255l-240-90-240 90v189q0 121 68 220t172 132zm0-316z"/>
 </vector>
