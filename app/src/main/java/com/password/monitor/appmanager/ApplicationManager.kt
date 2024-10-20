@@ -18,11 +18,9 @@
 package com.password.monitor.appmanager
 
 import android.app.Application
-import com.google.android.material.color.DynamicColors
 import com.password.monitor.api.ApiManager.Companion.apiBuilder
 import com.password.monitor.models.MultiPwdItem
 import com.password.monitor.preferences.PreferenceManager
-import com.password.monitor.preferences.PreferenceManager.Companion.MATERIAL_YOU
 import com.password.monitor.preferences.PreferenceManager.Companion.THEME
 import com.password.monitor.repositories.ApiRepository
 import com.password.monitor.utils.UiUtils.Companion.setAppTheme
@@ -42,11 +40,6 @@ class ApplicationManager : Application() {
         
         // Theme
         setAppTheme(preferenceManager.getInt(THEME))
-        
-        // Material you
-        if (preferenceManager.getBoolean(MATERIAL_YOU, defValue = false)) {
-            DynamicColors.applyToActivitiesIfAvailable(this)
-        }
         
     }
     

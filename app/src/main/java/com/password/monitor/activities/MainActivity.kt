@@ -22,12 +22,15 @@ import android.os.Bundle
 import android.view.WindowManager
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.enableEdgeToEdge
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
+import com.google.android.material.color.DynamicColors
 import com.password.monitor.appmanager.ApplicationManager
 import com.password.monitor.preferences.PreferenceManager.Companion.BLOCK_SS
 import com.password.monitor.R
 import com.password.monitor.databinding.ActivityMainBinding
+import com.password.monitor.preferences.PreferenceManager.Companion.MATERIAL_YOU
 import com.password.monitor.utils.UiUtils.Companion.setNavBarContrastEnforced
 
 class MainActivity : AppCompatActivity() {
@@ -38,6 +41,14 @@ class MainActivity : AppCompatActivity() {
     private var selectedItem = 0
     
     override fun onCreate(savedInstanceState: Bundle?) {
+        installSplashScreen()
+        // Material you
+        // set this here instead of in Application class,
+        // or else Dynamic Colors will not be applied to this activity
+        if ((applicationContext as ApplicationManager).preferenceManager.getBoolean (MATERIAL_YOU, defValue = false)) {
+            DynamicColors.applyToActivityIfAvailable(this)
+            DynamicColors.applyToActivitiesIfAvailable(applicationContext as ApplicationManager) // For other activities
+        }
         enableEdgeToEdge()
         setNavBarContrastEnforced(window)
         super.onCreate(savedInstanceState)
