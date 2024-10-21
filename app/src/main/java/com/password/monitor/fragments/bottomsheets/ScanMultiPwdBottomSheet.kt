@@ -29,11 +29,11 @@ import androidx.lifecycle.lifecycleScope
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.password.monitor.R
 import com.password.monitor.activities.MultiPwdActivity
-import com.password.monitor.appmanager.ApplicationManager
 import com.password.monitor.databinding.BottomSheetFooterBinding
 import com.password.monitor.databinding.BottomSheetHeaderBinding
 import com.password.monitor.databinding.BottomSheetScanMultiPwdBinding
 import com.password.monitor.models.MultiPwdItem
+import com.password.monitor.objects.MultiPwdList
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -92,7 +92,7 @@ class ScanMultiPwdBottomSheet : BottomSheetDialogFragment() {
                         val bufferedReader = BufferedReader(InputStreamReader(inputStream))
                         var lineList: List<String>
                         
-                        (requireContext().applicationContext as ApplicationManager).multiPasswordsList.apply {
+                        MultiPwdList.pwdList.apply {
                             if (isNotEmpty()) clear()
                             // Read file line by line
                             while (bufferedReader.readLine().also { lineList = listOf(it) } != null) {

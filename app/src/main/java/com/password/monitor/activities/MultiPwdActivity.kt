@@ -28,20 +28,20 @@ import androidx.core.view.MenuProvider
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import com.password.monitor.R
-import com.password.monitor.appmanager.ApplicationManager
 import com.password.monitor.databinding.ActivityMultiPwdBinding
+import com.password.monitor.objects.MultiPwdList
 import com.password.monitor.preferences.PreferenceManager
 import com.password.monitor.preferences.PreferenceManager.Companion.GRID_VIEW
 import com.password.monitor.preferences.PreferenceManager.Companion.SORT_ASC
 import com.password.monitor.utils.UiUtils.Companion.blockScreenshots
 import com.password.monitor.utils.UiUtils.Companion.setNavBarContrastEnforced
+import org.koin.android.ext.android.inject
 
 class MultiPwdActivity : AppCompatActivity(), MenuProvider {
     
     private lateinit var activityBinding: ActivityMultiPwdBinding
-    private lateinit var appManager: ApplicationManager
     private lateinit var navController: NavController
-    private lateinit var preferenceManager: PreferenceManager
+    private val prefManager by inject<PreferenceManager>()
     var isGridView = false
     var isAscSort = false
     
@@ -56,13 +56,11 @@ class MultiPwdActivity : AppCompatActivity(), MenuProvider {
         
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.multi_pwd_nav_host) as NavHostFragment
         navController = navHostFragment.navController
-        appManager = applicationContext as ApplicationManager
-        preferenceManager = appManager.preferenceManager
-        isGridView = preferenceManager.getBoolean(GRID_VIEW, defValue = false)
-        isAscSort = preferenceManager.getBoolean(SORT_ASC)
+        isGridView = prefManager.getBoolean(GRID_VIEW, defValue = false)
+        isAscSort = prefManager.getBoolean(SORT_ASC)
         
         // Disable screenshots and screen recordings
-        blockScreenshots(this, preferenceManager.getBoolean(PreferenceManager.BLOCK_SS))
+        blockScreenshots(this, prefManager.getBoolean(PreferenceManager.BLOCK_SS))
         
         activityBinding.multiPwdBottomAppBar.apply {
             setSupportActionBar(this)
@@ -109,10 +107,10 @@ class MultiPwdActivity : AppCompatActivity(), MenuProvider {
     
     override fun onDestroy() {
         super.onDestroy()
-        preferenceManager.apply {
+        prefManager.apply {
             setBoolean(GRID_VIEW, isGridView)
             setBoolean(SORT_ASC, isAscSort)
         }
-        appManager.multiPasswordsList.clear()
+        MultiPwdList.pwdList.clear()
     }
 }

@@ -27,11 +27,11 @@ import androidx.core.widget.doOnTextChanged
 import androidx.lifecycle.lifecycleScope
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.password.monitor.activities.MultiPwdActivity
-import com.password.monitor.appmanager.ApplicationManager
 import com.password.monitor.databinding.BottomSheetAddMultiPwdBinding
 import com.password.monitor.databinding.BottomSheetFooterBinding
 import com.password.monitor.databinding.BottomSheetHeaderBinding
 import com.password.monitor.models.MultiPwdItem
+import com.password.monitor.objects.MultiPwdList
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -76,7 +76,7 @@ class AddMultiPwdBottomSheet : BottomSheetDialogFragment() {
                     bottomSheetBinding.multiPwdText.text!!.split("\n")
                         .filter { it.isNotEmpty() }
                         .map { MultiPwdItem(it) }
-                (requireContext().applicationContext as ApplicationManager).multiPasswordsList.addAll(itemList)
+                MultiPwdList.pwdList.addAll(itemList)
                 dismiss()
                 startActivity(Intent(requireActivity(), MultiPwdActivity::class.java))
             }

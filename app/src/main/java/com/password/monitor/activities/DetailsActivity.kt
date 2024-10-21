@@ -21,12 +21,13 @@ import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import com.password.monitor.R
-import com.password.monitor.appmanager.ApplicationManager
 import com.password.monitor.databinding.ActivityDetailsBinding
 import com.password.monitor.fragments.details.DetailsFragment
 import com.password.monitor.preferences.PreferenceManager
+import com.password.monitor.preferences.PreferenceManager.Companion.BLOCK_SS
 import com.password.monitor.utils.UiUtils.Companion.blockScreenshots
 import com.password.monitor.utils.UiUtils.Companion.setNavBarContrastEnforced
+import org.koin.android.ext.android.get
 
 class DetailsActivity : AppCompatActivity() {
     
@@ -43,8 +44,7 @@ class DetailsActivity : AppCompatActivity() {
         passwordLine = intent.getStringExtra("PwdLine")!!
         
         // Disable screenshots and screen recordings
-        blockScreenshots(this,
-                                (applicationContext as ApplicationManager).preferenceManager.getBoolean(PreferenceManager.BLOCK_SS))
+        blockScreenshots(this, get<PreferenceManager>().getBoolean(BLOCK_SS))
         
         activityBinding.detailsBottomAppBar.apply {
             setSupportActionBar(this)

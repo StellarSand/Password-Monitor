@@ -32,15 +32,16 @@ import androidx.fragment.app.Fragment
 import com.password.monitor.BuildConfig
 import com.password.monitor.R
 import com.password.monitor.activities.MainActivity
-import com.password.monitor.appmanager.ApplicationManager
 import com.password.monitor.databinding.FragmentSettingsBinding
 import com.password.monitor.fragments.bottomsheets.LicensesBottomSheet
 import com.password.monitor.fragments.bottomsheets.SupportMethodsBottomSheet
 import com.password.monitor.fragments.bottomsheets.ThemeBottomSheet
+import com.password.monitor.preferences.PreferenceManager
 import com.password.monitor.preferences.PreferenceManager.Companion.BLOCK_SS
 import com.password.monitor.preferences.PreferenceManager.Companion.INCOG_KEYBOARD
 import com.password.monitor.preferences.PreferenceManager.Companion.MATERIAL_YOU
 import com.password.monitor.utils.IntentUtils.Companion.openURL
+import org.koin.android.ext.android.inject
 
 class SettingsFragment : Fragment() {
     
@@ -57,7 +58,7 @@ class SettingsFragment : Fragment() {
     
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         
-        val preferenceManager = (requireContext().applicationContext as ApplicationManager).preferenceManager
+        val prefManager by inject<PreferenceManager>()
         val mainActivity = requireActivity() as MainActivity
         
         // Adjust scrollview for edge to edge
@@ -82,18 +83,18 @@ class SettingsFragment : Fragment() {
         fragmentBinding.materialYouSwitch.apply {
             if (Build.VERSION.SDK_INT >= 31) {
                 isVisible = true
-                isChecked = preferenceManager.getBoolean(MATERIAL_YOU, defValue = false)
+                isChecked = prefManager.getBoolean(MATERIAL_YOU, defValue = false)
                 setOnCheckedChangeListener { _, isChecked ->
-                    preferenceManager.setBoolean(MATERIAL_YOU, isChecked)
+                    prefManager.setBoolean(MATERIAL_YOU, isChecked)
                 }
             }
         }
         
         // Block screenshots
         fragmentBinding.blockScreenshotsSwitch.apply {
-            isChecked = preferenceManager.getBoolean(BLOCK_SS)
+            isChecked = prefManager.getBoolean(BLOCK_SS)
             setOnCheckedChangeListener { _, isChecked ->
-                preferenceManager.setBoolean(BLOCK_SS, isChecked)
+                prefManager.setBoolean(BLOCK_SS, isChecked)
                 when (isChecked) {
                     true -> mainActivity.window.setFlags(WindowManager.LayoutParams.FLAG_SECURE,
                                                          WindowManager.LayoutParams.FLAG_SECURE)
@@ -104,9 +105,9 @@ class SettingsFragment : Fragment() {
         
         // Incognito keyboard
         fragmentBinding.incognitoKeyboardSwitch.apply {
-            isChecked = preferenceManager.getBoolean(INCOG_KEYBOARD)
+            isChecked = prefManager.getBoolean(INCOG_KEYBOARD)
             setOnCheckedChangeListener { _, isChecked ->
-                preferenceManager.setBoolean(INCOG_KEYBOARD, isChecked)
+                prefManager.setBoolean(INCOG_KEYBOARD, isChecked)
             }
         }
         

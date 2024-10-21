@@ -34,11 +34,12 @@ import androidx.core.widget.doOnTextChanged
 import androidx.lifecycle.lifecycleScope
 import com.password.monitor.R
 import com.password.monitor.activities.MainActivity
-import com.password.monitor.appmanager.ApplicationManager
 import com.password.monitor.databinding.FragmentScanBinding
 import com.password.monitor.fragments.bottomsheets.NoNetworkBottomSheet
 import com.password.monitor.fragments.bottomsheets.ScanMultiPwdBottomSheet
+import com.password.monitor.preferences.PreferenceManager
 import com.password.monitor.preferences.PreferenceManager.Companion.INCOG_KEYBOARD
+import com.password.monitor.repositories.ApiRepository
 import com.password.monitor.utils.HashUtils.Companion.generateSHA1Hash
 import com.password.monitor.utils.HashUtils.Companion.getHashCount
 import com.password.monitor.utils.IntentUtils.Companion.openURL
@@ -50,6 +51,7 @@ import com.password.monitor.utils.UiUtils.Companion.showSnackbar
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import org.koin.android.ext.android.get
 import retrofit2.awaitResponse
 
 class ScanFragment : Fragment() {
@@ -108,7 +110,7 @@ class ScanFragment : Fragment() {
         }
         
         fragmentBinding.passwordText.apply {
-            if ((requireContext().applicationContext as ApplicationManager).preferenceManager.getBoolean(INCOG_KEYBOARD)) {
+            if (get<PreferenceManager>().getBoolean(INCOG_KEYBOARD)) {
                 imeOptions = IME_FLAG_NO_PERSONALIZED_LEARNING
                 inputType = TYPE_TEXT_VARIATION_PASSWORD
             }
@@ -201,8 +203,7 @@ class ScanFragment : Fragment() {
         lifecycleScope.launch{
             val context = requireContext()
             if (hasNetwork(context) && hasInternet()) {
-                val apiRepository = (context.applicationContext as ApplicationManager).apiRepository
-                val hashesCall = apiRepository.getHashes(hashPrefix)
+                val hashesCall = get<ApiRepository>().getHashes(hashPrefix)
                 val hashesResponse = hashesCall.awaitResponse()
                 
                 if (hashesResponse.isSuccessful) {

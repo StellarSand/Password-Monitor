@@ -32,9 +32,9 @@ import androidx.lifecycle.lifecycleScope
 import com.password.monitor.R
 import com.password.monitor.activities.DetailsActivity
 import com.password.monitor.activities.MainActivity
-import com.password.monitor.appmanager.ApplicationManager
 import com.password.monitor.databinding.FragmentScanBinding
 import com.password.monitor.fragments.bottomsheets.NoNetworkBottomSheet
+import com.password.monitor.repositories.ApiRepository
 import com.password.monitor.utils.HashUtils.Companion.generateSHA1Hash
 import com.password.monitor.utils.HashUtils.Companion.getHashCount
 import com.password.monitor.utils.IntentUtils
@@ -44,6 +44,7 @@ import com.password.monitor.utils.UiUtils.Companion.convertDpToPx
 import com.password.monitor.utils.UiUtils.Companion.setFoundInBreachSubtitleText
 import com.password.monitor.utils.UiUtils.Companion.showSnackbar
 import kotlinx.coroutines.launch
+import org.koin.android.ext.android.get
 import retrofit2.awaitResponse
 
 class DetailsFragment : Fragment() {
@@ -149,8 +150,7 @@ class DetailsFragment : Fragment() {
         lifecycleScope.launch {
             val context = requireContext()
             if (hasNetwork(context) && hasInternet()) {
-                val apiRepository = (context.applicationContext as ApplicationManager).apiRepository
-                val hashesCall = apiRepository.getHashes(hashPrefix)
+                val hashesCall = get<ApiRepository>().getHashes(hashPrefix)
                 val hashesResponse = hashesCall.awaitResponse()
                 
                 if (hashesResponse.isSuccessful) {

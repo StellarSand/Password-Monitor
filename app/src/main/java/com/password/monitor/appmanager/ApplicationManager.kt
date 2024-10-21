@@ -18,28 +18,26 @@
 package com.password.monitor.appmanager
 
 import android.app.Application
-import com.password.monitor.api.ApiManager.Companion.apiBuilder
-import com.password.monitor.models.MultiPwdItem
+import com.password.monitor.koin_di.appModule
 import com.password.monitor.preferences.PreferenceManager
 import com.password.monitor.preferences.PreferenceManager.Companion.THEME
-import com.password.monitor.repositories.ApiRepository
 import com.password.monitor.utils.UiUtils.Companion.setAppTheme
+import org.koin.android.ext.android.get
+import org.koin.android.ext.koin.androidContext
+import org.koin.core.context.startKoin
 
 class ApplicationManager : Application() {
-    
-    val preferenceManager by lazy {
-        PreferenceManager(this)
-    }
-    private val apiService by lazy { apiBuilder() }
-    val apiRepository by lazy { ApiRepository(apiService) }
-    
-    var multiPasswordsList = mutableListOf<MultiPwdItem>()
     
     override fun onCreate() {
         super.onCreate()
         
+        startKoin {
+            androidContext(this@ApplicationManager)
+            modules(appModule)
+        }
+        
         // Theme
-        setAppTheme(preferenceManager.getInt(THEME))
+        setAppTheme(get<PreferenceManager>().getInt(THEME))
         
     }
     

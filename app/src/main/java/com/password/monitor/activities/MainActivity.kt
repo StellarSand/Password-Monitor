@@ -30,12 +30,15 @@ import com.password.monitor.appmanager.ApplicationManager
 import com.password.monitor.preferences.PreferenceManager.Companion.BLOCK_SS
 import com.password.monitor.R
 import com.password.monitor.databinding.ActivityMainBinding
+import com.password.monitor.preferences.PreferenceManager
 import com.password.monitor.preferences.PreferenceManager.Companion.MATERIAL_YOU
 import com.password.monitor.utils.UiUtils.Companion.setNavBarContrastEnforced
+import org.koin.android.ext.android.inject
 
 class MainActivity : AppCompatActivity() {
     
     lateinit var activityBinding: ActivityMainBinding
+    private val prefManager by inject<PreferenceManager>()
     private lateinit var navHostFragment: NavHostFragment
     private lateinit var navController: NavController
     private var selectedItem = 0
@@ -45,7 +48,7 @@ class MainActivity : AppCompatActivity() {
         // Material you
         // set this here instead of in Application class,
         // or else Dynamic Colors will not be applied to this activity
-        if ((applicationContext as ApplicationManager).preferenceManager.getBoolean (MATERIAL_YOU, defValue = false)) {
+        if (prefManager.getBoolean (MATERIAL_YOU, defValue = false)) {
             DynamicColors.applyToActivityIfAvailable(this)
             DynamicColors.applyToActivitiesIfAvailable(applicationContext as ApplicationManager) // For other activities
         }
@@ -60,7 +63,7 @@ class MainActivity : AppCompatActivity() {
         navController = navHostFragment.navController
         
         // Disable screenshots and screen recordings
-        if ((applicationContext as ApplicationManager).preferenceManager.getBoolean(BLOCK_SS)) {
+        if (prefManager.getBoolean(BLOCK_SS)) {
             window.setFlags(WindowManager.LayoutParams.FLAG_SECURE,
                             WindowManager.LayoutParams.FLAG_SECURE)
         }
