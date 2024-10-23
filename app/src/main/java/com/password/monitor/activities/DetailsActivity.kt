@@ -31,7 +31,7 @@ import org.koin.android.ext.android.get
 
 class DetailsActivity : AppCompatActivity() {
     
-    private lateinit var activityBinding: ActivityDetailsBinding
+    lateinit var activityBinding: ActivityDetailsBinding
     lateinit var passwordLine: String
     
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -58,6 +58,7 @@ class ScanFragment : Fragment() {
     
     private var _binding: FragmentScanBinding? = null
     private val fragmentBinding get() = _binding!!
+    private lateinit var mainActivity: MainActivity
     private lateinit var naString: String
     private lateinit var breachedSuggestionString: String
     private lateinit var notBreachedSuggestionString: String
@@ -74,22 +75,13 @@ class ScanFragment : Fragment() {
     @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         
+        mainActivity = requireActivity() as MainActivity
         var job: Job? = null
         naString = getString(R.string.na)
         breachedSuggestionString = getString(R.string.breached_suggestion)
         notBreachedSuggestionString = getString(R.string.not_breached_suggestion)
         
         // Adjust UI components for edge to edge
-        ViewCompat.setOnApplyWindowInsetsListener(fragmentBinding.scanCoordLayout) { v, windowInsets ->
-            val insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.updateLayoutParams<ViewGroup.MarginLayoutParams> {
-                leftMargin = insets.left
-                topMargin = insets.top
-                rightMargin = insets.right
-                bottomMargin = insets.bottom
-            }
-            WindowInsetsCompat.CONSUMED
-        }
         ViewCompat.setOnApplyWindowInsetsListener(fragmentBinding.passwordBox) { v, windowInsets ->
             val insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars()
                                                         or WindowInsetsCompat.Type.displayCutout())
@@ -97,6 +89,12 @@ class ScanFragment : Fragment() {
             v.updateLayoutParams<ViewGroup.MarginLayoutParams> {
                 topMargin = insets.top + convertDpToPx(requireContext(), 12f)
             }
+            WindowInsetsCompat.CONSUMED
+        }
+        ViewCompat.setOnApplyWindowInsetsListener(fragmentBinding.scrollView) { v, windowInsets ->
+            val insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars()
+                                                        or WindowInsetsCompat.Type.displayCutout())
+            v.updatePadding(left = insets.left, right = insets.right, bottom = insets.bottom)
             WindowInsetsCompat.CONSUMED
         }
         ViewCompat.setOnApplyWindowInsetsListener(fragmentBinding.scanMultipleFab) { v, windowInsets ->
@@ -133,6 +131,7 @@ class ScanFragment : Fragment() {
                                 timesFoundSubtitle.text = naString
                                 suggestionSubtitle.text = naString
                             }
+                            fragmentBinding.detailsCard.isVisible = false
                         }
                     }
             }
@@ -142,7 +141,7 @@ class ScanFragment : Fragment() {
         fragmentBinding.checkBtn.apply {
             setOnClickListener {
                 enableUiComponents(false)
-                fragmentBinding.progressIndicator.isVisible = true
+                fragmentBinding.loadingIndicator.isVisible = true
                 generateSHA1Hash(fragmentBinding.passwordText.text.toString()).apply {
                     hashPrefix = take(5).uppercase() // First 5 chars
                     hashSuffix = substring(5).uppercase() // Rest of the hash
@@ -154,9 +153,9 @@ class ScanFragment : Fragment() {
         // Tap here
         fragmentBinding.tapHereBtn.apply {
             setOnClickListener {
-                openURL(requireActivity() as MainActivity,
+                openURL(mainActivity,
                         getString(R.string.app_wiki_url),
-                        fragmentBinding.scanCoordLayout,
+                        mainActivity.activityBinding.mainCoordLayout,
                         fragmentBinding.scanMultipleFab)
             }
         }
@@ -197,6 +196,8 @@ class ScanFragment : Fragment() {
                 suggestionSubtitle.text = notBreachedSuggestionString
             }
         }
+        
+        fragmentBinding.detailsCard.isVisible = true
     }
     
     private fun checkPassword() {
@@ -209,13 +210,13 @@ class ScanFragment : Fragment() {
                 if (hashesResponse.isSuccessful) {
                     val responseBody = hashesResponse.body()
                     val count = getHashCount(responseBody, hashSuffix)
-                    fragmentBinding.progressIndicator.visibility = View.INVISIBLE
+                    fragmentBinding.loadingIndicator.isVisible = false
                     displayResult(count)
                 }
                 else {
-                    showSnackbar(fragmentBinding.scanCoordLayout,
-                                         context.getString(R.string.something_went_wrong),
-                                         fragmentBinding.scanMultipleFab)
+                    showSnackbar(mainActivity.activityBinding.mainCoordLayout,
+                                 context.getString(R.string.something_went_wrong),
+                                 fragmentBinding.scanMultipleFab)
                 }
                 
                 enableUiComponents(true)
@@ -223,7 +224,7 @@ class ScanFragment : Fragment() {
             else {
                 NoNetworkBottomSheet(positiveButtonClickListener = { checkPassword() },
                                      negativeButtonClickListener = {
-                                         fragmentBinding.progressIndicator.visibility = View.INVISIBLE
+                                         fragmentBinding.loadingIndicator.isVisible = false
                                          enableUiComponents(true)
                                      })
                     .show(parentFragmentManager, "NoNetworkBottomSheet")

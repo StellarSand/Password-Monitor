@@ -25,7 +25,6 @@ material3 = "1.13.0-alpha07"
 koin = "4.0.0"
 navigationKtx = "2.8.3"
 retrofit2 = "2.11.0"
-lottie = "6.5.2"
 androidfastscrollKt = "v1.0.3"
 
 [libraries]
@@ -39,7 +38,6 @@ androidx-navigation-fragment-ktx = { module = "androidx.navigation:navigation-fr
 androidx-navigation-ui-ktx = { module = "androidx.navigation:navigation-ui-ktx", version.ref = "navigationKtx" }
 retrofit2 = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit2" }
 retrofit2-converter-scalars = { module = "com.squareup.retrofit2:converter-scalars", version.ref = "retrofit2" }
-lottie = { module = "com.airbnb.android:lottie", version.ref = "lottie" }
 androidFastScrollKt = { module = "com.github.StellarSand:AndroidFastScroll-kt", version.ref = "androidfastscrollKt" }
 
 [bundles]

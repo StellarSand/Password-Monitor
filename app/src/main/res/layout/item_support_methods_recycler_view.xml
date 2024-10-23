@@ -59,13 +59,13 @@
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/supportMethodUrl"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="@dimen/margin_16"
-            android:layout_gravity="center"
             android:text="@string/liberapay_url"
             android:textColor="@color/color_url"
             android:textSize="@dimen/text_17"
+            android:textAlignment="center"
             android:textIsSelectable="true"/>
 
     </LinearLayout>

@@ -31,13 +31,12 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import com.password.monitor.R
 import com.password.monitor.activities.DetailsActivity
-import com.password.monitor.activities.MainActivity
 import com.password.monitor.databinding.FragmentScanBinding
 import com.password.monitor.fragments.bottomsheets.NoNetworkBottomSheet
 import com.password.monitor.repositories.ApiRepository
 import com.password.monitor.utils.HashUtils.Companion.generateSHA1Hash
 import com.password.monitor.utils.HashUtils.Companion.getHashCount
-import com.password.monitor.utils.IntentUtils
+import com.password.monitor.utils.IntentUtils.Companion.openURL
 import com.password.monitor.utils.NetworkUtils.Companion.hasInternet
 import com.password.monitor.utils.NetworkUtils.Companion.hasNetwork
 import com.password.monitor.utils.UiUtils.Companion.convertDpToPx
@@ -51,6 +50,7 @@ class DetailsFragment : Fragment() {
     
     private var _binding: FragmentScanBinding? = null
     private val fragmentBinding get() = _binding!!
+    private lateinit var detailsActivity: DetailsActivity
     private lateinit var passwordString: String
     private lateinit var naString: String
     private lateinit var breachedSuggestionString: String
@@ -69,23 +69,14 @@ class DetailsFragment : Fragment() {
     @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         
-        passwordString = (requireActivity() as DetailsActivity).passwordLine
+        detailsActivity = (requireActivity() as DetailsActivity)
+        passwordString = detailsActivity.passwordLine
         naString = getString(R.string.na)
         breachedSuggestionString = getString(R.string.breached_suggestion)
         notBreachedSuggestionString = getString(R.string.not_breached_suggestion)
         
         fragmentBinding.apply {
             // Adjust UI components for edge to edge
-            ViewCompat.setOnApplyWindowInsetsListener(scanCoordLayout) { v, windowInsets ->
-                val insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars())
-                v.updateLayoutParams<ViewGroup.MarginLayoutParams> {
-                    leftMargin = insets.left
-                    topMargin = insets.top
-                    rightMargin = insets.right
-                    bottomMargin = insets.bottom
-                }
-                WindowInsetsCompat.CONSUMED
-            }
             ViewCompat.setOnApplyWindowInsetsListener(fragmentBinding.passwordBox) { v, windowInsets ->
                 val insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars()
                                                             or WindowInsetsCompat.Type.displayCutout())
@@ -95,6 +86,12 @@ class DetailsFragment : Fragment() {
                 }
                 WindowInsetsCompat.CONSUMED
             }
+            ViewCompat.setOnApplyWindowInsetsListener(fragmentBinding.scrollView) { v, windowInsets ->
+                val insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars()
+                                                            or WindowInsetsCompat.Type.displayCutout())
+                v.updatePadding(left = insets.left, right = insets.right, bottom = insets.bottom)
+                WindowInsetsCompat.CONSUMED
+            }
             
             passwordText.apply {
                 setText(passwordString)
@@ -102,7 +99,7 @@ class DetailsFragment : Fragment() {
                 isCursorVisible = false
             }
             checkBtn.isVisible = false
-            progressIndicator.isVisible = true
+            loadingIndicator.isVisible = true
             scanMultipleFab.isVisible = false
             
             generateSHA1Hash(passwordText.text.toString()).apply {
@@ -115,10 +112,10 @@ class DetailsFragment : Fragment() {
             // Tap here
             tapHereBtn.apply {
                 setOnClickListener {
-                    IntentUtils.openURL(requireActivity() as MainActivity,
-                                        getString(R.string.app_wiki_url),
-                                        fragmentBinding.scanCoordLayout,
-                                        fragmentBinding.scanMultipleFab)
+                    openURL(detailsActivity,
+                            getString(R.string.app_wiki_url),
+                            detailsActivity.activityBinding.detailsCoordLayout,
+                            fragmentBinding.scanMultipleFab)
                 }
             }
         }
@@ -144,6 +141,8 @@ class DetailsFragment : Fragment() {
                 suggestionSubtitle.text = notBreachedSuggestionString
             }
         }
+        
+        fragmentBinding.detailsCard.isVisible = true
     }
     
     private fun checkPassword() {
@@ -156,11 +155,11 @@ class DetailsFragment : Fragment() {
                 if (hashesResponse.isSuccessful) {
                     val responseBody = hashesResponse.body()
                     val count = getHashCount(responseBody, hashSuffix)
-                    fragmentBinding.progressIndicator.visibility = View.INVISIBLE
+                    fragmentBinding.loadingIndicator.isVisible = false
                     displayResult(count)
                 }
                 else {
-                    showSnackbar(fragmentBinding.scanCoordLayout,
+                    showSnackbar(detailsActivity.activityBinding.detailsCoordLayout,
                                  context.getString(R.string.something_went_wrong),
                                  fragmentBinding.scanMultipleFab)
                 }
@@ -168,7 +167,7 @@ class DetailsFragment : Fragment() {
             else {
                 NoNetworkBottomSheet(positiveButtonClickListener = { checkPassword() },
                                      negativeButtonClickListener = {
-                                         fragmentBinding.progressIndicator.visibility = View.INVISIBLE
+                                         fragmentBinding.loadingIndicator.isVisible = false
                                      })
                     .show(parentFragmentManager, "NoNetworkBottomSheet")
             }

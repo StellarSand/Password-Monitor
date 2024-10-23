@@ -31,9 +31,7 @@
 
     <!--Licenses title-->
     <string name="retrofit" translatable="false">Retrofit</string>
-    <string name="lottie_android" translatable="false">lottie-android</string>
-    <string name="lottie_files" translatable="false">LottieFiles</string>
-    <string name="fastscroll" translatable="false">AndroidFastScroll-kt</string>
+        <string name="fastscroll" translatable="false">AndroidFastScroll-kt</string>
     <string name="liberapay_icon" translatable="false">Liberapay icon</string>
     <string name="paypal_icon" translatable="false">PayPal icon</string>
     <string name="kofi_icon" translatable="false">Ko-fi icon</string>

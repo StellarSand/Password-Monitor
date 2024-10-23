@@ -26,12 +26,12 @@ kotlin {
 
 android {
     namespace = "com.password.monitor"
-    compileSdk = 34
+    compileSdk = 35
     
     defaultConfig {
         applicationId = "com.password.monitor"
         minSdk = 23
-        targetSdk = 34
+        targetSdk = 35
         versionCode = 101
         versionName = "1.0.1"
         setProperty("archivesBaseName", "PasswordMonitor_v$versionName")
@@ -62,6 +62,5 @@ dependencies {
     implementation(libs.koin.android)
     implementation(libs.bundles.navigation)
     implementation(libs.bundles.retrofit2)
-    implementation(libs.lottie)
     implementation(libs.androidFastScrollKt)
 }
