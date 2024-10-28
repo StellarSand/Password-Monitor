@@ -30,7 +30,7 @@
     <string name="kofi_url" translatable="false">https://ko-fi.com/stellarsand</string>
 
     <!--Licenses bottom sheet-->
-    <string name="retrofit_license_url" translatable="false">https://github.com/square/retrofit/blob/master/LICENSE.txt</string>
+    <string name="ktor_license_url" translatable="false">https://github.com/ktorio/ktor/blob/main/LICENSE</string>
     <string name="fastscroll_license_url" translatable="false">https://github.com/StellarSand/AndroidFastScroll-kt/blob/master/LICENSE</string>
     <string name="liberapay_icon_license_url" translatable="false">https://liberapay.com/about/logos</string>
     <string name="paypal_icon_license_url" translatable="false">https://commons.wikimedia.org/wiki/Category:SVG_PayPal_logos</string>

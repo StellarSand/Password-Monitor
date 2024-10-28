@@ -18,11 +18,10 @@
 package com.password.monitor.repositories
 
 import com.password.monitor.api.ApiService
-import retrofit2.Call
 
 class ApiRepository(private val apiService: ApiService) {
     
-    fun getHashes(prefix: String): Call<String> {
+    suspend fun getHashes(prefix: String): String {
         return apiService.getHashes(prefix)
     }
     

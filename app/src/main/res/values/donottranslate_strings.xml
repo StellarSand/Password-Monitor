@@ -30,13 +30,12 @@
     <string name="kofi" translatable="false">Ko-fi</string>
 
     <!--Licenses title-->
-    <string name="retrofit" translatable="false">Retrofit</string>
-        <string name="fastscroll" translatable="false">AndroidFastScroll-kt</string>
+    <string name="ktor" translatable="false">Ktor</string>
+    <string name="fastscroll" translatable="false">AndroidFastScroll-kt</string>
     <string name="liberapay_icon" translatable="false">Liberapay icon</string>
     <string name="paypal_icon" translatable="false">PayPal icon</string>
     <string name="kofi_icon" translatable="false">Ko-fi icon</string>
 
-    <string name="copyright_square" translatable="false">Copyright \u00A9 2013 Square, Inc.</string>
     <string name="copyright_fastscroll" translatable="false">Copyright \u00A9 2023-present StellarSand</string>
 
 </resources>

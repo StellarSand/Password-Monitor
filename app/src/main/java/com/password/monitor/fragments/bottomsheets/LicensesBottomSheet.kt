@@ -38,7 +38,6 @@ class LicensesBottomSheet : BottomSheetDialogFragment() {
     
     private var _binding: BottomSheetLicensesBinding? = null
     private val bottomSheetBinding get() = _binding!!
-    private lateinit var licenseList: ArrayList<License>
     
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         return (super.onCreateDialog(savedInstanceState) as BottomSheetDialog).apply {
@@ -54,38 +53,39 @@ class LicensesBottomSheet : BottomSheetDialogFragment() {
     }
     
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-    
+        
         // Title
         BottomSheetHeaderBinding.bind(bottomSheetBinding.root).bottomSheetTitle.text = getString(R.string.third_party_licenses)
-    
-        licenseList = ArrayList<License>().apply {
-            
-            // Retrofit
-            add(License(getString(R.string.retrofit),
-                        "${getString(R.string.copyright_square)}\n\n${getString(R.string.apache_2_0_license)}",
-                        getString(R.string.retrofit_license_url)))
-            
-            // Fastscroll
-            add(License(title = getString(R.string.fastscroll),
-                        desc = "${getString(R.string.copyright_fastscroll)}\n\n${getString(R.string.apache_2_0_license)}",
-                        url = getString(R.string.fastscroll_license_url)))
-            
-            // Liberapay
-            add(License(title = getString(R.string.liberapay_icon),
-                        desc = getString(R.string.cc0_1_0_universal_public_domain_license),
-                        url = getString(R.string.liberapay_icon_license_url)))
-            
-            // PayPal
-            add(License(title = getString(R.string.paypal_icon),
-                        desc = "",
-                        url = getString(R.string.paypal_icon_license_url)))
-            
-            // Ko-fi
-            add(License(title = getString(R.string.kofi_icon),
-                        desc = "",
-                        url = getString(R.string.kofi_icon_license_url)))
-        }
-    
+        
+        val licenseList =
+            ArrayList<License>().apply {
+                
+                // Ktor
+                add(License(getString(R.string.ktor),
+                            getString(R.string.apache_2_0_license),
+                            getString(R.string.ktor_license_url)))
+                
+                // Fastscroll
+                add(License(title = getString(R.string.fastscroll),
+                            desc = "${getString(R.string.copyright_fastscroll)}\n\n${getString(R.string.apache_2_0_license)}",
+                            url = getString(R.string.fastscroll_license_url)))
+                
+                // Liberapay
+                add(License(title = getString(R.string.liberapay_icon),
+                            desc = getString(R.string.cc0_1_0_universal_public_domain_license),
+                            url = getString(R.string.liberapay_icon_license_url)))
+                
+                // PayPal
+                add(License(title = getString(R.string.paypal_icon),
+                            desc = "",
+                            url = getString(R.string.paypal_icon_license_url)))
+                
+                // Ko-fi
+                add(License(title = getString(R.string.kofi_icon),
+                            desc = "",
+                            url = getString(R.string.kofi_icon_license_url)))
+            }
+        
         bottomSheetBinding.licensesRecyclerView.adapter = LicenseItemAdapter(licenseList,
                                                                              requireActivity() as MainActivity)
         

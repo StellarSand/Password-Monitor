@@ -17,13 +17,18 @@
 
 package com.password.monitor.api
 
-import retrofit2.Call
-import retrofit2.http.GET
-import retrofit2.http.Path
+import io.ktor.client.HttpClient
+import io.ktor.client.call.body
+import io.ktor.client.request.get
 
-interface ApiService {
+class ApiService(private val client: HttpClient) {
     
-    @GET("{prefix}")
-    fun getHashes(@Path("prefix") prefix: String): Call<String>
+    private companion object {
+        private const val API_BASE_URL = "https://api.pwnedpasswords.com/range/"
+    }
+    
+    suspend fun getHashes(prefix: String): String {
+        return client.get("$API_BASE_URL$prefix").body()
+    }
     
 }

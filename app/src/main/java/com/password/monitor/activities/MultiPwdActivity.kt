@@ -39,7 +39,6 @@ import org.koin.android.ext.android.inject
 
 class MultiPwdActivity : AppCompatActivity(), MenuProvider {
     
-    private lateinit var activityBinding: ActivityMultiPwdBinding
     private lateinit var navController: NavController
     private val prefManager by inject<PreferenceManager>()
     var isGridView = false
@@ -51,7 +50,7 @@ class MultiPwdActivity : AppCompatActivity(), MenuProvider {
         super.onCreate(savedInstanceState)
         addMenuProvider(this)
         onBackPressedDispatcher.addCallback(this, onBackPressedCallback)
-        activityBinding = ActivityMultiPwdBinding.inflate(layoutInflater)
+        val activityBinding = ActivityMultiPwdBinding.inflate(layoutInflater)
         setContentView(activityBinding.root)
         
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.multi_pwd_nav_host) as NavHostFragment

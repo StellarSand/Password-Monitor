@@ -42,7 +42,7 @@
             android:layout_marginBottom="@dimen/margin_4"
             android:clickable="true"
             android:focusable="true"
-            android:text="@string/retrofit"
+            android:text="@string/ktor"
             android:textAlignment="viewStart"
             android:textColor="@color/color_url"
             android:textSize="@dimen/text_20" />

@@ -44,7 +44,7 @@ import com.password.monitor.utils.UiUtils.Companion.setFoundInBreachSubtitleText
 import com.password.monitor.utils.UiUtils.Companion.showSnackbar
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.get
-import retrofit2.awaitResponse
+import java.util.Locale
 
 class DetailsFragment : Fragment() {
     
@@ -128,7 +128,7 @@ class DetailsFragment : Fragment() {
                                          isFound = true,
                                          textView = fragmentBinding.foundInBreachSubtitle)
             fragmentBinding.apply {
-                timesFoundSubtitle.text = count.toString()
+                timesFoundSubtitle.text = String.format(Locale.getDefault(), "%d", count)
                 suggestionSubtitle.text = breachedSuggestionString
             }
         }
@@ -147,22 +147,19 @@ class DetailsFragment : Fragment() {
     
     private fun checkPassword() {
         lifecycleScope.launch {
-            val context = requireContext()
-            if (hasNetwork(context) && hasInternet()) {
-                val hashesCall = get<ApiRepository>().getHashes(hashPrefix)
-                val hashesResponse = hashesCall.awaitResponse()
-                
-                if (hashesResponse.isSuccessful) {
-                    val responseBody = hashesResponse.body()
-                    val count = getHashCount(responseBody, hashSuffix)
-                    fragmentBinding.loadingIndicator.isVisible = false
-                    displayResult(count)
+            if (hasNetwork(requireContext()) && hasInternet()) {
+                try {
+                    val hashesResponse = get<ApiRepository>().getHashes(hashPrefix)
+                    displayResult(getHashCount(hashesResponse, hashSuffix))
                 }
-                else {
+                catch (e: Exception) {
+                    // Handle other exceptions
+                    e.printStackTrace()
                     showSnackbar(detailsActivity.activityBinding.detailsCoordLayout,
-                                 context.getString(R.string.something_went_wrong),
+                                 "${getString(R.string.something_went_wrong)}: $e",
                                  fragmentBinding.scanMultipleFab)
                 }
+                fragmentBinding.loadingIndicator.isVisible = false
             }
             else {
                 NoNetworkBottomSheet(positiveButtonClickListener = { checkPassword() },

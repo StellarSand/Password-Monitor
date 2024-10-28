@@ -52,7 +52,7 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.get
-import retrofit2.awaitResponse
+import java.util.Locale
 
 class ScanFragment : Fragment() {
     
@@ -183,7 +183,7 @@ class ScanFragment : Fragment() {
                                          isFound = true,
                                          textView = fragmentBinding.foundInBreachSubtitle)
             fragmentBinding.apply {
-                timesFoundSubtitle.text = count.toString()
+                timesFoundSubtitle.text = String.format(Locale.getDefault(), "%d", count)
                 suggestionSubtitle.text = breachedSuggestionString
             }
         }
@@ -201,24 +201,20 @@ class ScanFragment : Fragment() {
     }
     
     private fun checkPassword() {
-        lifecycleScope.launch{
-            val context = requireContext()
-            if (hasNetwork(context) && hasInternet()) {
-                val hashesCall = get<ApiRepository>().getHashes(hashPrefix)
-                val hashesResponse = hashesCall.awaitResponse()
-                
-                if (hashesResponse.isSuccessful) {
-                    val responseBody = hashesResponse.body()
-                    val count = getHashCount(responseBody, hashSuffix)
-                    fragmentBinding.loadingIndicator.isVisible = false
-                    displayResult(count)
+        lifecycleScope.launch {
+            if (hasNetwork(requireContext()) && hasInternet()) {
+                try {
+                    val hashesResponse = get<ApiRepository>().getHashes(hashPrefix)
+                    displayResult(getHashCount(hashesResponse, hashSuffix))
                 }
-                else {
+                catch (e: Exception) {
+                    // Handle other exceptions
+                    e.printStackTrace()
                     showSnackbar(mainActivity.activityBinding.mainCoordLayout,
-                                 context.getString(R.string.something_went_wrong),
+                                 "${getString(R.string.something_went_wrong)}: $e",
                                  fragmentBinding.scanMultipleFab)
                 }
-                
+                fragmentBinding.loadingIndicator.isVisible = false
                 enableUiComponents(true)
             }
             else {

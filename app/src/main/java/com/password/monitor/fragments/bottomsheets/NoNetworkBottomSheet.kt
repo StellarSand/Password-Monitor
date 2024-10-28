@@ -84,6 +84,8 @@ class NoNetworkBottomSheet(
         // Retry
         footerBinding.positiveButton.apply {
             isVisible = true
+            isEnabled = true
+            text = getString(R.string.retry)
             setOnClickListener {
                 dismiss()
                 positiveButtonClickListener.invoke()

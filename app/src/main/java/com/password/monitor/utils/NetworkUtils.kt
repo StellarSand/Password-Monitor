@@ -46,9 +46,10 @@ class NetworkUtils {
         suspend fun hasInternet(): Boolean {
             return try {
                 withContext(Dispatchers.IO) {
-                    val socket = Socket()
-                    socket.connect(InetSocketAddress("haveibeenpwned.com", 443), 10000)
-                    socket.close()
+                    Socket().apply {
+                        connect(InetSocketAddress("haveibeenpwned.com", 443), 10000)
+                        close()
+                    }
                     true
                 }
             }

@@ -17,14 +17,14 @@
 
 [versions]
 androidGradle = "8.7.1"
-androidKotlin = "2.0.21" # https://github.com/JetBrains/kotlin/releases/latest (latest version is not always auto picked up)
+androidKotlin = "2.0.21" # https://github.com/JetBrains/kotlin/releases/latest (latest version is not auto detected)
 appcompat = "1.7.0"
 coreKtx = "1.13.1"
 splashscreen = "1.0.1"
 material3 = "1.13.0-alpha07"
 koin = "4.0.0"
 navigationKtx = "2.8.3"
-retrofit2 = "2.11.0"
+ktor = "3.0.0"
 androidfastscrollKt = "v1.0.3"
 
 [libraries]
@@ -36,14 +36,14 @@ koin-android = { module = "io.insert-koin:koin-android", version.ref = "koin" }
 androidx-navigation-runtime-ktx = { module = "androidx.navigation:navigation-runtime-ktx", version.ref = "navigationKtx" }
 androidx-navigation-fragment-ktx = { module = "androidx.navigation:navigation-fragment-ktx", version.ref = "navigationKtx" }
 androidx-navigation-ui-ktx = { module = "androidx.navigation:navigation-ui-ktx", version.ref = "navigationKtx" }
-retrofit2 = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit2" }
-retrofit2-converter-scalars = { module = "com.squareup.retrofit2:converter-scalars", version.ref = "retrofit2" }
+ktor = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }
+ktor-engine = { module = "io.ktor:ktor-client-okhttp", version.ref = "ktor" }
 androidFastScrollKt = { module = "com.github.StellarSand:AndroidFastScroll-kt", version.ref = "androidfastscrollKt" }
 
 [bundles]
 androidxCoreComponents = ["androidx-appcompat", "androidx-core-ktx", "androidx-core-splashscreen"]
 navigation = ["androidx-navigation-runtime-ktx", "androidx-navigation-fragment-ktx", "androidx-navigation-ui-ktx"]
-retrofit2 = ["retrofit2", "retrofit2-converter-scalars"]
+ktor = ["ktor", "ktor-engine"]
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "androidGradle" }

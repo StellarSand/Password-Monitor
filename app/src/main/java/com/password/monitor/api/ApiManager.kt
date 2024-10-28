@@ -17,22 +17,25 @@
 
 package com.password.monitor.api
 
-import retrofit2.Retrofit
-import retrofit2.converter.scalars.ScalarsConverterFactory
+import io.ktor.client.HttpClient
+import io.ktor.client.engine.okhttp.OkHttp
 
 class ApiManager {
     
     companion object {
         
-        private const val API_BASE_URL = "https://api.pwnedpasswords.com/range/"
+        private val httpClient =
+            HttpClient(OkHttp) {
+                engine {
+                    config {
+                        followRedirects(true)
+                    }
+                }
+            }
         
         fun apiBuilder(): ApiService {
-            val retrofit = Retrofit.Builder()
-                .baseUrl(API_BASE_URL)
-                .addConverterFactory(ScalarsConverterFactory.create())
-                .build()
-            
-            return retrofit.create(ApiService::class.java)
+            return ApiService(httpClient)
         }
+        
     }
 }
