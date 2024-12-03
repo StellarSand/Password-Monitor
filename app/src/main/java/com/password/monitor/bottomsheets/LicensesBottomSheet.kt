@@ -15,7 +15,7 @@
  *     along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.password.monitor.fragments.bottomsheets
+package com.password.monitor.bottomsheets
 
 import android.app.Dialog
 import android.os.Bundle
@@ -31,12 +31,12 @@ import com.password.monitor.activities.MainActivity
 import com.password.monitor.adapters.LicenseItemAdapter
 import com.password.monitor.databinding.BottomSheetFooterBinding
 import com.password.monitor.databinding.BottomSheetHeaderBinding
-import com.password.monitor.databinding.BottomSheetLicensesBinding
+import com.password.monitor.databinding.BottomSheetRecyclerViewBinding
 import com.password.monitor.models.License
 
 class LicensesBottomSheet : BottomSheetDialogFragment() {
     
-    private var _binding: BottomSheetLicensesBinding? = null
+    private var _binding: BottomSheetRecyclerViewBinding? = null
     private val bottomSheetBinding get() = _binding!!
     
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
@@ -48,7 +48,7 @@ class LicensesBottomSheet : BottomSheetDialogFragment() {
     override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
-        _binding = BottomSheetLicensesBinding.inflate(inflater, container, false)
+        _binding = BottomSheetRecyclerViewBinding.inflate(inflater, container, false)
         return bottomSheetBinding.root
     }
     

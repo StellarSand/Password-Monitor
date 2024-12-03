@@ -15,7 +15,7 @@
  *     along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.password.monitor.fragments.bottomsheets
+package com.password.monitor.bottomsheets
 
 import android.app.Dialog
 import android.os.Bundle
@@ -30,12 +30,12 @@ import com.password.monitor.activities.MainActivity
 import com.password.monitor.adapters.SupportMethodItemAdapter
 import com.password.monitor.databinding.BottomSheetFooterBinding
 import com.password.monitor.databinding.BottomSheetHeaderBinding
-import com.password.monitor.databinding.BottomSheetSupportMethodsBinding
+import com.password.monitor.databinding.BottomSheetRecyclerViewBinding
 import com.password.monitor.models.SupportMethod
 
 class SupportMethodsBottomSheet : BottomSheetDialogFragment() {
     
-    private var _binding: BottomSheetSupportMethodsBinding? = null
+    private var _binding: BottomSheetRecyclerViewBinding? = null
     private val bottomSheetBinding get() = _binding!!
     private lateinit var supportMethodsList: ArrayList<SupportMethod>
     
@@ -48,7 +48,7 @@ class SupportMethodsBottomSheet : BottomSheetDialogFragment() {
     override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
-        _binding = BottomSheetSupportMethodsBinding.inflate(inflater, container, false)
+        _binding = BottomSheetRecyclerViewBinding.inflate(inflater, container, false)
         return bottomSheetBinding.root
     }
     

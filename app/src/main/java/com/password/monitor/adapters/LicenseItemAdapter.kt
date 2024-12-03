@@ -50,11 +50,8 @@ class LicenseItemAdapter(private val aListViewItems: ArrayList<License>,
         
         holder.licenseTitle.apply {
             text = license.title
-            setOnClickListener{
-                openURL(mainActivity,
-                        license.url,
-                        mainActivity.activityBinding.mainCoordLayout,
-                        null)
+            setOnClickListener {
+                openURL(mainActivity, license.url)
             }
         }
         

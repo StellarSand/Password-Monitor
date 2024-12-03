@@ -21,14 +21,10 @@ import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.request.get
 
-class ApiService(private val client: HttpClient) {
-    
-    private companion object {
-        private const val API_BASE_URL = "https://api.pwnedpasswords.com/range/"
-    }
+class ApiService(private val okHttpClient: HttpClient) {
     
     suspend fun getHashes(prefix: String): String {
-        return client.get("$API_BASE_URL$prefix").body()
+        return okHttpClient.get("https://api.pwnedpasswords.com/range/$prefix").body()
     }
     
 }

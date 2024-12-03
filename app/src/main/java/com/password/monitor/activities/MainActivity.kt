@@ -19,7 +19,6 @@ package com.password.monitor.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.WindowManager
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.enableEdgeToEdge
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
@@ -32,6 +31,7 @@ import com.password.monitor.R
 import com.password.monitor.databinding.ActivityMainBinding
 import com.password.monitor.preferences.PreferenceManager
 import com.password.monitor.preferences.PreferenceManager.Companion.MATERIAL_YOU
+import com.password.monitor.utils.UiUtils.Companion.blockScreenshots
 import com.password.monitor.utils.UiUtils.Companion.setNavBarContrastEnforced
 import org.koin.android.ext.android.inject
 
@@ -53,7 +53,7 @@ class MainActivity : AppCompatActivity() {
             DynamicColors.applyToActivitiesIfAvailable(applicationContext as ApplicationManager) // For other activities
         }
         enableEdgeToEdge()
-        setNavBarContrastEnforced(window)
+        window.setNavBarContrastEnforced()
         super.onCreate(savedInstanceState)
         onBackPressedDispatcher.addCallback(this, onBackPressedCallback)
         activityBinding = ActivityMainBinding.inflate(layoutInflater)
@@ -63,13 +63,7 @@ class MainActivity : AppCompatActivity() {
         navController = navHostFragment.navController
         
         // Disable screenshots and screen recordings
-        if (prefManager.getBoolean(BLOCK_SS)) {
-            window.setFlags(WindowManager.LayoutParams.FLAG_SECURE,
-                            WindowManager.LayoutParams.FLAG_SECURE)
-        }
-        else {
-            window.clearFlags(WindowManager.LayoutParams.FLAG_SECURE)
-        }
+        window.blockScreenshots(prefManager.getBoolean(BLOCK_SS))
         
         selectedItem = savedInstanceState?.getInt("selectedItem") ?: R.id.nav_scan
         

@@ -17,7 +17,6 @@
 
 package com.password.monitor.utils
 
-import android.app.Activity
 import android.content.Context
 import android.os.Build
 import android.view.View
@@ -51,9 +50,19 @@ class UiUtils {
             }
         }
         
-        fun setNavBarContrastEnforced(window: Window) {
+        fun Window.setNavBarContrastEnforced() {
             if (Build.VERSION.SDK_INT >= 29) {
-                window.isNavigationBarContrastEnforced = false
+                isNavigationBarContrastEnforced = false
+            }
+        }
+        
+        fun Window.blockScreenshots(shouldBlock: Boolean) {
+            if (shouldBlock) {
+                setFlags(WindowManager.LayoutParams.FLAG_SECURE,
+                         WindowManager.LayoutParams.FLAG_SECURE)
+            }
+            else {
+                clearFlags(WindowManager.LayoutParams.FLAG_SECURE)
             }
         }
         
@@ -61,38 +70,25 @@ class UiUtils {
             return (dp * context.resources.displayMetrics.density).toInt()
         }
         
-        fun setFoundInBreachSubtitleText(context: Context,
-                                         isFound: Boolean = false,
-                                         reset: Boolean = false,
-                                         textView: MaterialTextView) {
+        fun MaterialTextView.setFoundInBreachSubtitleText(context: Context,
+                                                          isFound: Boolean = false,
+                                                          reset: Boolean = false) {
             val (displayText, icon) =
                 when {
                     isFound -> Pair("${context.getString(R.string.yes)}\t", R.drawable.ic_found_in_breach)
                     reset -> Pair(context.getString(R.string.na), 0)
                     else -> Pair("${context.getString(R.string.no)}\t", R.drawable.ic_not_found_in_breach)
                 }
-            textView.apply {
-                text = displayText
-                if (reset) {
-                    setCompoundDrawablesWithIntrinsicBounds(null, null, null, null)
-                }
-                else {
-                    setCompoundDrawablesWithIntrinsicBounds(null,
-                                                            null,
-                                                            ContextCompat.getDrawable(context, icon),
-                                                            null)
-                }
-            }
-        }
-        
-        fun blockScreenshots(activity: Activity,
-                             shouldBlock: Boolean) {
-            if (shouldBlock) {
-                activity.window.setFlags(WindowManager.LayoutParams.FLAG_SECURE,
-                                         WindowManager.LayoutParams.FLAG_SECURE)
+            
+            text = displayText
+            if (reset) {
+                setCompoundDrawablesWithIntrinsicBounds(null, null, null, null)
             }
             else {
-                activity.window.clearFlags(WindowManager.LayoutParams.FLAG_SECURE)
+                setCompoundDrawablesWithIntrinsicBounds(null,
+                                                        null,
+                                                        ContextCompat.getDrawable(context, icon),
+                                                        null)
             }
         }
         

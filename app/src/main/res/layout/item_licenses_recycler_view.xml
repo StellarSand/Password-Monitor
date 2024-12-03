@@ -45,7 +45,9 @@
             android:text="@string/ktor"
             android:textAlignment="viewStart"
             android:textColor="@color/color_url"
-            android:textSize="@dimen/text_20" />
+            android:textSize="@dimen/text_18"
+            android:drawableEnd="@drawable/ic_open_in_browser"
+            android:drawablePadding="@dimen/margin_4"/>
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/license_desc"

@@ -32,7 +32,7 @@ import androidx.lifecycle.lifecycleScope
 import com.password.monitor.R
 import com.password.monitor.activities.DetailsActivity
 import com.password.monitor.databinding.FragmentScanBinding
-import com.password.monitor.fragments.bottomsheets.NoNetworkBottomSheet
+import com.password.monitor.bottomsheets.NoNetworkBottomSheet
 import com.password.monitor.repositories.ApiRepository
 import com.password.monitor.utils.HashUtils.Companion.generateSHA1Hash
 import com.password.monitor.utils.HashUtils.Companion.getHashCount
@@ -102,7 +102,7 @@ class DetailsFragment : Fragment() {
             loadingIndicator.isVisible = true
             scanMultipleFab.isVisible = false
             
-            generateSHA1Hash(passwordText.text.toString()).apply {
+            passwordText.text.toString().generateSHA1Hash().apply {
                 hashPrefix = take(5).uppercase() // First 5 chars
                 hashSuffix = substring(5).uppercase() // Rest of the hash
             }
@@ -124,18 +124,16 @@ class DetailsFragment : Fragment() {
     
     private fun displayResult(count: Int) {
         if (count > 0) {
-            setFoundInBreachSubtitleText(context = requireContext(),
-                                         isFound = true,
-                                         textView = fragmentBinding.foundInBreachSubtitle)
+            fragmentBinding.foundInBreachSubtitle.setFoundInBreachSubtitleText(context = requireContext(),
+                                                                               isFound = true)
             fragmentBinding.apply {
                 timesFoundSubtitle.text = String.format(Locale.getDefault(), "%d", count)
                 suggestionSubtitle.text = breachedSuggestionString
             }
         }
         else {
-            setFoundInBreachSubtitleText(context = requireContext(),
-                                         isFound = false,
-                                         textView = fragmentBinding.foundInBreachSubtitle)
+            fragmentBinding.foundInBreachSubtitle.setFoundInBreachSubtitleText(context = requireContext(),
+                                                                               isFound = false)
             fragmentBinding.apply {
                 timesFoundSubtitle.text = naString
                 suggestionSubtitle.text = notBreachedSuggestionString
@@ -154,7 +152,6 @@ class DetailsFragment : Fragment() {
                 }
                 catch (e: Exception) {
                     // Handle other exceptions
-                    e.printStackTrace()
                     showSnackbar(detailsActivity.activityBinding.detailsCoordLayout,
                                  "${getString(R.string.something_went_wrong)}: $e",
                                  fragmentBinding.scanMultipleFab)

@@ -25,9 +25,9 @@ class HashUtils {
        
        private const val ITEM_NOT_FOUND = -1
         
-        fun generateSHA1Hash(password: String): String {
+        fun String.generateSHA1Hash(): String {
             val messageDigest = MessageDigest.getInstance("SHA-1")
-            val bytes = messageDigest.digest(password.toByteArray())
+            val bytes = messageDigest.digest(toByteArray())
             return bytes.joinToString("") { "%02x".format(it) }
         }
         

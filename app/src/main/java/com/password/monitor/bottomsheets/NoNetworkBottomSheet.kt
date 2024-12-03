@@ -15,7 +15,7 @@
  *     along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.password.monitor.fragments.bottomsheets
+package com.password.monitor.bottomsheets
 
 import android.app.Dialog
 import android.content.DialogInterface

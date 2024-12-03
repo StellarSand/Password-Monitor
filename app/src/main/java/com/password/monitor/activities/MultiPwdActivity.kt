@@ -46,7 +46,7 @@ class MultiPwdActivity : AppCompatActivity(), MenuProvider {
     
     override fun onCreate(savedInstanceState: Bundle?) {
         enableEdgeToEdge()
-        setNavBarContrastEnforced(window)
+        window.setNavBarContrastEnforced()
         super.onCreate(savedInstanceState)
         addMenuProvider(this)
         onBackPressedDispatcher.addCallback(this, onBackPressedCallback)
@@ -59,7 +59,7 @@ class MultiPwdActivity : AppCompatActivity(), MenuProvider {
         isAscSort = prefManager.getBoolean(SORT_ASC)
         
         // Disable screenshots and screen recordings
-        blockScreenshots(this, prefManager.getBoolean(PreferenceManager.BLOCK_SS))
+        window.blockScreenshots(prefManager.getBoolean(PreferenceManager.BLOCK_SS))
         
         activityBinding.multiPwdBottomAppBar.apply {
             setSupportActionBar(this)

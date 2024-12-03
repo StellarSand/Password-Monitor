@@ -53,7 +53,7 @@ class NetworkUtils {
                     true
                 }
             }
-            catch (e: IOException) {
+            catch (_: IOException) {
                 false
             }
         }

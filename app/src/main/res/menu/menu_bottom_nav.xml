@@ -26,6 +26,11 @@
         android:title="@string/scan"/>
 
     <item
+        android:id="@+id/nav_bookmarks"
+        android:icon="@drawable/ic_bookmarks"
+        android:title="Saved"/>
+
+    <item
         android:id="@+id/nav_settings"
         android:icon="@drawable/ic_settings"
         android:title="@string/settings"/>
