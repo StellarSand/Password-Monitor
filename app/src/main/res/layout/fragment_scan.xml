@@ -216,7 +216,7 @@
                 layout="@layout/divider_horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                app:layout_constraintTop_toBottomOf="@id/bookmark"
+                app:layout_constraintTop_toBottomOf="@id/suggestionSubtitle"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginHorizontal="@dimen/margin_4"

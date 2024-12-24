@@ -32,8 +32,8 @@ android {
         applicationId = "com.password.monitor"
         minSdk = 23
         targetSdk = 35
-        versionCode = 101
-        versionName = "1.0.1"
+        versionCode = 102
+        versionName = "1.0.2"
         setProperty("archivesBaseName", "PasswordMonitor_v$versionName")
     }
     

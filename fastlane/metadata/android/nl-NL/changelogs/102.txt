@@ -1,0 +1,1 @@
+- Ondersteuning voor Android 15.
