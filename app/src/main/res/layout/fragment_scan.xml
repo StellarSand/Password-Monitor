@@ -190,7 +190,7 @@
                     android:textColor="?attr/colorControlNormal"
                     android:textSize="@dimen/text_17"/>
 
-                <com.google.android.material.checkbox.MaterialCheckBox
+                <!--<com.google.android.material.checkbox.MaterialCheckBox
                     android:id="@+id/bookmark"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -206,7 +206,7 @@
                     android:visibility="gone"
                     tools:visibility="visible"
                     android:layoutDirection="rtl"
-                    style="@style/MediumBoldText"/>
+                    style="@style/MediumBoldText"/>-->
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 

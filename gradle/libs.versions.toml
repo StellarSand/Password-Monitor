@@ -21,10 +21,10 @@ androidKotlin = "2.1.0" # https://github.com/JetBrains/kotlin/releases/latest (l
 appcompat = "1.7.0"
 coreKtx = "1.15.0"
 splashscreen = "1.0.1"
-material3 = "1.13.0-alpha08"
-koin = "4.0.0"
-navigationKtx = "2.8.4"
-ktor = "3.0.2"
+material3 = "1.13.0-alpha09"
+koin = "4.0.1"
+navigationKtx = "2.8.5"
+ktor = "3.0.3"
 androidFastscrollKt = "v1.0.8"
 
 [libraries]

@@ -25,10 +25,10 @@
         android:icon="@drawable/ic_scan"
         android:title="@string/scan"/>
 
-    <item
+    <!--<item
         android:id="@+id/nav_bookmarks"
         android:icon="@drawable/ic_bookmarks"
-        android:title="Saved"/>
+        android:title="Saved"/>-->
 
     <item
         android:id="@+id/nav_settings"
