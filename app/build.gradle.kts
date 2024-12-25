@@ -41,6 +41,7 @@ android {
         getByName("release") {
             isMinifyEnabled = true
             isShrinkResources = true
+            vcsInfo.include = false // https://f-droid.org/docs/Reproducible_Builds/#vcs-info
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
         /*getByName("debug") {
@@ -48,6 +49,11 @@ android {
             isShrinkResources = true
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }*/
+    }
+    
+    dependenciesInfo {
+        includeInApk = false // Disables dependency metadata when building APKs.
+        includeInBundle = false // Disables dependency metadata when building Android App Bundles.
     }
     
     buildFeatures {
