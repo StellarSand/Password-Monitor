@@ -19,6 +19,7 @@ package com.password.monitor.api
 
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.okhttp.OkHttp
+import okhttp3.CertificatePinner
 
 class ApiManager {
     
@@ -29,6 +30,11 @@ class ApiManager {
                 engine {
                     config {
                         followRedirects(true)
+                        certificatePinner(
+                            CertificatePinner.Builder()
+                                .add("api.pwnedpasswords.com","sha256/8U2U045KrvwjayFk78sd+2LJv7xiun4wfD+Dnaqft1M=")
+                                .build()
+                        )
                     }
                 }
             }
