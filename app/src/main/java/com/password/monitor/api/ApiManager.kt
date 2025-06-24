@@ -34,7 +34,7 @@ class ApiManager {
                         connectionSpecs(listOf(ConnectionSpec.RESTRICTED_TLS, ConnectionSpec.MODERN_TLS))
                         certificatePinner(
                             CertificatePinner.Builder()
-                                .add("api.pwnedpasswords.com","sha256/8U2U045KrvwjayFk78sd+2LJv7xiun4wfD+Dnaqft1M=")
+                                .add("api.pwnedpasswords.com","sha256/mEflZT5enoR1FuXLgYYGqnVEoZvmf9c2bVBpiOjYQ0c=") // GTS Root R4
                                 .build()
                         )
                     }
