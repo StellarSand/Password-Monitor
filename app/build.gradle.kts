@@ -26,12 +26,12 @@ kotlin {
 
 android {
     namespace = "com.password.monitor"
-    compileSdk = 35
+    compileSdk = 36
     
     defaultConfig {
         applicationId = "com.password.monitor"
         minSdk = 23
-        targetSdk = 35
+        targetSdk = 36
         versionCode = 102
         versionName = "1.0.2"
         setProperty("archivesBaseName", "PasswordMonitor_v$versionName")
