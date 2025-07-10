@@ -23,8 +23,8 @@ coreKtx = "1.16.0"
 splashscreen = "1.0.1"
 material3 = "1.14.0-alpha02"
 koin = "4.1.0"
-navigationKtx = "2.9.0"
-ktor = "3.2.0"
+navigationKtx = "2.9.1"
+ktor = "3.2.1"
 androidFastscrollKt = "v1.0.8"
 
 [libraries]
