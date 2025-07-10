@@ -54,6 +54,7 @@
     <!--#########################################################################################-->
 
     <!--Multi password activity-->
+    <string name="back">Back</string>
     <string name="view">Vista</string>
     <string name="sort">Ordinamento</string>
 
@@ -81,6 +82,7 @@
     <string name="done">Fatto</string>
 
     <!--No Network/Internet-->
+    <string name="error_occurred_title">Si \u00E8 verificato un errore</string>
     <string name="no_network_title">Nessuna rete/internet</string>
     <string name="no_network_subtitle">Collegarsi alla rete Wi-Fi o ai dati mobili e riprovare.
         Se \u00E8 gi\u00E0 connesso, assicurarsi che abbia una connessione a Internet.</string>

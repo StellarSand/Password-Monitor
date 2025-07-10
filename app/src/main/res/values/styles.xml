@@ -33,6 +33,13 @@
 
     <!--#########################################################################################-->
 
+    <!--Switch style-->
+    <style name="SwitchStyle" parent="Widget.Material3.CompoundButton.MaterialSwitch">
+        <item name="thumbIcon">@drawable/ic_switch_thumb</item>
+    </style>
+
+    <!--#########################################################################################-->
+
     <!--Base theme chip style-->
     <style name="BaseThemeChipStyle" parent="Widget.Material3.Chip.Filter">
         <item name="chipBackgroundColor">@color/chip_bg_color</item>

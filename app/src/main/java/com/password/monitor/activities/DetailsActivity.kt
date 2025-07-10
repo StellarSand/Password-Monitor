@@ -18,14 +18,17 @@
 package com.password.monitor.activities
 
 import android.os.Bundle
+import android.view.Window
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.transition.platform.MaterialSharedAxis
 import com.password.monitor.R
 import com.password.monitor.databinding.ActivityDetailsBinding
 import com.password.monitor.fragments.details.DetailsFragment
 import com.password.monitor.preferences.PreferenceManager
 import com.password.monitor.preferences.PreferenceManager.Companion.BLOCK_SS
 import com.password.monitor.utils.UiUtils.Companion.blockScreenshots
+import com.password.monitor.utils.UiUtils.Companion.setButtonTooltipText
 import com.password.monitor.utils.UiUtils.Companion.setNavBarContrastEnforced
 import org.koin.android.ext.android.get
 
@@ -36,7 +39,12 @@ class DetailsActivity : AppCompatActivity() {
     
     override fun onCreate(savedInstanceState: Bundle?) {
         enableEdgeToEdge()
-        window.setNavBarContrastEnforced()
+        window.apply {
+            setNavBarContrastEnforced()
+            requestFeature(Window.FEATURE_CONTENT_TRANSITIONS)
+            enterTransition = MaterialSharedAxis(MaterialSharedAxis.Z, true)
+            returnTransition = MaterialSharedAxis(MaterialSharedAxis.Z, false)
+        }
         super.onCreate(savedInstanceState)
         activityBinding = ActivityDetailsBinding.inflate(layoutInflater)
         setContentView(activityBinding.root)
@@ -46,9 +54,10 @@ class DetailsActivity : AppCompatActivity() {
         // Disable screenshots and screen recordings
         window.blockScreenshots(get<PreferenceManager>().getBoolean(BLOCK_SS))
         
-        activityBinding.detailsBottomAppBar.apply {
-            setSupportActionBar(this)
-            setNavigationOnClickListener { onBackPressedDispatcher.onBackPressed() }
+        // Back
+        activityBinding.detailsBackBtn.apply {
+            setButtonTooltipText(getString(R.string.back))
+            setOnClickListener { onBackPressedDispatcher.onBackPressed() }
         }
         
         supportFragmentManager.beginTransaction()

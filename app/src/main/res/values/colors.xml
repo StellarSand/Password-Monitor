@@ -169,4 +169,6 @@
     <color name="color_found_in_breach">#E62E2E</color>
     <color name="color_not_found_in_breach">#27B763</color>
 
+    <color name="color_splash_bg">#4F6628</color>
+
 </resources>

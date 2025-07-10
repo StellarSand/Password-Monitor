@@ -37,17 +37,6 @@ This app seamlessly integrates with [Have I Been Pwned?](https://haveibeenpwned.
 - Supports both light and dark theme
 - No ads
 - No collection of personal data
-- Supported languages:
-    - English
-    - Chinese
-    - Dutch
-    - French
-    - German
-    - Italian
-    - Japanese
-    - Spanish
-    - Swedish
-    - Turkish
 
 
 

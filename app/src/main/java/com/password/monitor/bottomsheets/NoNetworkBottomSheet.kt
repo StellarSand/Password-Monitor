@@ -33,8 +33,10 @@ import com.password.monitor.databinding.BottomSheetHeaderBinding
 import com.password.monitor.databinding.BottomSheetNoNetworkBinding
 
 class NoNetworkBottomSheet(
-    private val positiveButtonClickListener: () -> Unit,
-    private val negativeButtonClickListener: () -> Unit
+    private val isNoNetworkError: Boolean = true,
+    private val exception: Exception? = null,
+    private val positiveBtnClickAction: () -> Unit,
+    private val negativeBtnClickAction: () -> Unit
 ) : BottomSheetDialogFragment() {
     
     private var _binding: BottomSheetNoNetworkBinding? = null
@@ -72,7 +74,9 @@ class NoNetworkBottomSheet(
         BottomSheetHeaderBinding.bind(bottomSheetBinding.root).apply {
             dragHandle.isVisible = false
             bottomSheetTitle.apply {
-                text = getString(R.string.no_network_title)
+                text =
+                    if (isNoNetworkError) getString(R.string.no_network_title)
+                    else getString(R.string.error_occurred_title)
                 // Set margin top to 12 dp, since drag handle is not visible now
                 val params = layoutParams as ViewGroup.MarginLayoutParams
                 val topMargin = (12 * requireContext().resources.displayMetrics.density).toInt()
@@ -81,6 +85,9 @@ class NoNetworkBottomSheet(
             }
         }
         
+        // Description
+        if (!isNoNetworkError) bottomSheetBinding.descText.text = exception.toString()
+        
         // Retry
         footerBinding.positiveButton.apply {
             isVisible = true
@@ -88,14 +95,14 @@ class NoNetworkBottomSheet(
             text = getString(R.string.retry)
             setOnClickListener {
                 dismiss()
-                positiveButtonClickListener.invoke()
+                positiveBtnClickAction()
             }
         }
         
         // Exit/Cancel
         footerBinding.negativeButton.setOnClickListener {
             dismiss()
-            negativeButtonClickListener.invoke()
+            negativeBtnClickAction()
         }
     }
     

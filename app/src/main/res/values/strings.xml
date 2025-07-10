@@ -48,6 +48,7 @@
     <!--#########################################################################################-->
 
     <!--Multi password activity-->
+    <string name="back">Back</string>
     <string name="view">View</string>
     <string name="sort">Sort</string>
 
@@ -75,6 +76,7 @@
     <string name="done">Done</string>
 
     <!--No Network/Internet-->
+    <string name="error_occurred_title">An error occurred</string>
     <string name="no_network_title">No Network/Internet</string>
     <string name="no_network_subtitle">Connect to Wi-Fi or mobile data and retry.
         If already connected, make sure it has an internet connection.</string>

@@ -25,4 +25,5 @@
     android:layout_height="match_parent"
     android:background="@android:color/transparent"
     android:paddingTop="@dimen/margin_10"
+    android:clipToPadding="false"
     tools:listitem="@layout/item_file_recycler_view" />

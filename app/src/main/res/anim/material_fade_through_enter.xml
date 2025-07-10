@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <!--
-  ~     Copyright (C) 2024-present StellarSand
+  ~     Copyright (C) 2022-present StellarSand
   ~
   ~     This program is free software: you can redistribute it and/or modify
   ~     it under the terms of the GNU General Public License as published by
@@ -17,10 +17,19 @@
   ~     along with this program.  If not, see <https://www.gnu.org/licenses/>.
   -->
 
-<set xmlns:android="http://schemas.android.com/apk/res/android">
+<set xmlns:android="http://schemas.android.com/apk/res/android"
+    android:interpolator="@android:interpolator/fast_out_slow_in"
+    android:duration="300">
 
-    <translate
-        android:duration="250"
-        android:fromXDelta="0%"
-        android:toXDelta="-100%" />
+    <alpha
+        android:fromAlpha="0"
+        android:toAlpha="1" />
+
+    <scale
+        android:fromXScale="0.92"
+        android:toXScale="1.0"
+        android:fromYScale="0.92"
+        android:toYScale="1.0"
+        android:pivotX="50%"
+        android:pivotY="50%" />
 </set>

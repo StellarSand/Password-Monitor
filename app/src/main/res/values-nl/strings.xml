@@ -50,6 +50,7 @@
     <!--#########################################################################################-->
 
     <!--Multi password activity-->
+    <string name="back">Back</string>
     <string name="view">Bekijk</string>
     <string name="sort">Sorteer</string>
 
@@ -77,6 +78,7 @@
     <string name="done">Gedaan</string>
 
     <!--No Network/Internet-->
+    <string name="error_occurred_title">Er is een fout opgetreden</string>
     <string name="no_network_title">Geen netwerk/internet</string>
     <string name="no_network_subtitle">Maak verbinding met Wi-Fi of mobiele data en probeer het opnieuw.
         Als er al een verbinding is, controleer dan of er een internetverbinding is.</string>

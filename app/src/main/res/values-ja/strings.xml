@@ -45,6 +45,7 @@
     <!--#########################################################################################-->
 
     <!--Multi password activity-->
+    <string name="back">Back</string>
     <string name="view">表示</string>
     <string name="sort">ソート</string>
 
@@ -72,6 +73,7 @@
     <string name="done">完了</string>
 
     <!--No Network/Internet-->
+    <string name="error_occurred_title">エラーが発生しました</string>
     <string name="no_network_title">ネットワーク/インターネットなし</string>
     <string name="no_network_subtitle">Wi-Fiまたはモバイルデータに接続し、再試行してください。
         すでに接続されている場合は、インターネットに接続されていることを確認してください。</string>

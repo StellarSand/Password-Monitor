@@ -45,6 +45,7 @@
     <!--#########################################################################################-->
 
     <!--Multi password activity-->
+    <string name="back">Back</string>
     <string name="view">查看</string>
     <string name="sort">排序</string>
 
@@ -72,6 +73,7 @@
     <string name="done">已完成</string>
 
     <!--No Network/Internet-->
+    <string name="error_occurred_title">发生错误</string>
     <string name="no_network_title">无网络/互联网</string>
     <string name="no_network_subtitle">连接到 Wi-Fi 或移动数据，然后重试。
         如果已经连接，请确保有互联网连接。</string>

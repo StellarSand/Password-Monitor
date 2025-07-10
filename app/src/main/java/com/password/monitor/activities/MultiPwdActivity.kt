@@ -18,15 +18,15 @@
 package com.password.monitor.activities
 
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.MenuItem
+import android.view.Window
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.MenuProvider
+import androidx.core.content.ContextCompat
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
+import com.google.android.material.button.MaterialButton
+import com.google.android.material.transition.platform.MaterialSharedAxis
 import com.password.monitor.R
 import com.password.monitor.databinding.ActivityMultiPwdBinding
 import com.password.monitor.objects.MultiPwdList
@@ -34,10 +34,11 @@ import com.password.monitor.preferences.PreferenceManager
 import com.password.monitor.preferences.PreferenceManager.Companion.GRID_VIEW
 import com.password.monitor.preferences.PreferenceManager.Companion.SORT_ASC
 import com.password.monitor.utils.UiUtils.Companion.blockScreenshots
+import com.password.monitor.utils.UiUtils.Companion.setButtonTooltipText
 import com.password.monitor.utils.UiUtils.Companion.setNavBarContrastEnforced
 import org.koin.android.ext.android.inject
 
-class MultiPwdActivity : AppCompatActivity(), MenuProvider {
+class MultiPwdActivity : AppCompatActivity() {
     
     private lateinit var navController: NavController
     private val prefManager by inject<PreferenceManager>()
@@ -46,9 +47,13 @@ class MultiPwdActivity : AppCompatActivity(), MenuProvider {
     
     override fun onCreate(savedInstanceState: Bundle?) {
         enableEdgeToEdge()
-        window.setNavBarContrastEnforced()
+        window.apply {
+            setNavBarContrastEnforced()
+            requestFeature(Window.FEATURE_CONTENT_TRANSITIONS)
+            enterTransition = MaterialSharedAxis(MaterialSharedAxis.Y, true)
+            returnTransition = MaterialSharedAxis(MaterialSharedAxis.Y, false)
+        }
         super.onCreate(savedInstanceState)
-        addMenuProvider(this)
         onBackPressedDispatcher.addCallback(this, onBackPressedCallback)
         val activityBinding = ActivityMultiPwdBinding.inflate(layoutInflater)
         setContentView(activityBinding.root)
@@ -61,46 +66,45 @@ class MultiPwdActivity : AppCompatActivity(), MenuProvider {
         // Disable screenshots and screen recordings
         window.blockScreenshots(prefManager.getBoolean(PreferenceManager.BLOCK_SS))
         
-        activityBinding.multiPwdBottomAppBar.apply {
-            setSupportActionBar(this)
-            setNavigationOnClickListener { onBackPressedDispatcher.onBackPressed() }
+        // Back
+        activityBinding.backButton.apply {
+            setButtonTooltipText(getString(R.string.back))
+            setOnClickListener {
+                onBackPressedDispatcher.onBackPressed()
+            }
         }
-    }
-    
-    override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        menuInflater.inflate(R.menu.menu_multi_pwd, menu)
-        menu.findItem(R.id.menu_view).apply {
-            if (!isGridView) setIcon(R.drawable.ic_view_grid)
-            else setIcon(R.drawable.ic_view_list)
-        }
-    }
-    
-    override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
         
-        when (menuItem.itemId) {
-            
-            R.id.menu_view -> {
+        // View
+        activityBinding.viewButton.apply {
+            setButtonTooltipText(getString(R.string.view))
+            setViewButtonIcon()
+            setOnClickListener {
                 isGridView = !isGridView
-                if (!isGridView) menuItem.setIcon(R.drawable.ic_view_grid)
-                else menuItem.setIcon(R.drawable.ic_view_list)
+                setViewButtonIcon()
                 navController.navigate(R.id.action_multiPwdFragment_self)
             }
-            
-            R.id.menu_sort -> {
+        }
+        
+        // Sort
+        activityBinding.sortButton.apply {
+            setButtonTooltipText(getString(R.string.sort))
+            setOnClickListener {
                 isAscSort = !isAscSort
                 navController.navigate(R.id.action_multiPwdFragment_self)
             }
-            
         }
-        
-        return true
+    }
+    
+    private fun MaterialButton.setViewButtonIcon() {
+        icon = ContextCompat.getDrawable(this@MultiPwdActivity,
+                                         if (!isGridView) R.drawable.ic_view_grid
+                                         else R.drawable.ic_view_list)
     }
     
     // On back pressed
     private val onBackPressedCallback = object : OnBackPressedCallback(true) {
         override fun handleOnBackPressed() {
-            finish()
+            finishAfterTransition()
         }
     }
     

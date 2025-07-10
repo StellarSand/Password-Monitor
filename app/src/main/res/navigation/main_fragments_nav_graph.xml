@@ -30,8 +30,8 @@
         <action
             android:id="@+id/action_scanFragment_to_settingsFragment"
             app:destination="@id/settingsFragment"
-            app:enterAnim="@anim/slide_from_end"
-            app:exitAnim="@anim/slide_to_start"/>
+            app:enterAnim="@anim/material_fade_through_enter"
+            app:exitAnim="@anim/material_fade_through_exit"/>
     </fragment>
 
     <fragment
@@ -42,8 +42,8 @@
         <action
             android:id="@+id/action_settingsFragment_to_scanFragment"
             app:destination="@id/scanFragment"
-            app:enterAnim="@anim/slide_from_start"
-            app:exitAnim="@anim/slide_to_end"/>
+            app:enterAnim="@anim/material_fade_through_enter"
+            app:exitAnim="@anim/material_fade_through_exit"/>
     </fragment>
 
 </navigation>

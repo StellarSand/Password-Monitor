@@ -41,7 +41,6 @@ import com.password.monitor.utils.NetworkUtils.Companion.hasInternet
 import com.password.monitor.utils.NetworkUtils.Companion.hasNetwork
 import com.password.monitor.utils.UiUtils.Companion.convertDpToPx
 import com.password.monitor.utils.UiUtils.Companion.setFoundInBreachSubtitleText
-import com.password.monitor.utils.UiUtils.Companion.showSnackbar
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.get
 import java.util.Locale
@@ -152,15 +151,19 @@ class DetailsFragment : Fragment() {
                 }
                 catch (e: Exception) {
                     // Handle other exceptions
-                    showSnackbar(detailsActivity.activityBinding.detailsCoordLayout,
-                                 "${getString(R.string.something_went_wrong)}: $e",
-                                 fragmentBinding.scanMultipleFab)
+                    NoNetworkBottomSheet(isNoNetworkError = false,
+                                         exception = e,
+                                         positiveBtnClickAction = { checkPassword() },
+                                         negativeBtnClickAction = {
+                                             fragmentBinding.loadingIndicator.isVisible = false
+                                         })
+                        .show(parentFragmentManager, "NoNetworkBottomSheet")
                 }
                 fragmentBinding.loadingIndicator.isVisible = false
             }
             else {
-                NoNetworkBottomSheet(positiveButtonClickListener = { checkPassword() },
-                                     negativeButtonClickListener = {
+                NoNetworkBottomSheet(positiveBtnClickAction = { checkPassword() },
+                                     negativeBtnClickAction = {
                                          fragmentBinding.loadingIndicator.isVisible = false
                                      })
                     .show(parentFragmentManager, "NoNetworkBottomSheet")
