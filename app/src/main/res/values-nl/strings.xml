@@ -80,7 +80,7 @@
     <!--No Network/Internet-->
     <string name="error_occurred_title">Er is een fout opgetreden</string>
     <string name="no_network_title">Geen netwerk/internet</string>
-    <string name="no_network_subtitle">Maak verbinding met Wi-Fi of mobiele data en probeer het opnieuw.
+    <string name="no_network_desc">Maak verbinding met Wi-Fi of mobiele data en probeer het opnieuw.
         Als er al een verbinding is, controleer dan of er een internetverbinding is.</string>
 
     <!--Scan multiple passwords-->

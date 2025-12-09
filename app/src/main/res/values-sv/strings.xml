@@ -84,7 +84,7 @@
     <!--No Network/Internet-->
     <string name="error_occurred_title">Ett fel intr\u00E4ffade</string>
     <string name="no_network_title">Inget n\u00E4tverk/internet</string>
-    <string name="no_network_subtitle">Anslut till Wi-Fi eller mobildata och f\u00F6rs\u00F6k igen.
+    <string name="no_network_desc">Anslut till Wi-Fi eller mobildata och f\u00F6rs\u00F6k igen.
         Om du redan \u00E4r ansluten, kontrollera att den har en internetanslutning.</string>
 
     <!--Scan multiple passwords-->

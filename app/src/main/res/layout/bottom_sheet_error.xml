@@ -37,7 +37,7 @@
         android:layout_marginBottom="@dimen/margin_16"
         android:paddingStart="@dimen/margin_25"
         android:paddingEnd="@dimen/margin_25"
-        android:text="@string/no_network_subtitle"
+        android:text="@string/no_network_desc"
         android:textSize="@dimen/text_17"
         android:textColor="?attr/colorOnSurface"/>
 

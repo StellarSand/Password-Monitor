@@ -38,7 +38,7 @@
         android:layout_marginBottom="@dimen/margin_8"
         android:paddingStart="@dimen/margin_22"
         android:paddingEnd="@dimen/margin_22"
-        app:chipSpacingVertical="@dimen/margin_2.5"
+        app:chipSpacingVertical="@dimen/margin_2"
         app:singleSelection="true"
         app:selectionRequired="true">
 

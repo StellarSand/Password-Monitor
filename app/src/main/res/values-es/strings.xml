@@ -85,7 +85,7 @@
     <!--No Network/Internet-->
     <string name="error_occurred_title">Se ha producido un error</string>
     <string name="no_network_title">Sin Network/Internet</string>
-    <string name="no_network_subtitle">Conéctese a Wi-Fi o a datos m\u00F3viles y vuelva a intentarlo.
+    <string name="no_network_desc">Conéctese a Wi-Fi o a datos m\u00F3viles y vuelva a intentarlo.
         Si ya est\u00E1 conectado, aseg\u00FArese de que tiene conexi\u00F3n a Internet.</string>
 
     <!--Scan multiple passwords-->

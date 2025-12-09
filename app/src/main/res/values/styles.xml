@@ -67,11 +67,11 @@
     </style>
 
     <!--Bottom sheet buttons-->
-    <style name="NegativeButtonStyle" parent="Widget.Material3.Button.TextButton">
+    <style name="NegativeButtonStyle" parent="Widget.Material3Expressive.Button.TextButton">
         <item name="android:textSize">@dimen/text_16</item>
     </style>
 
-    <style name="PositiveButtonStyle" parent="Widget.Material3.Button.TonalButton">
+    <style name="PositiveButtonStyle" parent="Widget.Material3Expressive.Button.TonalButton">
         <item name="android:textSize">@dimen/text_16</item>
     </style>
 

@@ -31,6 +31,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import com.password.monitor.R
 import com.password.monitor.activities.DetailsActivity
+import com.password.monitor.bottomsheets.ExceptionErrorBottomSheet
 import com.password.monitor.databinding.FragmentScanBinding
 import com.password.monitor.bottomsheets.NoNetworkBottomSheet
 import com.password.monitor.repositories.ApiRepository
@@ -98,7 +99,7 @@ class DetailsFragment : Fragment() {
                 isCursorVisible = false
             }
             checkBtn.isVisible = false
-            loadingIndicator.isVisible = true
+            progressIndicator.show()
             scanMultipleFab.isVisible = false
             
             passwordText.text.toString().generateSHA1Hash().apply {
@@ -151,22 +152,23 @@ class DetailsFragment : Fragment() {
                 }
                 catch (e: Exception) {
                     // Handle other exceptions
-                    NoNetworkBottomSheet(isNoNetworkError = false,
-                                         exception = e,
-                                         positiveBtnClickAction = { checkPassword() },
-                                         negativeBtnClickAction = {
-                                             fragmentBinding.loadingIndicator.isVisible = false
-                                         })
-                        .show(parentFragmentManager, "NoNetworkBottomSheet")
+                    ExceptionErrorBottomSheet(
+                        exception = e,
+                        onPositiveBtnClick = { checkPassword() },
+                        onNegativeBtnClick = {
+                            fragmentBinding.progressIndicator.hide()
+                        }
+                    ).show(parentFragmentManager, "ExceptionErrorBottomSheet")
                 }
-                fragmentBinding.loadingIndicator.isVisible = false
+                fragmentBinding.progressIndicator.hide()
             }
             else {
-                NoNetworkBottomSheet(positiveBtnClickAction = { checkPassword() },
-                                     negativeBtnClickAction = {
-                                         fragmentBinding.loadingIndicator.isVisible = false
-                                     })
-                    .show(parentFragmentManager, "NoNetworkBottomSheet")
+                NoNetworkBottomSheet(
+                    onPositiveBtnClick = { checkPassword() },
+                    onNegativeBtnClick = {
+                        fragmentBinding.progressIndicator.hide()
+                    }
+                ).show(parentFragmentManager, "NoNetworkBottomSheet")
             }
         }
     }

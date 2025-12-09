@@ -20,10 +20,12 @@ package com.password.monitor.fragments.main
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.text.InputType.TYPE_TEXT_VARIATION_PASSWORD
+import android.util.TypedValue
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.inputmethod.EditorInfoCompat.IME_FLAG_NO_PERSONALIZED_LEARNING
@@ -32,8 +34,10 @@ import androidx.core.view.updateLayoutParams
 import androidx.core.view.updatePadding
 import androidx.core.widget.doOnTextChanged
 import androidx.lifecycle.lifecycleScope
+import com.google.android.material.appbar.AppBarLayout
 import com.password.monitor.R
 import com.password.monitor.activities.MainActivity
+import com.password.monitor.bottomsheets.ExceptionErrorBottomSheet
 import com.password.monitor.databinding.FragmentScanBinding
 import com.password.monitor.bottomsheets.NoNetworkBottomSheet
 import com.password.monitor.bottomsheets.ScanMultiPwdBottomSheet
@@ -58,6 +62,9 @@ class ScanFragment : Fragment() {
     private var _binding: FragmentScanBinding? = null
     private val fragmentBinding get() = _binding!!
     private lateinit var mainActivity: MainActivity
+    private var isInitialLaunch = true
+    private var collapsingToolbarLargeHeightInPx = 0
+    private var collapsingToolbarTopInsets = -1
     private lateinit var naString: String
     private lateinit var breachedSuggestionString: String
     private lateinit var notBreachedSuggestionString: String
@@ -76,6 +83,14 @@ class ScanFragment : Fragment() {
         
         mainActivity = requireActivity() as MainActivity
         var job: Job? = null
+        val displayMetrics = resources.displayMetrics
+        val typedValue = TypedValue()
+        requireContext().theme.resolveAttribute(
+            com.google.android.material.R.attr.collapsingToolbarLayoutLargeSize,
+            typedValue,
+            true
+        )
+        collapsingToolbarLargeHeightInPx = TypedValue.complexToDimensionPixelSize(typedValue.data, displayMetrics)
         naString = getString(R.string.na)
         breachedSuggestionString = getString(R.string.breached_suggestion)
         notBreachedSuggestionString = getString(R.string.not_breached_suggestion)
@@ -106,6 +121,35 @@ class ScanFragment : Fragment() {
             WindowInsetsCompat.CONSUMED
         }
         
+        ViewCompat.setOnApplyWindowInsetsListener(fragmentBinding.collapsingToolbar) { _, windowInsets ->
+            if (collapsingToolbarTopInsets == -1) {
+                val insets =
+                    windowInsets.getInsets(
+                        WindowInsetsCompat.Type.systemBars() or WindowInsetsCompat.Type.displayCutout()
+                    )
+                collapsingToolbarTopInsets = insets.top
+            }
+            WindowInsetsCompat.CONSUMED
+        }
+        
+        // Set collapsing toolbar to center of screen for first time
+        // Don't move this within setOnApplyWindowInsetsListener() above
+        setCollapsingToolbarHeight(
+            (collapsingToolbarTopInsets + displayMetrics.heightPixels) / 2
+            - (64f * resources.displayMetrics.density).toInt()
+        )
+        
+        // Prevent dragging of appbar when scrollview is not visible
+        val appBarLayoutBehavior =
+            AppBarLayout.Behavior().also {
+                (fragmentBinding.appBar.layoutParams as CoordinatorLayout.LayoutParams).behavior = it
+            }
+        appBarLayoutBehavior.setDragCallback(object : AppBarLayout.Behavior.DragCallback() {
+            override fun canDrag(appBarLayout: AppBarLayout): Boolean {
+                return !isInitialLaunch
+            }
+        })
+        
         fragmentBinding.passwordText.apply {
             if (get<PreferenceManager>().getBoolean(INCOG_KEYBOARD)) {
                 imeOptions = IME_FLAG_NO_PERSONALIZED_LEARNING
@@ -129,7 +173,6 @@ class ScanFragment : Fragment() {
                                 timesFoundSubtitle.text = naString
                                 suggestionSubtitle.text = naString
                             }
-                            fragmentBinding.detailsCard.isVisible = false
                         }
                     }
             }
@@ -139,7 +182,7 @@ class ScanFragment : Fragment() {
         fragmentBinding.checkBtn.apply {
             setOnClickListener {
                 enableUiComponents(false)
-                fragmentBinding.loadingIndicator.isVisible = true
+                fragmentBinding.progressIndicator.show()
                 fragmentBinding.passwordText.text.toString().generateSHA1Hash().apply {
                     hashPrefix = take(5).uppercase() // First 5 chars
                     hashSuffix = substring(5).uppercase() // Rest of the hash
@@ -161,6 +204,15 @@ class ScanFragment : Fragment() {
         // Fab
         fragmentBinding.scanMultipleFab.setOnClickListener {
             ScanMultiPwdBottomSheet().show(parentFragmentManager, "ScanMultiplePwdBottomSheet")
+        }
+    }
+    
+    private fun setCollapsingToolbarHeight(height: Int) {
+        fragmentBinding.collapsingToolbar.apply {
+            val params = layoutParams
+            params.height = height
+            layoutParams = params
+            requestLayout()
         }
     }
     
@@ -193,7 +245,12 @@ class ScanFragment : Fragment() {
             }
         }
         
-        fragmentBinding.detailsCard.isVisible = true
+        if (isInitialLaunch) {
+            isInitialLaunch = false
+            fragmentBinding.appBar.setExpanded(false, true)
+            fragmentBinding.detailsCard.isVisible = true
+            setCollapsingToolbarHeight(collapsingToolbarTopInsets + collapsingToolbarLargeHeightInPx)
+        }
     }
     
     private fun checkPassword() {
@@ -205,25 +262,26 @@ class ScanFragment : Fragment() {
                 }
                 catch (e: Exception) {
                     // Handle other exceptions
-                    NoNetworkBottomSheet(isNoNetworkError = false,
-                                         exception = e,
-                                         positiveBtnClickAction = { checkPassword() },
-                                         negativeBtnClickAction = {
-                                             fragmentBinding.loadingIndicator.isVisible = false
-                                             enableUiComponents(true)
-                                         })
-                        .show(parentFragmentManager, "NoNetworkBottomSheet")
+                    ExceptionErrorBottomSheet(
+                        exception = e,
+                        onPositiveBtnClick = { checkPassword() },
+                        onNegativeBtnClick = {
+                            fragmentBinding.progressIndicator.hide()
+                            enableUiComponents(true)
+                        }
+                    ).show(parentFragmentManager, "ExceptionErrorBottomSheet")
                 }
-                fragmentBinding.loadingIndicator.isVisible = false
+                fragmentBinding.progressIndicator.hide()
                 enableUiComponents(true)
             }
             else {
-                NoNetworkBottomSheet(positiveBtnClickAction = { checkPassword() },
-                                     negativeBtnClickAction = {
-                                         fragmentBinding.loadingIndicator.isVisible = false
-                                         enableUiComponents(true)
-                                     })
-                    .show(parentFragmentManager, "NoNetworkBottomSheet")
+                NoNetworkBottomSheet(
+                    onPositiveBtnClick = { checkPassword() },
+                    onNegativeBtnClick = {
+                        fragmentBinding.progressIndicator.hide()
+                        enableUiComponents(true)
+                    }
+                ).show(parentFragmentManager, "NoNetworkBottomSheet")
             }
         }
     }

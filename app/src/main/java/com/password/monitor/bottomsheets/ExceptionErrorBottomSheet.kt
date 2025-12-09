@@ -18,14 +18,16 @@
 package com.password.monitor.bottomsheets
 
 import com.password.monitor.R
+import kotlin.toString
 
-class NoNetworkBottomSheet(
+class ExceptionErrorBottomSheet(
+    exception: Exception,
     onPositiveBtnClick: () -> Unit,
     onNegativeBtnClick: () -> Unit
 ) : BaseErrorBottomSheet() {
     
-    override val titleTextResId = R.string.no_network_title
-    override val descriptionText = TextOrRes.Res(R.string.no_network_desc)
+    override val titleTextResId = R.string.error_occurred_title
+    override val descriptionText = TextOrRes.Text(exception.toString())
     override val positiveBtnClickAction = onPositiveBtnClick
     override val negativeBtnClickAction = onNegativeBtnClick
 }

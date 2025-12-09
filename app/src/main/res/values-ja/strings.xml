@@ -75,7 +75,7 @@
     <!--No Network/Internet-->
     <string name="error_occurred_title">エラーが発生しました</string>
     <string name="no_network_title">ネットワーク/インターネットなし</string>
-    <string name="no_network_subtitle">Wi-Fiまたはモバイルデータに接続し、再試行してください。
+    <string name="no_network_desc">Wi-Fiまたはモバイルデータに接続し、再試行してください。
         すでに接続されている場合は、インターネットに接続されていることを確認してください。</string>
 
     <!--Scan multiple passwords-->
