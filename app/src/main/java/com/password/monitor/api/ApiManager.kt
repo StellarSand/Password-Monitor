@@ -19,6 +19,9 @@ package com.password.monitor.api
 
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.okhttp.OkHttp
+import io.ktor.client.plugins.HttpCallValidator
+import io.ktor.http.isSuccess
+import kotlinx.io.IOException
 import okhttp3.CertificatePinner
 import okhttp3.ConnectionSpec
 
@@ -31,6 +34,7 @@ class ApiManager {
                 engine {
                     config {
                         followRedirects(true)
+                        followSslRedirects(true)
                         connectionSpecs(listOf(ConnectionSpec.RESTRICTED_TLS, ConnectionSpec.MODERN_TLS))
                         certificatePinner(
                             CertificatePinner.Builder()
@@ -39,7 +43,27 @@ class ApiManager {
                         )
                     }
                 }
+                install(HttpCallValidator) {
+                    validateResponse { response ->
+                        if (!response.status.isSuccess()) {
+                            throw IOException("\n\nHTTP ${response.status.value} - ${getStatusMessage(response.status.value)}")
+                        }
+                    }
+                }
             }
+        
+        private fun getStatusMessage(statusCode: Int): String {
+            return when (statusCode) {
+                400 -> "Bad Request"
+                401 -> "Unauthorized"
+                403 -> "Forbidden"
+                404 -> "Not Found"
+                500 -> "Internal Server Error"
+                502 -> "Bad Gateway"
+                503 -> "Service Unavailable"
+                else -> "HTTP Error"
+            }
+        }
         
         fun apiBuilder(): ApiService {
             return ApiService(httpClient)

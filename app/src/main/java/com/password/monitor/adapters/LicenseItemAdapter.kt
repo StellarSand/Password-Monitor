@@ -30,7 +30,7 @@ import com.password.monitor.utils.IntentUtils.Companion.openURL
 class LicenseItemAdapter(private val aListViewItems: ArrayList<License>,
                          private val mainActivity: MainActivity) : RecyclerView.Adapter<LicenseItemAdapter.ListViewHolder>() {
     
-    inner class ListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    class ListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         
         val licenseTitle: MaterialTextView = itemView.findViewById(R.id.license_title)
         val licenseDesc: MaterialTextView = itemView.findViewById(R.id.license_desc)

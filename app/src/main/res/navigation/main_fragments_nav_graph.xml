@@ -26,24 +26,24 @@
         android:id="@+id/scanFragment"
         android:name="com.password.monitor.fragments.main.ScanFragment"
         android:label="@string/scan"
-        tools:layout="@layout/fragment_scan">
-        <action
-            android:id="@+id/action_scanFragment_to_settingsFragment"
-            app:destination="@id/settingsFragment"
-            app:enterAnim="@anim/material_fade_through_enter"
-            app:exitAnim="@anim/material_fade_through_exit"/>
-    </fragment>
+        tools:layout="@layout/fragment_scan"/>
 
     <fragment
         android:id="@+id/settingsFragment"
         android:name="com.password.monitor.fragments.main.SettingsFragment"
         android:label="@string/settings"
-        tools:layout="@layout/fragment_settings">
-        <action
-            android:id="@+id/action_settingsFragment_to_scanFragment"
-            app:destination="@id/scanFragment"
-            app:enterAnim="@anim/material_fade_through_enter"
-            app:exitAnim="@anim/material_fade_through_exit"/>
-    </fragment>
+        tools:layout="@layout/fragment_settings"/>
+
+    <action
+        android:id="@+id/action_global_to_scanFragment"
+        app:destination="@id/scanFragment"
+        app:enterAnim="@anim/material_fade_through_enter"
+        app:exitAnim="@anim/material_fade_through_exit"/>
+
+    <action
+        android:id="@+id/action_global_to_settingsFragment"
+        app:destination="@id/settingsFragment"
+        app:enterAnim="@anim/material_fade_through_enter"
+        app:exitAnim="@anim/material_fade_through_exit"/>
 
 </navigation>

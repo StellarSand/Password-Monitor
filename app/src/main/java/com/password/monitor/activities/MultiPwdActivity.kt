@@ -34,7 +34,6 @@ import com.password.monitor.preferences.PreferenceManager
 import com.password.monitor.preferences.PreferenceManager.Companion.GRID_VIEW
 import com.password.monitor.preferences.PreferenceManager.Companion.SORT_ASC
 import com.password.monitor.utils.UiUtils.Companion.blockScreenshots
-import com.password.monitor.utils.UiUtils.Companion.setButtonTooltipText
 import com.password.monitor.utils.UiUtils.Companion.setNavBarContrastEnforced
 import org.koin.android.ext.android.inject
 
@@ -67,16 +66,12 @@ class MultiPwdActivity : AppCompatActivity() {
         window.blockScreenshots(prefManager.getBoolean(PreferenceManager.BLOCK_SS))
         
         // Back
-        activityBinding.backButton.apply {
-            setButtonTooltipText(getString(R.string.back))
-            setOnClickListener {
-                onBackPressedDispatcher.onBackPressed()
-            }
+        activityBinding.backButton.setOnClickListener {
+            onBackPressedDispatcher.onBackPressed()
         }
         
         // View
         activityBinding.viewButton.apply {
-            setButtonTooltipText(getString(R.string.view))
             setViewButtonIcon()
             setOnClickListener {
                 isGridView = !isGridView
@@ -86,12 +81,9 @@ class MultiPwdActivity : AppCompatActivity() {
         }
         
         // Sort
-        activityBinding.sortButton.apply {
-            setButtonTooltipText(getString(R.string.sort))
-            setOnClickListener {
-                isAscSort = !isAscSort
-                navController.navigate(R.id.action_multiPwdFragment_self)
-            }
+        activityBinding.sortButton.setOnClickListener {
+            isAscSort = !isAscSort
+            navController.navigate(R.id.action_multiPwdFragment_self)
         }
     }
     

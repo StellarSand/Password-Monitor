@@ -17,10 +17,8 @@
 
 package com.password.monitor.objects
 
-import com.password.monitor.models.MultiPwdItem
-
 object MultiPwdList {
     
-    val pwdList by lazy { mutableListOf<MultiPwdItem>() }
+    val pwdList by lazy { mutableListOf<String>() }
     
 }

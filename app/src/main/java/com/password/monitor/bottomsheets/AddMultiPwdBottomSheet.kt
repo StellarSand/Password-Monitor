@@ -31,7 +31,6 @@ import com.password.monitor.activities.MultiPwdActivity
 import com.password.monitor.databinding.BottomSheetAddMultiPwdBinding
 import com.password.monitor.databinding.BottomSheetFooterBinding
 import com.password.monitor.databinding.BottomSheetHeaderBinding
-import com.password.monitor.models.MultiPwdItem
 import com.password.monitor.objects.MultiPwdList
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
@@ -76,7 +75,7 @@ class AddMultiPwdBottomSheet : BottomSheetDialogFragment() {
                 val itemList =
                     bottomSheetBinding.multiPwdText.text!!.split("\n")
                         .filter { it.isNotEmpty() }
-                        .map { MultiPwdItem(it) }
+                        .map { it }
                 MultiPwdList.pwdList.addAll(itemList)
                 dismiss()
                 startActivity(Intent(requireActivity(), MultiPwdActivity::class.java),

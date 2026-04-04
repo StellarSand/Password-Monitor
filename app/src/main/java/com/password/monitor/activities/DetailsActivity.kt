@@ -28,7 +28,6 @@ import com.password.monitor.fragments.details.DetailsFragment
 import com.password.monitor.preferences.PreferenceManager
 import com.password.monitor.preferences.PreferenceManager.Companion.BLOCK_SS
 import com.password.monitor.utils.UiUtils.Companion.blockScreenshots
-import com.password.monitor.utils.UiUtils.Companion.setButtonTooltipText
 import com.password.monitor.utils.UiUtils.Companion.setNavBarContrastEnforced
 import org.koin.android.ext.android.get
 
@@ -55,10 +54,7 @@ class DetailsActivity : AppCompatActivity() {
         window.blockScreenshots(get<PreferenceManager>().getBoolean(BLOCK_SS))
         
         // Back
-        activityBinding.detailsBackBtn.apply {
-            setButtonTooltipText(getString(R.string.back))
-            setOnClickListener { onBackPressedDispatcher.onBackPressed() }
-        }
+        activityBinding.detailsBackBtn.setOnClickListener { onBackPressedDispatcher.onBackPressed() }
         
         supportFragmentManager.beginTransaction()
             .replace(R.id.activity_host_fragment, DetailsFragment())

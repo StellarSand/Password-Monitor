@@ -33,14 +33,12 @@ import com.password.monitor.activities.MultiPwdActivity
 import com.password.monitor.databinding.BottomSheetFooterBinding
 import com.password.monitor.databinding.BottomSheetHeaderBinding
 import com.password.monitor.databinding.BottomSheetScanMultiPwdBinding
-import com.password.monitor.models.MultiPwdItem
 import com.password.monitor.objects.MultiPwdList
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.io.BufferedReader
 import java.io.FileNotFoundException
-import java.io.IOException
 import java.io.InputStreamReader
 
 class ScanMultiPwdBottomSheet : BottomSheetDialogFragment() {
@@ -82,29 +80,30 @@ class ScanMultiPwdBottomSheet : BottomSheetDialogFragment() {
     
     private var filePicker =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
-            
             if (result.resultCode == Activity.RESULT_OK) {
-                val data = result.data!!
-                val fileUri = data.data
-                
+                val fileUri = result.data?.data
                 lifecycleScope.launch(Dispatchers.IO) {
                     try {
-                        val inputStream = requireActivity().contentResolver.openInputStream(fileUri!!)
-                        val bufferedReader = BufferedReader(InputStreamReader(inputStream))
-                        var lineList: Array<String>
-                        
-                        MultiPwdList.pwdList.apply {
-                            if (isNotEmpty()) clear()
-                            // Read file line by line
-                            while (bufferedReader.readLine().also { lineList = arrayOf(it) } != null) {
-                                for (line in lineList) {
-                                    if (line.isNotEmpty()) add(MultiPwdItem(passwordLine = line))
+                        fileUri?.let {
+                            requireActivity().contentResolver.openInputStream(it)?.use { inputStream ->
+                                BufferedReader(InputStreamReader(inputStream)).use { bufferedReader ->
+                                    MultiPwdList.pwdList.apply {
+                                        if (isNotEmpty()) clear()
+                                        // Read file line by line
+                                        bufferedReader.forEachLine { line ->
+                                            if (line.isNotEmpty()) add(line)
+                                        }
+                                    }
                                 }
                             }
                         }
-                        
-                        inputStream!!.close()
-                        bufferedReader.close()
+                        withContext(Dispatchers.Main) {
+                            dismiss()
+                            startActivity(
+                                Intent(requireActivity(), MultiPwdActivity::class.java),
+                                ActivityOptions.makeSceneTransitionAnimation(requireActivity()).toBundle()
+                            )
+                        }
                     }
                     catch (fileNotFoundException: FileNotFoundException) {
                         fileNotFoundException.printStackTrace()
@@ -114,19 +113,13 @@ class ScanMultiPwdBottomSheet : BottomSheetDialogFragment() {
                                                  fragmentBinding.selectFab)*/
                         }
                     }
-                    catch (ioException: IOException) {
-                        ioException.printStackTrace()
+                    catch (e: Exception) {
+                        e.printStackTrace()
                         withContext(Dispatchers.Main) {
                             /*UiUtils.showSnackbar(mainActivity.activityBinding.mainCoordLayout,
                                                  "Error reading file",
                                                  fragmentBinding.selectFab)*/
                         }
-                    }
-                    
-                    withContext(Dispatchers.Main) {
-                        dismiss()
-                        startActivity(Intent(requireActivity(), MultiPwdActivity::class.java),
-                                      ActivityOptions.makeSceneTransitionAnimation(requireActivity()).toBundle())
                     }
                 }
             }

@@ -32,32 +32,31 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.password.monitor.activities.DetailsActivity
 import com.password.monitor.activities.MultiPwdActivity
 import com.password.monitor.adapters.MultiPwdAdapter
-import com.password.monitor.databinding.FragmentMultiPwdBinding
-import com.password.monitor.models.MultiPwdItem
+import com.password.monitor.databinding.RecyclerViewBinding
 import com.password.monitor.objects.MultiPwdList
 import com.password.monitor.utils.UiUtils.Companion.convertDpToPx
 import me.stellarsand.android.fastscroll.FastScrollerBuilder
 
 class MultiPwdFragment : Fragment(), MultiPwdAdapter.OnItemClickListener {
     
-    private var _binding: FragmentMultiPwdBinding? = null
+    private var _binding: RecyclerViewBinding? = null
     private val fragmentBinding get() = _binding!!
     private lateinit var multiPwdActivity: MultiPwdActivity
-    private lateinit var multiplePwdList: List<MultiPwdItem>
+    private lateinit var multiplePwdList: List<String>
     
     override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
         // Inflate the layout for this fragment
-        _binding = FragmentMultiPwdBinding.inflate(inflater, container, false)
+        _binding = RecyclerViewBinding.inflate(inflater, container, false)
         return fragmentBinding.root
     }
     
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         multiPwdActivity = requireActivity() as MultiPwdActivity
         multiplePwdList =
-            if (multiPwdActivity.isAscSort) MultiPwdList.pwdList.sortedBy { it.passwordLine.lowercase() }
-            else MultiPwdList.pwdList.sortedByDescending { it.passwordLine.lowercase() }
+            if (multiPwdActivity.isAscSort) MultiPwdList.pwdList.sortedBy { it.lowercase() }
+            else MultiPwdList.pwdList.sortedByDescending { it.lowercase() }
         
         fragmentBinding.recyclerView.apply {
             // Adjust recyclerview for edge to edge
@@ -82,7 +81,7 @@ class MultiPwdFragment : Fragment(), MultiPwdAdapter.OnItemClickListener {
     // On click
     override fun onItemClick(position: Int) {
         startActivity(Intent(multiPwdActivity, DetailsActivity::class.java)
-                          .putExtra("PwdLine", multiplePwdList[position].passwordLine),
+                          .putExtra("PwdLine", multiplePwdList[position]),
                       ActivityOptions.makeSceneTransitionAnimation(multiPwdActivity).toBundle())
     }
     

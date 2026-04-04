@@ -25,7 +25,6 @@ import android.view.WindowManager
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.content.ContextCompat
-import com.google.android.material.button.MaterialButton
 import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textview.MaterialTextView
@@ -91,10 +90,6 @@ class UiUtils {
                                                         ContextCompat.getDrawable(context, icon),
                                                         null)
             }
-        }
-        
-        fun MaterialButton.setButtonTooltipText(text: String) {
-            if (Build.VERSION.SDK_INT >= 26) tooltipText = text
         }
         
         fun showSnackbar(coordinatorLayout: CoordinatorLayout,

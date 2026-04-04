@@ -30,11 +30,11 @@ android {
     
     defaultConfig {
         applicationId = "com.password.monitor"
-        minSdk = 23
+        minSdk = 26
         targetSdk = 36
         versionCode = 102
         versionName = "1.0.2"
-        setProperty("archivesBaseName", "PasswordMonitor_v$versionName")
+        extensions.getByType<BasePluginExtension>().archivesName.set("PasswordMonitor_v$versionName")
     }
     
     buildTypes {

@@ -30,16 +30,18 @@
         android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="64dp"
         app:navGraph="@navigation/multi_pwd_fragments_nav_graph"
         app:defaultNavHost="true"/>
 
-    <com.google.android.material.dockedtoolbar.DockedToolbarLayout
+    <com.google.android.material.floatingtoolbar.FloatingToolbarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
+        android:layout_marginHorizontal="@dimen/margin_65"
+        android:layout_marginBottom="@dimen/margin_8"
         android:clickable="true"
-        android:focusable="true">
+        android:focusable="true"
+        app:layout_behavior="com.google.android.material.behavior.HideViewOnScrollBehavior">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -55,6 +57,8 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:icon="@drawable/ic_back"
+                android:contentDescription="@string/back"
+                android:tooltipText="@string/back"
                 style="?attr/materialIconButtonStyle"/>
 
             <com.google.android.material.button.MaterialButton
@@ -67,6 +71,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:icon="@drawable/ic_view_grid"
                 android:contentDescription="@string/view"
+                android:tooltipText="@string/view"
                 style="?attr/materialIconButtonStyle"/>
 
             <com.google.android.material.button.MaterialButton
@@ -79,10 +84,11 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:icon="@drawable/ic_sort"
                 android:contentDescription="@string/sort"
+                android:tooltipText="@string/sort"
                 style="?attr/materialIconButtonStyle"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </com.google.android.material.dockedtoolbar.DockedToolbarLayout>
+    </com.google.android.material.floatingtoolbar.FloatingToolbarLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

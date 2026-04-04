@@ -41,7 +41,7 @@ class MainActivity : AppCompatActivity() {
     private val prefManager by inject<PreferenceManager>()
     private lateinit var navHostFragment: NavHostFragment
     private lateinit var navController: NavController
-    private lateinit var navActionsMap: Map<Pair<Int, Int>, Int>
+    private lateinit var navActionsMap: Map<Int, Int>
     private var selectedItem = 0
     
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -62,9 +62,12 @@ class MainActivity : AppCompatActivity() {
         
         navHostFragment = supportFragmentManager.findFragmentById(R.id.main_nav_host) as NavHostFragment
         navController = navHostFragment.navController
+        
         navActionsMap =
-            mapOf(Pair(R.id.settingsFragment, R.id.nav_scan) to R.id.action_settingsFragment_to_scanFragment,
-                  Pair(R.id.scanFragment, R.id.nav_settings) to R.id.action_scanFragment_to_settingsFragment)
+            mapOf(
+                R.id.nav_scan to R.id.action_global_to_scanFragment,
+                R.id.nav_settings to R.id.action_global_to_settingsFragment
+            )
         
         // Disable screenshots and screen recordings
         window.blockScreenshots(prefManager.getBoolean(BLOCK_SS))
@@ -88,12 +91,14 @@ class MainActivity : AppCompatActivity() {
     
     // Setup fragments
     private fun displayFragment(clickedNavItem: Int) {
-        val currentFragment = navController.currentDestination!!
-        navActionsMap[Pair(currentFragment.id, clickedNavItem)]?.let {
-            if (clickedNavItem != currentFragment.id) {
-                activityBinding.mainBottomNav.menu.findItem(clickedNavItem).isChecked = true
-                navController.navigate(it)
-            }
+        val action = navActionsMap[clickedNavItem] ?: 0
+        
+        // java.lang.IllegalArgumentException:
+        // Destination id == 0 can only be used in conjunction with a valid navOptions.popUpTo
+        // Hence the second check
+        if (clickedNavItem != navController.currentDestination?.id && action != 0) {
+            activityBinding.mainBottomNav.menu.findItem(clickedNavItem).isChecked = true
+            navController.navigate(action)
         }
         
     }
