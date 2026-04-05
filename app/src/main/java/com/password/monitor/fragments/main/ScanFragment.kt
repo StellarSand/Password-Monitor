@@ -65,7 +65,7 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.get
-import java.util.Locale
+import java.text.NumberFormat
 
 class ScanFragment : Fragment() {
     
@@ -267,7 +267,7 @@ class ScanFragment : Fragment() {
             fragmentBinding.foundInBreachSubtitle.setFoundInBreachSubtitleText(context = requireContext(),
                                                                                isFound = true)
             fragmentBinding.apply {
-                timesFoundSubtitle.text = String.format(Locale.getDefault(), "%d", count)
+                timesFoundSubtitle.text = NumberFormat.getInstance().format(count)
                 suggestionSubtitle.text = breachedSuggestionString
             }
         }
