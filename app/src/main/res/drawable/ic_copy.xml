@@ -1,3 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+
 <!--
   ~     Copyright (C) 2024-present StellarSand
   ~
@@ -15,6 +17,15 @@
   ~     along with this program.  If not, see <https://www.gnu.org/licenses/>.
   -->
 
-<vector xmlns:android="http://schemas.android.com/apk/res/android" android:width="24dp" android:height="24dp" android:viewportWidth="960" android:viewportHeight="960" android:tint="?attr/colorControlNormal">
-    <path android:fillColor="@android:color/white" android:pathData="M480 720l-168 72q-40 17-76-6.5T200 719V200q0-33 23.5-56.5T280 120h400q33 0 56.5 23.5T760 200v519q0 43-36 66.5t-76 6.5l-168-72z"/>
+<vector
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="960"
+    android:viewportHeight="960"
+    android:tint="?attr/colorControlNormal"
+    android:autoMirrored="true">
+    <path
+        android:fillColor="@android:color/white"
+        android:pathData="M360 720q-33 0-56.5-23.5T280 640V160q0-33 23.5-56.5T360 80h360q33 0 56.5 23.5T800 160v480q0 33-23.5 56.5T720 720H360zm0-80h360V160H360v480zM200 880q-33 0-56.5-23.5T120 800V280q0-17 11.5-28.5T160 240q17 0 28.5 11.5T200 280v520h400q17 0 28.5 11.5T640 840q0 17-11.5 28.5T600 880H200zm160-240V160v480z"/>
 </vector>

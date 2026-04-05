@@ -34,6 +34,10 @@
     <string name="scan_your_password">Scan your password</string>
     <string name="check">Check</string>
     <string name="details">Details</string>
+    <string name="copy">Copy</string>
+    <string name="share">Share</string>
+    <string name="export">Export</string>
+    <string name="password">Password</string>
     <string name="found_in_breach">Found in breach</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
@@ -97,6 +101,9 @@
     <!--#########################################################################################-->
 
     <!--Snackbars-->
+    <string name="copied_to_clipboard">Copied to clipboard</string>
+    <string name="export_success">Exported successfully</string>
+    <string name="export_fail">Export failed</string>
     <string name="no_browsers">No browsers installed on this device</string>
     <string name="something_went_wrong">Something went wrong</string>
 

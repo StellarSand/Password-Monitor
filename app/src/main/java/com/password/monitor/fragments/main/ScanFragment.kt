@@ -18,6 +18,10 @@
 package com.password.monitor.fragments.main
 
 import android.annotation.SuppressLint
+import android.content.ClipData
+import android.content.ClipboardManager
+import android.content.Context
+import android.os.Build
 import android.os.Bundle
 import android.text.InputType.TYPE_TEXT_VARIATION_PASSWORD
 import android.util.TypedValue
@@ -25,6 +29,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -41,16 +46,21 @@ import com.password.monitor.bottomsheets.ExceptionErrorBottomSheet
 import com.password.monitor.databinding.FragmentScanBinding
 import com.password.monitor.bottomsheets.NoNetworkBottomSheet
 import com.password.monitor.bottomsheets.ScanMultiPwdBottomSheet
+import com.password.monitor.common.getFormattedResultsText
 import com.password.monitor.preferences.PreferenceManager
 import com.password.monitor.preferences.PreferenceManager.Companion.INCOG_KEYBOARD
 import com.password.monitor.repositories.ApiRepository
+import com.password.monitor.utils.ClipboardUtils.Companion.hideSensitiveContent
+import com.password.monitor.utils.FormatUtils.Companion.generateNewFilename
 import com.password.monitor.utils.HashUtils.Companion.generateSHA1Hash
 import com.password.monitor.utils.HashUtils.Companion.getHashCount
 import com.password.monitor.utils.IntentUtils.Companion.openURL
+import com.password.monitor.utils.IntentUtils.Companion.shareText
 import com.password.monitor.utils.NetworkUtils.Companion.hasInternet
 import com.password.monitor.utils.NetworkUtils.Companion.hasNetwork
 import com.password.monitor.utils.UiUtils.Companion.convertDpToPx
 import com.password.monitor.utils.UiUtils.Companion.setFoundInBreachSubtitleText
+import com.password.monitor.utils.UiUtils.Companion.showSnackbar
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -84,18 +94,30 @@ class ScanFragment : Fragment() {
         mainActivity = requireActivity() as MainActivity
         var job: Job? = null
         val displayMetrics = resources.displayMetrics
-        val typedValue = TypedValue()
-        requireContext().theme.resolveAttribute(
-            com.google.android.material.R.attr.collapsingToolbarLayoutLargeSize,
-            typedValue,
-            true
-        )
-        collapsingToolbarLargeHeightInPx = TypedValue.complexToDimensionPixelSize(typedValue.data, displayMetrics)
+        TypedValue().let {
+            requireContext().theme.resolveAttribute(
+                com.google.android.material.R.attr.collapsingToolbarLayoutLargeSize,
+                it,
+                true
+            )
+            collapsingToolbarLargeHeightInPx = TypedValue.complexToDimensionPixelSize(it.data, displayMetrics)
+        }
+        val clipboardManager = requireContext().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
         naString = getString(R.string.na)
         breachedSuggestionString = getString(R.string.breached_suggestion)
         notBreachedSuggestionString = getString(R.string.not_breached_suggestion)
         
         // Adjust UI components for edge to edge
+        ViewCompat.setOnApplyWindowInsetsListener(fragmentBinding.collapsingToolbar) { _, windowInsets ->
+            if (collapsingToolbarTopInsets == -1) {
+                val insets =
+                    windowInsets.getInsets(
+                        WindowInsetsCompat.Type.systemBars() or WindowInsetsCompat.Type.displayCutout()
+                    )
+                collapsingToolbarTopInsets = insets.top
+            }
+            WindowInsetsCompat.CONSUMED
+        }
         ViewCompat.setOnApplyWindowInsetsListener(fragmentBinding.passwordBox) { v, windowInsets ->
             val insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars()
                                                         or WindowInsetsCompat.Type.displayCutout())
@@ -117,17 +139,6 @@ class ScanFragment : Fragment() {
             v.updateLayoutParams<ViewGroup.MarginLayoutParams> {
                 rightMargin = insets.right + convertDpToPx(requireContext(), 16f)
                 bottomMargin = insets.bottom + convertDpToPx(requireContext(), 25f)
-            }
-            WindowInsetsCompat.CONSUMED
-        }
-        
-        ViewCompat.setOnApplyWindowInsetsListener(fragmentBinding.collapsingToolbar) { _, windowInsets ->
-            if (collapsingToolbarTopInsets == -1) {
-                val insets =
-                    windowInsets.getInsets(
-                        WindowInsetsCompat.Type.systemBars() or WindowInsetsCompat.Type.displayCutout()
-                    )
-                collapsingToolbarTopInsets = insets.top
             }
             WindowInsetsCompat.CONSUMED
         }
@@ -189,6 +200,30 @@ class ScanFragment : Fragment() {
                 }
                 checkPassword()
             }
+        }
+        
+        // Copy
+        fragmentBinding.copyChip.setOnClickListener {
+            val clipData = ClipData.newPlainText("PasswordMonitor", fragmentBinding.getFormattedResultsText(requireContext()))
+            clipData.hideSensitiveContent()
+            clipboardManager.setPrimaryClip(clipData)
+            // Show snackbar only if 12L or lower to avoid duplicate notifications
+            // https://developer.android.com/develop/ui/views/touch-and-input/copy-paste#duplicate-notifications
+            if (Build.VERSION.SDK_INT <= 32) {
+                showSnackbar(mainActivity.activityBinding.mainCoordLayout,
+                             requireContext().getString(R.string.copied_to_clipboard),
+                             fragmentBinding.scanMultipleFab)
+            }
+        }
+        
+        // Share
+        fragmentBinding.shareChip.setOnClickListener {
+            requireActivity().shareText(fragmentBinding.getFormattedResultsText(requireContext()))
+        }
+        
+        // Export
+        fragmentBinding.exportChip.setOnClickListener {
+            exportToFilePicker.launch(generateNewFilename())
         }
         
         // Tap here
@@ -285,6 +320,27 @@ class ScanFragment : Fragment() {
             }
         }
     }
+    
+    private val exportToFilePicker =
+        registerForActivityResult(
+            ActivityResultContracts.CreateDocument("text/plain")
+        ) { uri ->
+            uri?.let {
+                try {
+                    requireContext().contentResolver.openOutputStream(it)?.use { outputStream ->
+                        outputStream.write(fragmentBinding.getFormattedResultsText(requireContext()).toByteArray())
+                    }
+                    showSnackbar(mainActivity.activityBinding.mainCoordLayout,
+                                 getString(R.string.export_success),
+                                 fragmentBinding.scanMultipleFab)
+                }
+                catch (_: Exception) {
+                    showSnackbar(mainActivity.activityBinding.mainCoordLayout,
+                                 getString(R.string.export_fail),
+                                 fragmentBinding.scanMultipleFab)
+                }
+            }
+        }
     
     override fun onDestroyView() {
         super.onDestroyView()

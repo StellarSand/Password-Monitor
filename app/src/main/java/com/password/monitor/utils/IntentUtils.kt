@@ -20,12 +20,12 @@ package com.password.monitor.utils
 import android.app.Activity
 import android.content.ActivityNotFoundException
 import android.content.Intent
-import android.net.Uri
 import android.view.View
 import android.widget.Toast
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import com.password.monitor.R
 import com.password.monitor.utils.UiUtils.Companion.showSnackbar
+import androidx.core.net.toUri
 
 class IntentUtils {
 
@@ -36,7 +36,7 @@ class IntentUtils {
                     coordinatorLayout: CoordinatorLayout,
                     anchorView: View?) {
             try {
-                activity.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
+                activity.startActivity(Intent(Intent.ACTION_VIEW, url.toUri()))
             }
             // If no browser installed, show snackbar
             catch (_: ActivityNotFoundException) {
@@ -48,12 +48,23 @@ class IntentUtils {
         fun openURL(activity: Activity,
                     url: String) {
             try {
-                activity.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
+                activity.startActivity(Intent(Intent.ACTION_VIEW, url.toUri()))
             }
             // If no browser installed, show toast
             catch (_: ActivityNotFoundException) {
                 Toast.makeText(activity, activity.getString(R.string.no_browsers), Toast.LENGTH_SHORT).show()
             }
+        }
+        
+        fun Activity.shareText(text: CharSequence) {
+            startActivity(
+                Intent.createChooser(
+                    Intent(Intent.ACTION_SEND)
+                        .setType("text/plain")
+                        .putExtra(Intent.EXTRA_TEXT, text),
+                    getString(R.string.share)
+                )
+            )
         }
 
     }

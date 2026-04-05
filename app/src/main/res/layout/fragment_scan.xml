@@ -106,7 +106,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/margin_8"
             android:layout_marginBottom="@dimen/margin_8"
-            android:paddingTop="@dimen/margin_4"
+            android:paddingTop="@dimen/margin_2"
             android:paddingBottom="80dp">
 
             <com.google.android.material.button.MaterialButton
@@ -122,35 +122,65 @@
                 android:text="@string/check"
                 android:textSize="@dimen/text_16"/>
 
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/detailsCard"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/checkBtn"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginTop="@dimen/margin_16"
-                app:strokeColor="@android:color/transparent"
-                android:visibility="gone"
-                tools:visibility="visible">
-
                 <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/detailsCard"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    app:layout_constraintTop_toBottomOf="@id/checkBtn"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginTop="@dimen/margin_16"
+                    android:visibility="gone"
+                    tools:visibility="visible">
+
+                    <com.google.android.material.chip.ChipGroup
+                        android:id="@+id/copyChipGroup"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:singleLine="true">
+
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/copyChip"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:chipIcon="@drawable/ic_copy"
+                            android:text="@string/copy"
+                            android:textSize="@dimen/text_15"/>
+
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/shareChip"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:chipIcon="@drawable/ic_share"
+                            android:text="@string/share"
+                            android:textSize="@dimen/text_15"/>
+
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/exportChip"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:chipIcon="@drawable/ic_export"
+                            android:text="@string/export"
+                            android:textSize="@dimen/text_15"/>
+
+                    </com.google.android.material.chip.ChipGroup>
 
                     <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/foundInBreachTitle"
                         style="@style/MediumBoldText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/copyChipGroup"
                         android:layout_marginStart="@dimen/margin_6"
-                        android:layout_marginTop="@dimen/margin_8"
+                        android:layout_marginTop="@dimen/margin_16"
                         android:drawableStart="@drawable/ic_found"
                         android:drawablePadding="@dimen/margin_12"
                         android:text="@string/found_in_breach"
-                        android:textSize="@dimen/text_17"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        android:textSize="@dimen/text_17"/>
 
                     <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/foundInBreachSubtitle"
@@ -224,27 +254,7 @@
                         app:layout_constraintStart_toStartOf="@id/suggestionTitle"
                         app:layout_constraintTop_toBottomOf="@id/suggestionTitle" />
 
-                    <!--<com.google.android.material.checkbox.MaterialCheckBox
-                    android:id="@+id/bookmark"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/suggestionSubtitle"
-                    android:layout_marginStart="@dimen/margin_6.5"
-                    android:layout_marginTop="@dimen/margin_20"
-                    android:drawableEnd="@drawable/ic_bookmarks_outlined"
-                    android:drawablePadding="@dimen/margin_12"
-                    android:text="Save"
-                    android:textSize="@dimen/text_17"
-                    android:checked="false"
-                    android:visibility="gone"
-                    tools:visibility="visible"
-                    android:layoutDirection="rtl"
-                    style="@style/MediumBoldText"/>-->
-
                 </androidx.constraintlayout.widget.ConstraintLayout>
-
-            </com.google.android.material.card.MaterialCardView>
 
             <include
                 layout="@layout/divider_horizontal"

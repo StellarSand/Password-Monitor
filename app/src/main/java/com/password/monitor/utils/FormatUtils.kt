@@ -15,6 +15,19 @@
  *     along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.password.monitor.models
+package com.password.monitor.utils
 
-data class MultiPwdItem(val passwordLine: String)
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
+
+class FormatUtils {
+    
+    companion object {
+        
+        fun generateNewFilename(): String {
+            val timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd-HH-mm-ss"))
+            return "IYPS_export_${timestamp}.txt"
+        }
+        
+    }
+}
