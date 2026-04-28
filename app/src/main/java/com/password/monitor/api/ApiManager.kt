@@ -24,6 +24,7 @@ import io.ktor.http.isSuccess
 import kotlinx.io.IOException
 import okhttp3.CertificatePinner
 import okhttp3.ConnectionSpec
+import java.util.concurrent.TimeUnit
 
 class ApiManager {
     
@@ -33,6 +34,9 @@ class ApiManager {
             HttpClient(OkHttp) {
                 engine {
                     config {
+                        connectTimeout(30, TimeUnit.SECONDS) // Default is 10 seconds
+                        readTimeout(30, TimeUnit.SECONDS) // Default is 10 seconds
+                        writeTimeout(30, TimeUnit.SECONDS) // Default is 10 seconds
                         followRedirects(true)
                         followSslRedirects(true)
                         connectionSpecs(listOf(ConnectionSpec.RESTRICTED_TLS, ConnectionSpec.MODERN_TLS))
