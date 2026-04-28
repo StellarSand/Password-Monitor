@@ -18,10 +18,15 @@
 package com.password.monitor.fragments.details
 
 import android.annotation.SuppressLint
+import android.content.ClipData
+import android.content.ClipboardManager
+import android.content.Context
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.isVisible
@@ -34,17 +39,22 @@ import com.password.monitor.activities.DetailsActivity
 import com.password.monitor.bottomsheets.ExceptionErrorBottomSheet
 import com.password.monitor.databinding.FragmentScanBinding
 import com.password.monitor.bottomsheets.NoNetworkBottomSheet
+import com.password.monitor.common.getFormattedResultsText
 import com.password.monitor.repositories.ApiRepository
+import com.password.monitor.utils.ClipboardUtils.Companion.hideSensitiveContent
+import com.password.monitor.utils.FormatUtils.Companion.generateNewFilename
 import com.password.monitor.utils.HashUtils.Companion.generateSHA1Hash
 import com.password.monitor.utils.HashUtils.Companion.getHashCount
 import com.password.monitor.utils.IntentUtils.Companion.openURL
+import com.password.monitor.utils.IntentUtils.Companion.shareText
 import com.password.monitor.utils.NetworkUtils.Companion.hasInternet
 import com.password.monitor.utils.NetworkUtils.Companion.hasNetwork
 import com.password.monitor.utils.UiUtils.Companion.convertDpToPx
 import com.password.monitor.utils.UiUtils.Companion.setFoundInBreachSubtitleText
+import com.password.monitor.utils.UiUtils.Companion.showSnackbar
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.get
-import java.util.Locale
+import java.text.NumberFormat
 
 class DetailsFragment : Fragment() {
     
@@ -70,6 +80,7 @@ class DetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         
         detailsActivity = (requireActivity() as DetailsActivity)
+        val clipboardManager = requireContext().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
         passwordString = detailsActivity.passwordLine
         naString = getString(R.string.na)
         breachedSuggestionString = getString(R.string.breached_suggestion)
@@ -109,6 +120,30 @@ class DetailsFragment : Fragment() {
             
             checkPassword()
             
+            // Copy
+            fragmentBinding.copyChip.setOnClickListener {
+                val clipData = ClipData.newPlainText("PasswordMonitor", fragmentBinding.getFormattedResultsText(requireContext()))
+                clipData.hideSensitiveContent()
+                clipboardManager.setPrimaryClip(clipData)
+                // Show snackbar only if 12L or lower to avoid duplicate notifications
+                // https://developer.android.com/develop/ui/views/touch-and-input/copy-paste#duplicate-notifications
+                if (Build.VERSION.SDK_INT <= 32) {
+                    showSnackbar(detailsActivity.activityBinding.detailsCoordLayout,
+                                 requireContext().getString(R.string.copied_to_clipboard),
+                                 fragmentBinding.scanMultipleFab)
+                }
+            }
+            
+            // Share
+            fragmentBinding.shareChip.setOnClickListener {
+                requireActivity().shareText(fragmentBinding.getFormattedResultsText(requireContext()))
+            }
+            
+            // Export
+            fragmentBinding.exportChip.setOnClickListener {
+                exportToFilePicker.launch(generateNewFilename())
+            }
+            
             // Tap here
             tapHereBtn.apply {
                 setOnClickListener {
@@ -124,17 +159,15 @@ class DetailsFragment : Fragment() {
     
     private fun displayResult(count: Int) {
         if (count > 0) {
-            fragmentBinding.foundInBreachSubtitle.setFoundInBreachSubtitleText(context = requireContext(),
-                                                                               isFound = true)
             fragmentBinding.apply {
-                timesFoundSubtitle.text = String.format(Locale.getDefault(), "%d", count)
+                foundInBreachSubtitle.setFoundInBreachSubtitleText(context = requireContext(), isFound = true)
+                timesFoundSubtitle.text = NumberFormat.getInstance().format(count)
                 suggestionSubtitle.text = breachedSuggestionString
             }
         }
         else {
-            fragmentBinding.foundInBreachSubtitle.setFoundInBreachSubtitleText(context = requireContext(),
-                                                                               isFound = false)
             fragmentBinding.apply {
+                foundInBreachSubtitle.setFoundInBreachSubtitleText(context = requireContext(), isFound = false)
                 timesFoundSubtitle.text = naString
                 suggestionSubtitle.text = notBreachedSuggestionString
             }
@@ -172,6 +205,27 @@ class DetailsFragment : Fragment() {
             }
         }
     }
+    
+    private val exportToFilePicker =
+        registerForActivityResult(
+            ActivityResultContracts.CreateDocument("text/plain")
+        ) { uri ->
+            uri?.let {
+                try {
+                    requireContext().contentResolver.openOutputStream(it)?.use { outputStream ->
+                        outputStream.write(fragmentBinding.getFormattedResultsText(requireContext()).toByteArray())
+                    }
+                    showSnackbar(detailsActivity.activityBinding.detailsCoordLayout,
+                                 getString(R.string.export_success),
+                                 fragmentBinding.scanMultipleFab)
+                }
+                catch (_: Exception) {
+                    showSnackbar(detailsActivity.activityBinding.detailsCoordLayout,
+                                 getString(R.string.export_fail),
+                                 fragmentBinding.scanMultipleFab)
+                }
+            }
+        }
     
     override fun onDestroyView() {
         super.onDestroyView()
