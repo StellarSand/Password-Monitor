@@ -26,7 +26,7 @@ class FormatUtils {
         
         fun generateNewFilename(): String {
             val timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd-HH-mm-ss"))
-            return "IYPS_export_${timestamp}.txt"
+            return "PasswordMonitor_export_${timestamp}.txt"
         }
         
     }

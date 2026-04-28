@@ -51,7 +51,7 @@
             android:clipToPadding="false"
             android:paddingTop="@dimen/margin_10"
             android:paddingBottom="10dp"
-            tools:listitem="@layout/item_licenses_recycler_view"/>
+            tools:listitem="@layout/item_licenses_rv"/>
 
     </androidx.core.widget.NestedScrollView>
 

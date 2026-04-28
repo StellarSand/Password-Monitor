@@ -178,9 +178,11 @@ class ScanFragment : Fragment() {
                         fragmentBinding.checkBtn.isEnabled = !isEmpty
                         
                         if (isEmpty) {
-                            fragmentBinding.foundInBreachSubtitle.setFoundInBreachSubtitleText(context = requireContext(),
-                                                                                               reset = true)
                             fragmentBinding.apply {
+                                foundInBreachSubtitle.setFoundInBreachSubtitleText(context = requireContext(), reset = true)
+                                copyChip.isEnabled = false
+                                shareChip.isEnabled = false
+                                exportChip.isEnabled = false
                                 timesFoundSubtitle.text = naString
                                 suggestionSubtitle.text = naString
                             }
@@ -259,22 +261,23 @@ class ScanFragment : Fragment() {
                 isCursorVisible = enable
             }
             checkBtn.isEnabled = enable
+            copyChip.isEnabled = enable
+            shareChip.isEnabled = enable
+            exportChip.isEnabled = enable
         }
     }
     
     private fun displayResult(count: Int) {
         if (count > 0) {
-            fragmentBinding.foundInBreachSubtitle.setFoundInBreachSubtitleText(context = requireContext(),
-                                                                               isFound = true)
             fragmentBinding.apply {
+                foundInBreachSubtitle.setFoundInBreachSubtitleText(context = requireContext(), isFound = true)
                 timesFoundSubtitle.text = NumberFormat.getInstance().format(count)
                 suggestionSubtitle.text = breachedSuggestionString
             }
         }
         else {
-            fragmentBinding.foundInBreachSubtitle.setFoundInBreachSubtitleText(context = requireContext(),
-                                                                               isFound = false)
             fragmentBinding.apply {
+                foundInBreachSubtitle.setFoundInBreachSubtitleText(context = requireContext(), isFound = false)
                 timesFoundSubtitle.text = naString
                 suggestionSubtitle.text = notBreachedSuggestionString
             }
@@ -308,6 +311,7 @@ class ScanFragment : Fragment() {
                 }
                 fragmentBinding.progressIndicator.hide()
                 enableUiComponents(true)
+                fragmentBinding.checkBtn.isEnabled = false
             }
             else {
                 NoNetworkBottomSheet(

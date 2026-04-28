@@ -37,9 +37,7 @@ import com.password.monitor.objects.MultiPwdList
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import java.io.BufferedReader
 import java.io.FileNotFoundException
-import java.io.InputStreamReader
 
 class ScanMultiPwdBottomSheet : BottomSheetDialogFragment() {
     
@@ -86,7 +84,7 @@ class ScanMultiPwdBottomSheet : BottomSheetDialogFragment() {
                     try {
                         fileUri?.let {
                             requireActivity().contentResolver.openInputStream(it)?.use { inputStream ->
-                                BufferedReader(InputStreamReader(inputStream)).use { bufferedReader ->
+                                inputStream.bufferedReader().use { bufferedReader ->
                                     MultiPwdList.pwdList.apply {
                                         if (isNotEmpty()) clear()
                                         // Read file line by line
