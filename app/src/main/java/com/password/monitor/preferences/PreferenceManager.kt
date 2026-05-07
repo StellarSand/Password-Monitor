@@ -40,9 +40,10 @@ class PreferenceManager(context: Context) {
     }
 
     fun setInt(key: String, value: Int) {
-        val editor = sharedPreferences.edit()
-        editor.putInt(key, value)
-        editor.apply()
+        sharedPreferences.edit().apply {
+            putInt(key, value)
+            apply()
+        }
     }
     
     fun getBoolean(key: String, defValue: Boolean = true): Boolean {
@@ -50,9 +51,10 @@ class PreferenceManager(context: Context) {
     }
     
     fun setBoolean(key: String, value: Boolean) {
-        val editor = sharedPreferences.edit()
-        editor.putBoolean(key, value)
-        editor.apply()
+        sharedPreferences.edit().apply {
+            putBoolean(key, value)
+            apply()
+        }
     }
 
 }
