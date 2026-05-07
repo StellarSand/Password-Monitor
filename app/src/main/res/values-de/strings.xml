@@ -78,8 +78,14 @@
 
     <!--Bottom sheet-->
     <string name="cancel">Abbrechen</string>
+    <string name="dismiss">Schließen</string>
     <string name="retry">Wiederholung</string>
     <string name="done">Erledigt</string>
+
+    <!--Developer verification warning-->
+    <string name="dev_verf_warn_desc">Google hat angekündigt, dass ab 2026/2027 alle Apps auf zertifizierten Android-Geräten von den Entwicklern verlangen, dass sie persönliche Identitätsdaten direkt an Google übermitteln. \n\nDa die Entwickler dieser App dieser Anforderung nicht zustimmen, funktioniert diese App <b>nach diesem Zeitpunkt</b> möglicherweise nicht mehr auf zertifizierten Android-Geräten.</string>
+    <string name="solutions">Lösungen</string>
+    <string name="do_not_show_again">Nicht wieder anzeigen</string>
 
     <!--No Network/Internet-->
     <string name="error_occurred_title">Es ist ein Fehler aufgetreten</string>

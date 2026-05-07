@@ -28,9 +28,11 @@ import com.google.android.material.color.DynamicColors
 import com.password.monitor.appmanager.ApplicationManager
 import com.password.monitor.preferences.PreferenceManager.Companion.BLOCK_SS
 import com.password.monitor.R
+import com.password.monitor.bottomsheets.DevVerfWarnBottomSheet
 import com.password.monitor.databinding.ActivityMainBinding
 import com.password.monitor.preferences.PreferenceManager
 import com.password.monitor.preferences.PreferenceManager.Companion.MATERIAL_YOU
+import com.password.monitor.preferences.PreferenceManager.Companion.SHOW_DEV_VERF_WARNING
 import com.password.monitor.utils.UiUtils.Companion.blockScreenshots
 import com.password.monitor.utils.UiUtils.Companion.setNavBarContrastEnforced
 import org.koin.android.ext.android.inject
@@ -74,6 +76,11 @@ class MainActivity : AppCompatActivity() {
         
         selectedItem = savedInstanceState?.getInt("selectedItem") ?: R.id.nav_scan
         
+        if (selectedItem != R.id.nav_settings // Prevent showing when theme is changed from settings
+            && prefManager.getBoolean(SHOW_DEV_VERF_WARNING, defValue = true)) {
+            DevVerfWarnBottomSheet().show(supportFragmentManager, "DevVerfWarnBottomSheet" )
+        }
+        
         // Bottom nav
         activityBinding.mainBottomNav.apply {
             menu.findItem(selectedItemId).isChecked = true
@@ -101,6 +108,11 @@ class MainActivity : AppCompatActivity() {
             navController.navigate(action)
         }
         
+    }
+    
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putInt("selectedItem", selectedItem)
     }
     
     // On back pressed
