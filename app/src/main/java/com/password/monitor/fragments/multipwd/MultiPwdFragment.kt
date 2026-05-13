@@ -27,6 +27,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.updatePadding
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.password.monitor.activities.DetailsActivity
@@ -35,6 +36,7 @@ import com.password.monitor.adapters.MultiPwdAdapter
 import com.password.monitor.databinding.RecyclerViewBinding
 import com.password.monitor.objects.MultiPwdList
 import com.password.monitor.utils.UiUtils.Companion.convertDpToPx
+import kotlinx.coroutines.launch
 import me.stellarsand.android.fastscroll.FastScrollerBuilder
 
 class MultiPwdFragment : Fragment(), MultiPwdAdapter.OnItemClickListener {
@@ -42,7 +44,6 @@ class MultiPwdFragment : Fragment(), MultiPwdAdapter.OnItemClickListener {
     private var _binding: RecyclerViewBinding? = null
     private val fragmentBinding get() = _binding!!
     private lateinit var multiPwdActivity: MultiPwdActivity
-    private lateinit var multiplePwdList: List<String>
     
     override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?,
@@ -54,34 +55,34 @@ class MultiPwdFragment : Fragment(), MultiPwdAdapter.OnItemClickListener {
     
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         multiPwdActivity = requireActivity() as MultiPwdActivity
-        multiplePwdList =
-            if (multiPwdActivity.isAscSort) MultiPwdList.pwdList.sortedBy { it.lowercase() }
-            else MultiPwdList.pwdList.sortedByDescending { it.lowercase() }
         
-        fragmentBinding.recyclerView.apply {
-            // Adjust recyclerview for edge to edge
-            ViewCompat.setOnApplyWindowInsetsListener(this) { v, windowInsets ->
-                val insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars()
-                                                            or WindowInsetsCompat.Type.displayCutout())
-                v.updatePadding(left = insets.left,
-                                top = insets.top + convertDpToPx(requireContext(), 10f),
-                                right = insets.right,
-                                bottom = insets.bottom + convertDpToPx(requireContext(), 10f))
-                WindowInsetsCompat.CONSUMED
+        lifecycleScope.launch {
+            fragmentBinding.recyclerView.apply {
+                // Adjust recyclerview for edge to edge
+                ViewCompat.setOnApplyWindowInsetsListener(this) { v, windowInsets ->
+                    val insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars()
+                                                                or WindowInsetsCompat.Type.displayCutout())
+                    v.updatePadding(left = insets.left,
+                                    top = insets.top + convertDpToPx(requireContext(), 10f),
+                                    right = insets.right,
+                                    bottom = insets.bottom + convertDpToPx(requireContext(), 10f))
+                    WindowInsetsCompat.CONSUMED
+                }
+                
+                MultiPwdList.sortPwdList(multiPwdActivity.isAscSort)
+                adapter = MultiPwdAdapter(MultiPwdList.pwdList, this@MultiPwdFragment)
+                layoutManager =
+                    if (! multiPwdActivity.isGridView) LinearLayoutManager(requireContext())
+                    else StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+                FastScrollerBuilder(this).build()
             }
-            
-            adapter = MultiPwdAdapter(multiplePwdList, this@MultiPwdFragment)
-            layoutManager =
-                if (!multiPwdActivity.isGridView) LinearLayoutManager(requireContext())
-                else StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
-            FastScrollerBuilder(this).build()
         }
     }
     
     // On click
     override fun onItemClick(position: Int) {
         startActivity(Intent(multiPwdActivity, DetailsActivity::class.java)
-                          .putExtra("PwdLine", multiplePwdList[position]),
+                          .putExtra("PwdLine", MultiPwdList.pwdList[position]),
                       ActivityOptions.makeSceneTransitionAnimation(multiPwdActivity).toBundle())
     }
     

@@ -15,7 +15,7 @@
  *     along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.password.monitor.common
+package com.password.monitor.fragments.common
 
 import android.content.Context
 import com.password.monitor.R

@@ -17,8 +17,18 @@
 
 package com.password.monitor.objects
 
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
+
 object MultiPwdList {
     
     val pwdList by lazy { mutableListOf<String>() }
+    
+    suspend fun sortPwdList(isAscending: Boolean) {
+        withContext(Dispatchers.Default) {
+            if (isAscending) pwdList.sortBy { it.lowercase() }
+            else pwdList.sortByDescending { it.lowercase() }
+        }
+    }
     
 }
