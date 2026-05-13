@@ -25,14 +25,18 @@ import android.os.Build
 import android.os.Bundle
 import android.text.InputType.TYPE_TEXT_VARIATION_PASSWORD
 import android.util.TypedValue
+import android.view.ActionMode
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.forEach
 import androidx.core.view.inputmethod.EditorInfoCompat.IME_FLAG_NO_PERSONALIZED_LEARNING
 import androidx.core.view.isVisible
 import androidx.core.view.updateLayoutParams
@@ -40,17 +44,19 @@ import androidx.core.view.updatePadding
 import androidx.core.widget.doOnTextChanged
 import androidx.lifecycle.lifecycleScope
 import com.google.android.material.appbar.AppBarLayout
+import com.google.android.material.chip.Chip
 import com.password.monitor.R
 import com.password.monitor.activities.MainActivity
 import com.password.monitor.bottomsheets.ExceptionErrorBottomSheet
 import com.password.monitor.databinding.FragmentScanBinding
 import com.password.monitor.bottomsheets.NoNetworkBottomSheet
 import com.password.monitor.bottomsheets.ScanMultiPwdBottomSheet
-import com.password.monitor.common.getFormattedResultsText
+import com.password.monitor.fragments.common.getFormattedResultsText
 import com.password.monitor.preferences.PreferenceManager
 import com.password.monitor.preferences.PreferenceManager.Companion.INCOG_KEYBOARD
 import com.password.monitor.repositories.ApiRepository
 import com.password.monitor.utils.ClipboardUtils.Companion.hideSensitiveContent
+import com.password.monitor.utils.ClipboardUtils.Companion.scheduleClipboardClear
 import com.password.monitor.utils.FormatUtils.Companion.generateNewFilename
 import com.password.monitor.utils.HashUtils.Companion.generateSHA1Hash
 import com.password.monitor.utils.HashUtils.Companion.getHashCount
@@ -180,14 +186,37 @@ class ScanFragment : Fragment() {
                         if (isEmpty) {
                             fragmentBinding.apply {
                                 foundInBreachSubtitle.setFoundInBreachSubtitleText(context = requireContext(), reset = true)
-                                copyChip.isEnabled = false
-                                shareChip.isEnabled = false
-                                exportChip.isEnabled = false
+                                fragmentBinding.copyChipGroup.forEach {
+                                    (it as? Chip)?.isEnabled = false
+                                }
                                 timesFoundSubtitle.text = naString
                                 suggestionSubtitle.text = naString
                             }
                         }
                     }
+            }
+            
+            // Detect if copied from this app
+            customSelectionActionModeCallback = object : ActionMode.Callback {
+                override fun onCreateActionMode(mode: ActionMode?, menu: Menu?): Boolean {
+                    return true
+                }
+                
+                override fun onPrepareActionMode(mode: ActionMode?, menu: Menu?): Boolean {
+                    return true
+                }
+                
+                override fun onActionItemClicked(mode: ActionMode?, item: MenuItem?): Boolean {
+                    when (item?.itemId) {
+                        android.R.id.copy -> {
+                            clipboardManager.copyToClipboard(text.toString())
+                            scheduleClipboardClear(requireContext())
+                        }
+                    }
+                    return true
+                }
+                
+                override fun onDestroyActionMode(mode: ActionMode?) {}
             }
         }
         
@@ -206,16 +235,8 @@ class ScanFragment : Fragment() {
         
         // Copy
         fragmentBinding.copyChip.setOnClickListener {
-            val clipData = ClipData.newPlainText("PasswordMonitor", fragmentBinding.getFormattedResultsText(requireContext()))
-            clipData.hideSensitiveContent()
-            clipboardManager.setPrimaryClip(clipData)
-            // Show snackbar only if 12L or lower to avoid duplicate notifications
-            // https://developer.android.com/develop/ui/views/touch-and-input/copy-paste#duplicate-notifications
-            if (Build.VERSION.SDK_INT <= 32) {
-                showSnackbar(mainActivity.activityBinding.mainCoordLayout,
-                             requireContext().getString(R.string.copied_to_clipboard),
-                             fragmentBinding.scanMultipleFab)
-            }
+            clipboardManager.copyToClipboard(fragmentBinding.getFormattedResultsText(requireContext()))
+            scheduleClipboardClear(requireContext())
         }
         
         // Share
@@ -261,9 +282,9 @@ class ScanFragment : Fragment() {
                 isCursorVisible = enable
             }
             checkBtn.isEnabled = enable
-            copyChip.isEnabled = enable
-            shareChip.isEnabled = enable
-            exportChip.isEnabled = enable
+            fragmentBinding.copyChipGroup.forEach {
+                (it as? Chip)?.isEnabled = enable
+            }
         }
     }
     
@@ -322,6 +343,19 @@ class ScanFragment : Fragment() {
                     }
                 ).show(parentFragmentManager, "NoNetworkBottomSheet")
             }
+        }
+    }
+    
+    private fun ClipboardManager.copyToClipboard(copiedText: CharSequence) {
+        val clipData = ClipData.newPlainText("", copiedText)
+        clipData.hideSensitiveContent()
+        setPrimaryClip(clipData)
+        // Show snackbar only if 12L or lower to avoid duplicate notifications
+        // https://developer.android.com/develop/ui/views/touch-and-input/copy-paste#duplicate-notifications
+        if (Build.VERSION.SDK_INT <= 32) {
+            showSnackbar(mainActivity.activityBinding.mainCoordLayout,
+                         requireContext().getString(R.string.copied_to_clipboard),
+                         fragmentBinding.scanMultipleFab)
         }
     }
     

@@ -21,10 +21,11 @@ androidKotlin = "2.3.21" # https://github.com/JetBrains/kotlin/releases/latest (
 appcompat = "1.7.1"
 coreKtx = "1.18.0"
 splashscreen = "1.2.0"
-material3 = "1.14.0-beta01"
+material3 = "1.14.0"
 koin = "4.1.1" # v4.2.0 & above causes issues with backstack
 navigationKtx = "2.9.8"
-ktor = "3.4.2"
+ktor = "3.4.3"
+workRuntime = "2.11.2"
 androidFastscrollKt = "v1.0.8"
 
 [libraries]
@@ -38,6 +39,7 @@ androidx-navigation-fragment-ktx = { module = "androidx.navigation:navigation-fr
 androidx-navigation-ui-ktx = { module = "androidx.navigation:navigation-ui-ktx", version.ref = "navigationKtx" }
 ktor = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }
 ktor-engine = { module = "io.ktor:ktor-client-okhttp", version.ref = "ktor" }
+androidx-work-runtime = { module = "androidx.work:work-runtime", version.ref = "workRuntime" }
 androidFastScrollKt = { module = "com.github.StellarSand:AndroidFastScroll-kt", version.ref = "androidFastscrollKt" }
 
 [bundles]

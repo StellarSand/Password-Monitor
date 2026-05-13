@@ -39,9 +39,10 @@ import com.password.monitor.activities.DetailsActivity
 import com.password.monitor.bottomsheets.ExceptionErrorBottomSheet
 import com.password.monitor.databinding.FragmentScanBinding
 import com.password.monitor.bottomsheets.NoNetworkBottomSheet
-import com.password.monitor.common.getFormattedResultsText
+import com.password.monitor.fragments.common.getFormattedResultsText
 import com.password.monitor.repositories.ApiRepository
 import com.password.monitor.utils.ClipboardUtils.Companion.hideSensitiveContent
+import com.password.monitor.utils.ClipboardUtils.Companion.scheduleClipboardClear
 import com.password.monitor.utils.FormatUtils.Companion.generateNewFilename
 import com.password.monitor.utils.HashUtils.Companion.generateSHA1Hash
 import com.password.monitor.utils.HashUtils.Companion.getHashCount
@@ -122,7 +123,7 @@ class DetailsFragment : Fragment() {
             
             // Copy
             fragmentBinding.copyChip.setOnClickListener {
-                val clipData = ClipData.newPlainText("PasswordMonitor", fragmentBinding.getFormattedResultsText(requireContext()))
+                val clipData = ClipData.newPlainText("", fragmentBinding.getFormattedResultsText(requireContext()))
                 clipData.hideSensitiveContent()
                 clipboardManager.setPrimaryClip(clipData)
                 // Show snackbar only if 12L or lower to avoid duplicate notifications
@@ -132,6 +133,7 @@ class DetailsFragment : Fragment() {
                                  requireContext().getString(R.string.copied_to_clipboard),
                                  fragmentBinding.scanMultipleFab)
                 }
+                scheduleClipboardClear(requireContext())
             }
             
             // Share

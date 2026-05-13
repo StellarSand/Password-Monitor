@@ -68,5 +68,6 @@ dependencies {
     implementation(libs.koin.android)
     implementation(libs.bundles.navigation)
     implementation(libs.bundles.ktor)
+    implementation(libs.androidx.work.runtime)
     implementation(libs.androidFastScrollKt)
 }
