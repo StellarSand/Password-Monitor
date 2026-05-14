@@ -30,18 +30,31 @@ class PreferenceManager(context: Context) {
         const val MATERIAL_YOU = "material_you"
         const val BLOCK_SS = "block_ss"
         const val INCOG_KEYBOARD = "incog_keyboard"
+        const val CLEAR_CLIPBOARD_POS = "clear_clipboard_pos"
+        const val CLEAR_CLIPBOARD_TIME = "clear_clipboard_time"
     }
     
     private val sharedPreferences =
         context.getSharedPreferences("com.password.monitor_preferences", Context.MODE_PRIVATE)
 
-    fun getInt(key: String): Int {
-        return sharedPreferences.getInt(key, 0)
+    fun getInt(key: String, defVal: Int = 0): Int {
+        return sharedPreferences.getInt(key, defVal)
     }
 
     fun setInt(key: String, value: Int) {
         sharedPreferences.edit().apply {
             putInt(key, value)
+            apply()
+        }
+    }
+    
+    fun getLong(key: String): Long {
+        return sharedPreferences.getLong(key, 0L)
+    }
+    
+    fun setLong(key: String, value: Long) {
+        sharedPreferences.edit().apply {
+            putLong(key, value)
             apply()
         }
     }

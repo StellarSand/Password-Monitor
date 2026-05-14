@@ -25,12 +25,16 @@ import android.os.PersistableBundle
 import androidx.work.ExistingWorkPolicy
 import androidx.work.OneTimeWorkRequest
 import androidx.work.WorkManager
+import com.password.monitor.preferences.PreferenceManager
+import com.password.monitor.preferences.PreferenceManager.Companion.CLEAR_CLIPBOARD_TIME
 import com.password.monitor.workers.ClearClipboardWorker
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.get
 import java.util.concurrent.TimeUnit
 
 class ClipboardUtils {
     
-    companion object {
+    companion object : KoinComponent {
         
         // Hide from revealing on copy
         // https://developer.android.com/develop/ui/views/touch-and-input/copy-paste#SensitiveContent
@@ -45,7 +49,9 @@ class ClipboardUtils {
             val clearClipboardRequest =
                 OneTimeWorkRequest
                     .Builder(ClearClipboardWorker::class.java)
-                    .setInitialDelay(1L, TimeUnit.MINUTES)
+                    .setInitialDelay(
+                        get<PreferenceManager>().getLong(CLEAR_CLIPBOARD_TIME),
+                        TimeUnit.SECONDS)
                     .build()
             
             // Create a new work request with a 1 min delay
