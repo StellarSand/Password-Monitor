@@ -83,7 +83,10 @@ class SupportMethodsBottomSheet : BottomSheetDialogFragment() {
                                                                                    requireActivity() as MainActivity)
         
         // Cancel
-        BottomSheetFooterBinding.bind(bottomSheetBinding.root).negativeButton.setOnClickListener { dismiss() }
+        BottomSheetFooterBinding.bind(bottomSheetBinding.root).negativeButton.apply {
+            text = getString(R.string.dismiss)
+            setOnClickListener { dismiss() }
+        }
     }
     
     override fun onDestroyView() {

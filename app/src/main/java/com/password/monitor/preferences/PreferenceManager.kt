@@ -28,10 +28,10 @@ class PreferenceManager(context: Context) {
         const val GRID_VIEW = "grid_view"
         const val SORT_ASC = "sort_asc"
         const val MATERIAL_YOU = "material_you"
-        const val BLOCK_SS = "block_ss"
-        const val INCOG_KEYBOARD = "incog_keyboard"
         const val CLEAR_CLIPBOARD_POS = "clear_clipboard_pos"
         const val CLEAR_CLIPBOARD_TIME = "clear_clipboard_time"
+        const val BLOCK_SS = "block_ss"
+        const val INCOG_KEYBOARD = "incog_keyboard"
     }
     
     private val sharedPreferences =
@@ -48,8 +48,8 @@ class PreferenceManager(context: Context) {
         }
     }
     
-    fun getLong(key: String): Long {
-        return sharedPreferences.getLong(key, 0L)
+    fun getLong(key: String, defVal: Long = 0L): Long {
+        return sharedPreferences.getLong(key, defVal)
     }
     
     fun setLong(key: String, value: Long) {

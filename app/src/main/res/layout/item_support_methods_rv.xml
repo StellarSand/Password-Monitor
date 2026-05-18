@@ -24,7 +24,7 @@
     android:layout_height="wrap_content"
     android:layout_marginTop="@dimen/margin_4"
     android:layout_marginBottom="@dimen/margin_12"
-    android:layout_marginHorizontal="@dimen/margin_12"
+    android:layout_marginHorizontal="@dimen/margin_8"
     android:backgroundTint="@android:color/transparent">
 
     <LinearLayout
@@ -61,12 +61,12 @@
             android:id="@+id/supportMethodUrl"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="@dimen/margin_16"
+            android:layout_marginHorizontal="@dimen/margin_12"
+            android:paddingVertical="@dimen/margin_16"
+            android:gravity="center"
             android:text="@string/liberapay_url"
             android:textColor="@color/color_url"
-            android:textSize="@dimen/text_17"
-            android:textAlignment="center"
-            android:textIsSelectable="true"/>
+            android:textSize="@dimen/text_17"/>
 
     </LinearLayout>
 

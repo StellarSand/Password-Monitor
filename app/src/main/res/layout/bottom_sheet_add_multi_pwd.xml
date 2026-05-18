@@ -22,8 +22,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingTop="@dimen/margin_12"
-    android:paddingBottom="@dimen/margin_8"
+    android:paddingTop="@dimen/margin_8"
+    android:paddingBottom="@dimen/margin_4"
     android:orientation="vertical"
     android:layout_gravity="center">
 
@@ -46,13 +46,13 @@
             app:boxStrokeWidth="0dp"
             style="?attr/textInputFilledStyle">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/multiPwdText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:minLines="3">
-            <requestFocus/>
-        </com.google.android.material.textfield.TextInputEditText>
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/multiPwdText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minLines="3">
+                <requestFocus/>
+            </com.google.android.material.textfield.TextInputEditText>
 
         </com.google.android.material.textfield.TextInputLayout>
 

@@ -45,16 +45,17 @@ class ClipboardUtils {
             }
         }
         
+        // Create work request to clear clipboard after specified delay
         fun scheduleClipboardClear(context: Context) {
             val clearClipboardRequest =
                 OneTimeWorkRequest
                     .Builder(ClearClipboardWorker::class.java)
                     .setInitialDelay(
-                        get<PreferenceManager>().getLong(CLEAR_CLIPBOARD_TIME),
-                        TimeUnit.SECONDS)
+                        get<PreferenceManager>().getLong(CLEAR_CLIPBOARD_TIME, defVal = 60L),
+                        TimeUnit.SECONDS
+                    )
                     .build()
             
-            // Create a new work request with a 1 min delay
             WorkManager.getInstance(context.applicationContext).enqueueUniqueWork(
                 "PasswordMonitor_clear_clipboard_work",
                 ExistingWorkPolicy.REPLACE,

@@ -91,7 +91,10 @@ class LicensesBottomSheet : BottomSheetDialogFragment() {
         
         BottomSheetFooterBinding.bind(bottomSheetBinding.root).apply {
             positiveButton.isVisible = false
-            negativeButton.setOnClickListener { dismiss() }
+            negativeButton.apply {
+                text = getString(R.string.dismiss)
+                setOnClickListener { dismiss() }
+            }
         }
     }
     

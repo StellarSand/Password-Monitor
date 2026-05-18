@@ -166,8 +166,8 @@
     <color name="color_scrollbar">#A19CA0</color>
     <color name="color_url">#1976D2</color>
 
-    <color name="color_found_in_breach">#E62E2E</color>
-    <color name="color_not_found_in_breach">#27B763</color>
+    <color name="color_found_in_breach">#F44336</color>
+    <color name="color_not_found_in_breach">#4CAF50</color>
 
     <color name="color_splash_bg">#4F6628</color>
 

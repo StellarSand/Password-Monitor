@@ -24,17 +24,15 @@
     android:layout_height="wrap_content"
     android:layout_marginHorizontal="@dimen/margin_10"
     android:layout_marginTop="@dimen/margin_4"
-    android:layout_marginBottom="@dimen/margin_8">
+    android:layout_marginBottom="@dimen/margin_12">
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/password_line"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:drawableTintMode="src_atop"
-            android:layout_marginStart="@dimen/margin_16"
-            android:layout_marginEnd="@dimen/margin_8"
             android:padding="@dimen/margin_25"
             android:ellipsize="marquee"
+            android:text="@string/password"
             android:textAlignment="viewStart"
             android:textColor="?attr/colorOnSurface"
             android:textSize="@dimen/text_17" />
