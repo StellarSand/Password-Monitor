@@ -40,6 +40,10 @@
     <string name="scan_your_password">Scansione della password</string>
     <string name="check">Controllo</string>
     <string name="details">Dettagli</string>
+    <string name="copy">Copia</string>
+    <string name="share">Condividi</string>
+    <string name="export">Esporta</string>
+    <string name="password">Password</string>
     <string name="found_in_breach">Trovato in violazione</string>
     <string name="yes">S\u00ED</string>
     <string name="no">No</string>
@@ -118,7 +122,10 @@
     <!--#########################################################################################-->
 
     <!--Snackbars-->
+    <string name="export_success">Esportazione completata con successo</string>
+    <string name="export_fail">Esportazione non riuscita</string>
     <string name="no_browsers">Nessun browser installato sul dispositivo</string>
+    <string name="copied_to_clipboard">Copiato negli appunti</string>
     <string name="something_went_wrong">Qualcosa \u00E8 andato storto</string>
 
 </resources>

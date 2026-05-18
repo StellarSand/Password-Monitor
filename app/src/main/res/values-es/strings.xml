@@ -41,6 +41,10 @@
     <string name="scan_your_password">Escanea tu contrase\u00F1a</string>
     <string name="check">Consulte</string>
     <string name="details">Detalles</string>
+    <string name="copy">Copia</string>
+    <string name="share">Compartir</string>
+    <string name="export">Exportar</string>
+    <string name="password">Contrase\u00F1a</string>
     <string name="found_in_breach">Incumplimiento</string>
     <string name="yes">S\u00ED</string>
     <string name="no">No</string>
@@ -119,7 +123,10 @@
     <!--#########################################################################################-->
 
     <!--Snackbars-->
+    <string name="export_success">Se ha exportado correctamente</string>
+    <string name="export_fail">Error al exportar</string>
     <string name="no_browsers">No hay navegadores instalados en este dispositivo</string>
+    <string name="copied_to_clipboard">Copiado al portapapeles</string>
     <string name="something_went_wrong">Algo sali\u00F3 mal</string>
 
 </resources>

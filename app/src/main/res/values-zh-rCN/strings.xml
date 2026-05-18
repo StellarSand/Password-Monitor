@@ -31,6 +31,10 @@
     <string name="scan_your_password">扫描密码</string>
     <string name="check">检查</string>
     <string name="details">详细信息</string>
+    <string name="copy">复制</string>
+    <string name="share">分享</string>
+    <string name="export">导出</string>
+    <string name="password">密码</string>
     <string name="found_in_breach">发现违反</string>
     <string name="yes">是</string>
     <string name="no">没有</string>
@@ -107,7 +111,10 @@
     <!--#########################################################################################-->
 
     <!--Snackbars-->
+    <string name="export_success">已成功导出</string>
+    <string name="export_fail">导出失败</string>
     <string name="no_browsers">此设备未安装浏览器</string>
+    <string name="copied_to_clipboard">已复制到剪贴板</string>
     <string name="something_went_wrong">出了问题</string>
 
 </resources>

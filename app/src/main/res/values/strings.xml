@@ -116,10 +116,10 @@
     <!--#########################################################################################-->
 
     <!--Snackbars-->
-    <string name="copied_to_clipboard">Copied to clipboard</string>
     <string name="export_success">Exported successfully</string>
     <string name="export_fail">Export failed</string>
     <string name="no_browsers">No browsers installed on this device</string>
+    <string name="copied_to_clipboard">Copied to clipboard</string>
     <string name="something_went_wrong">Something went wrong</string>
 
 </resources>

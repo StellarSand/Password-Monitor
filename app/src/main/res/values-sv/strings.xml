@@ -40,6 +40,10 @@
     <string name="scan_your_password">Skanna ditt l\u00F6senord</string>
     <string name="check">Kontrollera</string>
     <string name="details">Detaljer</string>
+    <string name="copy">Kopia</string>
+    <string name="share">Andel</string>
+    <string name="export">Exportera</string>
+    <string name="password">L\u00F6senord</string>
     <string name="found_in_breach">Hittades i \u00F6vertr\u00E4delse</string>
     <string name="yes">Ja</string>
     <string name="no">Nej</string>
@@ -118,7 +122,10 @@
     <!--#########################################################################################-->
 
     <!--Snackbars-->
+    <string name="export_success">Exporterad framgångsrikt</string>
+    <string name="export_fail">Exportering misslyckades</string>
     <string name="no_browsers">Inga webbl\u00E4sare installerade p\u00E5 den h\u00E4r enheten</string>
+    <string name="copied_to_clipboard">Kopierad till urklipp</string>
     <string name="something_went_wrong">N\u00E5got gick fel</string>
 
 </resources>

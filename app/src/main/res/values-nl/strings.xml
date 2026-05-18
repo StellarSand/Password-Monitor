@@ -36,6 +36,10 @@
     <string name="scan_your_password">Scan je wachtwoord</string>
     <string name="check">Controleer</string>
     <string name="details">Details</string>
+    <string name="copy">Kopie</string>
+    <string name="share">Deel</string>
+    <string name="export">Exporteren</string>
+    <string name="password">Wachtwoord</string>
     <string name="found_in_breach">Gevonden in overtreding</string>
     <string name="yes">Ja</string>
     <string name="no">Geen</string>
@@ -114,7 +118,10 @@
     <!--#########################################################################################-->
 
     <!--Snackbars-->
+    <string name="export_success">Succesvol geëxporteerd</string>
+    <string name="export_fail">Exporteren is mislukt</string>
     <string name="no_browsers">Geen browsers ge\u00EFnstalleerd op dit apparaat</string>
+    <string name="copied_to_clipboard">Gekopieerd naar klembord</string>
     <string name="something_went_wrong">Er ging iets mis</string>
 
 </resources>

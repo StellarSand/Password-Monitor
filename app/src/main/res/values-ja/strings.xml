@@ -31,6 +31,10 @@
     <string name="scan_your_password">パスワードをスキャンする</string>
     <string name="check">チェック</string>
     <string name="details">詳細</string>
+    <string name="copy">コピー</string>
+    <string name="share">シェア</string>
+    <string name="export">エクスポート</string>
+    <string name="password">パスワード</string>
     <string name="found_in_breach">違反が発覚</string>
     <string name="yes">はい</string>
     <string name="no">いいえ</string>
@@ -109,7 +113,10 @@
     <!--#########################################################################################-->
 
     <!--Snackbars-->
+    <string name="export_success">正常にエクスポートされました</string>
+    <string name="export_fail">エクスポートに失敗しました</string>
     <string name="no_browsers">このデバイスにブラウザがインストールされていません</string>
+    <string name="copied_to_clipboard">クリップボードにコピー</string>
     <string name="something_went_wrong">何かが間違っていた</string>
 
 </resources>

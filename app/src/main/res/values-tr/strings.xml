@@ -46,6 +46,10 @@
     <string name="scan_your_password">\u015Eifrenizi taray\u0131n</string>
     <string name="check">Kontrol et</string>
     <string name="details">Detaylar</string>
+    <string name="copy">Anla\u015F\u0131ld\u0131</string>
+    <string name="share">Payla\u015F</string>
+    <string name="export">Dı\u015Fa aktar</string>
+    <string name="password">\u015Eifre</string>
     <string name="found_in_breach">\u0130hlalde bulundu</string>
     <string name="yes">Evet</string>
     <string name="no">Hay\u0131r</string>
@@ -124,7 +128,10 @@
     <!--#########################################################################################-->
 
     <!--Snackbars-->
+    <string name="export_success">Ba\u015Far\u0131yla d\u0131\u015Fa aktar\u0131ld\u0131</string>
+    <string name="export_fail">D\u0131\u015Fa aktarma ba\u015Far\u0131s\u0131z oldu</string>
     <string name="no_browsers">Bu cihazda y\u00FCkl\u00FC taray\u0131c\u0131 yok</string>
+    <string name="copied_to_clipboard">Panoya kopyaland\u0131</string>
     <string name="something_went_wrong">Bir \u015Feyler ters gitti</string>
 
 </resources>
