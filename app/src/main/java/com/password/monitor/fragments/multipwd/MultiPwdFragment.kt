@@ -82,7 +82,7 @@ class MultiPwdFragment : Fragment(), MultiPwdAdapter.OnItemClickListener {
     // On click
     override fun onItemClick(position: Int) {
         startActivity(Intent(multiPwdActivity, DetailsActivity::class.java)
-                          .putExtra("PwdLine", MultiPwdList.pwdList[position]),
+                          .putExtra("PwdItem", MultiPwdList.pwdList[position]),
                       ActivityOptions.makeSceneTransitionAnimation(multiPwdActivity).toBundle())
     }
     

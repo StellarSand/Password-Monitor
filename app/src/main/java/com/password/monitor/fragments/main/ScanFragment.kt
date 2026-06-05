@@ -72,6 +72,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.get
 import java.text.NumberFormat
+import kotlin.time.Duration.Companion.milliseconds
 
 class ScanFragment : Fragment() {
     
@@ -179,7 +180,7 @@ class ScanFragment : Fragment() {
                 job?.cancel()
                 job =
                     lifecycleScope.launch {
-                        delay(300)
+                        delay(300.milliseconds)
                         val isEmpty = charSequence!!.isEmpty()
                         fragmentBinding.checkBtn.isEnabled = !isEmpty
                         

@@ -33,6 +33,7 @@ import com.password.monitor.activities.MultiPwdActivity
 import com.password.monitor.databinding.BottomSheetFooterBinding
 import com.password.monitor.databinding.BottomSheetHeaderBinding
 import com.password.monitor.databinding.BottomSheetScanMultiPwdBinding
+import com.password.monitor.models.MultiPwd
 import com.password.monitor.objects.MultiPwdList
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -89,7 +90,7 @@ class ScanMultiPwdBottomSheet : BottomSheetDialogFragment() {
                                         if (isNotEmpty()) clear()
                                         // Read file line by line
                                         bufferedReader.forEachLine { line ->
-                                            if (line.isNotEmpty()) add(line)
+                                            if (line.isNotEmpty()) add(MultiPwd(password = line))
                                         }
                                     }
                                 }

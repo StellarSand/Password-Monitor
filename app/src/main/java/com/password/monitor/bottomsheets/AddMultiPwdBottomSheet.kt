@@ -31,10 +31,12 @@ import com.password.monitor.activities.MultiPwdActivity
 import com.password.monitor.databinding.BottomSheetAddMultiPwdBinding
 import com.password.monitor.databinding.BottomSheetFooterBinding
 import com.password.monitor.databinding.BottomSheetHeaderBinding
+import com.password.monitor.models.MultiPwd
 import com.password.monitor.objects.MultiPwdList
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import kotlin.time.Duration.Companion.milliseconds
 
 class AddMultiPwdBottomSheet : BottomSheetDialogFragment() {
     
@@ -61,7 +63,7 @@ class AddMultiPwdBottomSheet : BottomSheetDialogFragment() {
             job?.cancel()
             job =
                 lifecycleScope.launch {
-                    delay(300)
+                    delay(300.milliseconds)
                     footerBinding.positiveButton.apply {
                         isEnabled = charSequence!!.isNotEmpty()
                     }
@@ -72,11 +74,9 @@ class AddMultiPwdBottomSheet : BottomSheetDialogFragment() {
         footerBinding.positiveButton.apply {
             isVisible = true
             setOnClickListener {
-                val itemList =
-                    bottomSheetBinding.multiPwdText.text!!.split("\n")
-                        .filter { it.isNotEmpty() }
-                        .map { it }
-                MultiPwdList.pwdList.addAll(itemList)
+                bottomSheetBinding.multiPwdText.text!!.split("\n")
+                    .filter { it.isNotEmpty() }
+                    .forEach { MultiPwdList.pwdList.add(MultiPwd(password = it)) }
                 dismiss()
                 startActivity(Intent(requireActivity(), MultiPwdActivity::class.java),
                               ActivityOptions.makeSceneTransitionAnimation(requireActivity()).toBundle())

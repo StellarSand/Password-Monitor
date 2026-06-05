@@ -19,6 +19,7 @@
 
 <com.google.android.material.card.MaterialCardView
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/password_card"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -26,15 +27,35 @@
     android:layout_marginTop="@dimen/margin_4"
     android:layout_marginBottom="@dimen/margin_12">
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/password_line"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/margin_25"
-            android:ellipsize="marquee"
-            android:text="@string/password"
-            android:textAlignment="viewStart"
-            android:textColor="?attr/colorOnSurface"
-            android:textSize="@dimen/text_17" />
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:paddingHorizontal="@dimen/margin_16">
+
+                <ImageView
+                    android:id="@+id/breached_status_icon"
+                    android:layout_width="@dimen/margin_50"
+                    android:layout_height="@dimen/margin_50"
+                    android:padding="@dimen/margin_8"
+                    android:layout_gravity="center_vertical"
+                    android:background="@drawable/shape_filled_circle"
+                    android:backgroundTint="?attr/colorSurfaceVariant"
+                    android:src="@drawable/ic_not_found_in_breach"
+                    tools:ignore="ContentDescription" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/password_line"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="@dimen/margin_12"
+                    android:paddingVertical="@dimen/margin_25"
+                    android:ellipsize="marquee"
+                    android:text="@string/password"
+                    android:textAlignment="viewStart"
+                    android:textColor="?attr/colorOnSurface"
+                    android:textSize="@dimen/text_17" />
+
+        </LinearLayout>
 
 </com.google.android.material.card.MaterialCardView>

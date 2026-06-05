@@ -19,14 +19,16 @@ package com.password.monitor.adapters
 
 import androidx.recyclerview.widget.RecyclerView
 import com.password.monitor.adapters.MultiPwdAdapter.ListViewHolder
-import android.widget.TextView
 import com.password.monitor.R
 import android.view.ViewGroup
 import android.view.LayoutInflater
 import android.view.View
+import android.widget.ImageView
+import com.google.android.material.textview.MaterialTextView
+import com.password.monitor.models.MultiPwd
 import me.stellarsand.android.fastscroll.PopupTextProvider
 
-class MultiPwdAdapter(private val aListViewItems: List<String>,
+class MultiPwdAdapter(private val aListViewItems: List<MultiPwd>,
                       private val clickListener: OnItemClickListener): RecyclerView.Adapter<ListViewHolder>(), PopupTextProvider {
     
     interface OnItemClickListener {
@@ -35,7 +37,8 @@ class MultiPwdAdapter(private val aListViewItems: List<String>,
     
     inner class ListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
         
-        val passwordLine: TextView = itemView.findViewById(R.id.password_line)
+        val breachedStatusIcon: ImageView = itemView.findViewById(R.id.breached_status_icon)
+        val passwordLine: MaterialTextView = itemView.findViewById(R.id.password_line)
         
         init {
             // Handle click events of items
@@ -57,7 +60,9 @@ class MultiPwdAdapter(private val aListViewItems: List<String>,
     }
     
     override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
-        holder.passwordLine.text = aListViewItems[position]
+        val pwdItem = aListViewItems[position]
+        holder.passwordLine.text = pwdItem.password
+        if (pwdItem.isBreached) holder.breachedStatusIcon.setImageResource(R.drawable.ic_found_in_breach)
     }
     
     override fun getItemCount(): Int {
@@ -69,7 +74,7 @@ class MultiPwdAdapter(private val aListViewItems: List<String>,
     }
     
     override fun getPopupText(view: View, position: Int): CharSequence {
-        return aListViewItems[position].first().let {
+        return aListViewItems[position].password.first().let {
             if (it.isLowerCase()) it.uppercase()
             else it
         }.toString()

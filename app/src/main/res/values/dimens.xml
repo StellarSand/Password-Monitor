@@ -20,6 +20,7 @@
     <!--Margins & paddings-->
     <dimen name="margin_75">75dp</dimen>
     <dimen name="margin_65">65dp</dimen>
+    <dimen name="margin_50">50dp</dimen>
     <dimen name="margin_40">40dp</dimen>
     <dimen name="margin_35">35dp</dimen>
     <dimen name="margin_32">32dp</dimen>

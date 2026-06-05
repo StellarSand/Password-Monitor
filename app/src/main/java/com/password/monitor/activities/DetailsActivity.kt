@@ -17,6 +17,7 @@
 
 package com.password.monitor.activities
 
+import android.os.Build
 import android.os.Bundle
 import android.view.Window
 import androidx.activity.enableEdgeToEdge
@@ -25,6 +26,7 @@ import com.google.android.material.transition.platform.MaterialSharedAxis
 import com.password.monitor.R
 import com.password.monitor.databinding.ActivityDetailsBinding
 import com.password.monitor.fragments.details.DetailsFragment
+import com.password.monitor.models.MultiPwd
 import com.password.monitor.preferences.PreferenceManager
 import com.password.monitor.preferences.PreferenceManager.Companion.BLOCK_SS
 import com.password.monitor.utils.UiUtils.Companion.blockScreenshots
@@ -34,7 +36,6 @@ import org.koin.android.ext.android.get
 class DetailsActivity : AppCompatActivity() {
     
     lateinit var activityBinding: ActivityDetailsBinding
-    lateinit var passwordLine: String
     
     override fun onCreate(savedInstanceState: Bundle?) {
         enableEdgeToEdge()
@@ -48,8 +49,6 @@ class DetailsActivity : AppCompatActivity() {
         activityBinding = ActivityDetailsBinding.inflate(layoutInflater)
         setContentView(activityBinding.root)
         
-        passwordLine = intent.getStringExtra("PwdLine")!!
-        
         // Disable screenshots and screen recordings
         window.blockScreenshots(get<PreferenceManager>().getBoolean(BLOCK_SS))
         
@@ -57,8 +56,20 @@ class DetailsActivity : AppCompatActivity() {
         activityBinding.detailsBackBtn.setOnClickListener { onBackPressedDispatcher.onBackPressed() }
         
         supportFragmentManager.beginTransaction()
-            .replace(R.id.activity_host_fragment, DetailsFragment())
-            .commitNow()
+            .replace(
+                R.id.activity_host_fragment,
+                DetailsFragment().apply {
+                    arguments =
+                        Bundle().apply {
+                            putParcelable(
+                                "PwdItem",
+                                if (Build.VERSION.SDK_INT >= 33) intent.getParcelableExtra("PwdItem", MultiPwd ::class.java)
+                                else intent.getParcelableExtra("PwdItem")
+                            )
+                        }
+                }
+            )
+            .commit()
         
     }
     

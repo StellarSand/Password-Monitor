@@ -30,8 +30,37 @@
         android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:navGraph="@navigation/multi_pwd_fragments_nav_graph"
-        app:defaultNavHost="true"/>
+        app:defaultNavHost="true"
+        android:visibility="gone"/>
+
+    <LinearLayout
+        android:id="@+id/scanningLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="center"
+        android:gravity="center">
+
+        <com.google.android.material.loadingindicator.LoadingIndicator
+            android:id="@+id/loadingIndicator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:indicatorColor="?attr/colorPrimary"
+            app:indicatorSize="68dp"
+            app:containerWidth="88dp"
+            app:containerHeight="88dp"
+            style="@style/Widget.Material3.LoadingIndicator.Contained"/>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/scanningText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_16"
+            android:text="@string/scanning_passwords"
+            android:textAlignment="center"
+            android:textSize="@dimen/text_17"
+            android:textColor="?attr/colorOnSurfaceVariant"/>
+    </LinearLayout>
 
     <com.google.android.material.floatingtoolbar.FloatingToolbarLayout
         android:layout_width="match_parent"

@@ -1,5 +1,5 @@
 /*
- *     Copyright (C) 2022-present StellarSand
+ *     Copyright (C) 2024-present StellarSand
  *
  *     This program is free software: you can redistribute it and/or modify
  *     it under the terms of the GNU General Public License as published by
@@ -15,21 +15,14 @@
  *     along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.password.monitor.objects
+package com.password.monitor.models
 
-import com.password.monitor.models.MultiPwd
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
 
-object MultiPwdList {
-    
-    val pwdList by lazy { mutableListOf<MultiPwd>() }
-    
-    suspend fun sortPwdList(isAscending: Boolean) {
-        withContext(Dispatchers.Default) {
-            if (isAscending) pwdList.sortBy { it.password.lowercase() }
-            else pwdList.sortByDescending { it.password.lowercase() }
-        }
-    }
-    
-}
+@Parcelize
+data class MultiPwd(
+    val password: String,
+    var breachedCount: Int = 0,
+    var isBreached: Boolean = false
+): Parcelable

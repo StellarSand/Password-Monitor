@@ -33,28 +33,19 @@ import androidx.core.view.isVisible
 import androidx.core.view.updateLayoutParams
 import androidx.core.view.updatePadding
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.lifecycleScope
 import com.password.monitor.R
 import com.password.monitor.activities.DetailsActivity
-import com.password.monitor.bottomsheets.ExceptionErrorBottomSheet
 import com.password.monitor.databinding.FragmentScanBinding
-import com.password.monitor.bottomsheets.NoNetworkBottomSheet
 import com.password.monitor.fragments.common.getFormattedResultsText
-import com.password.monitor.repositories.ApiRepository
+import com.password.monitor.models.MultiPwd
 import com.password.monitor.utils.ClipboardUtils.Companion.hideSensitiveContent
 import com.password.monitor.utils.ClipboardUtils.Companion.scheduleClipboardClear
 import com.password.monitor.utils.FormatUtils.Companion.generateNewFilename
-import com.password.monitor.utils.HashUtils.Companion.generateSHA1Hash
-import com.password.monitor.utils.HashUtils.Companion.getHashCount
 import com.password.monitor.utils.IntentUtils.Companion.openURL
 import com.password.monitor.utils.IntentUtils.Companion.shareText
-import com.password.monitor.utils.NetworkUtils.Companion.hasInternet
-import com.password.monitor.utils.NetworkUtils.Companion.hasNetwork
 import com.password.monitor.utils.UiUtils.Companion.convertDpToPx
 import com.password.monitor.utils.UiUtils.Companion.setFoundInBreachSubtitleText
 import com.password.monitor.utils.UiUtils.Companion.showSnackbar
-import kotlinx.coroutines.launch
-import org.koin.android.ext.android.get
 import java.text.NumberFormat
 
 class DetailsFragment : Fragment() {
@@ -62,12 +53,9 @@ class DetailsFragment : Fragment() {
     private var _binding: FragmentScanBinding? = null
     private val fragmentBinding get() = _binding!!
     private lateinit var detailsActivity: DetailsActivity
-    private lateinit var passwordString: String
     private lateinit var naString: String
     private lateinit var breachedSuggestionString: String
     private lateinit var notBreachedSuggestionString: String
-    private var hashPrefix = ""
-    private var hashSuffix = ""
     
     override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?,
@@ -82,7 +70,9 @@ class DetailsFragment : Fragment() {
         
         detailsActivity = (requireActivity() as DetailsActivity)
         val clipboardManager = requireContext().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-        passwordString = detailsActivity.passwordLine
+        val pwdItem =
+            if (Build.VERSION.SDK_INT >= 33) arguments?.getParcelable("PwdItem", MultiPwd::class.java)!!
+            else arguments?.getParcelable("PwdItem")!!
         naString = getString(R.string.na)
         breachedSuggestionString = getString(R.string.breached_suggestion)
         notBreachedSuggestionString = getString(R.string.not_breached_suggestion)
@@ -105,21 +95,31 @@ class DetailsFragment : Fragment() {
                 WindowInsetsCompat.CONSUMED
             }
             
+            passwordBox.hint = getString(R.string.password)
             passwordText.apply {
-                setText(passwordString)
+                setText(pwdItem.password)
                 isFocusable = false
                 isCursorVisible = false
             }
             checkBtn.isVisible = false
-            progressIndicator.show()
             scanMultipleFab.isVisible = false
             
-            passwordText.text.toString().generateSHA1Hash().apply {
-                hashPrefix = take(5).uppercase() // First 5 chars
-                hashSuffix = substring(5).uppercase() // Rest of the hash
+            if (pwdItem.isBreached) {
+                fragmentBinding.apply {
+                    foundInBreachSubtitle.setFoundInBreachSubtitleText(context = requireContext(), isFound = true)
+                    timesFoundSubtitle.text = NumberFormat.getInstance().format(pwdItem.breachedCount)
+                    suggestionSubtitle.text = breachedSuggestionString
+                }
+            }
+            else {
+                fragmentBinding.apply {
+                    foundInBreachSubtitle.setFoundInBreachSubtitleText(context = requireContext(), isFound = false)
+                    timesFoundSubtitle.text = naString
+                    suggestionSubtitle.text = notBreachedSuggestionString
+                }
             }
             
-            checkPassword()
+            fragmentBinding.detailsCard.isVisible = true
             
             // Copy
             fragmentBinding.copyChip.setOnClickListener {
@@ -157,55 +157,6 @@ class DetailsFragment : Fragment() {
             }
         }
         
-    }
-    
-    private fun displayResult(count: Int) {
-        if (count > 0) {
-            fragmentBinding.apply {
-                foundInBreachSubtitle.setFoundInBreachSubtitleText(context = requireContext(), isFound = true)
-                timesFoundSubtitle.text = NumberFormat.getInstance().format(count)
-                suggestionSubtitle.text = breachedSuggestionString
-            }
-        }
-        else {
-            fragmentBinding.apply {
-                foundInBreachSubtitle.setFoundInBreachSubtitleText(context = requireContext(), isFound = false)
-                timesFoundSubtitle.text = naString
-                suggestionSubtitle.text = notBreachedSuggestionString
-            }
-        }
-        
-        fragmentBinding.detailsCard.isVisible = true
-    }
-    
-    private fun checkPassword() {
-        lifecycleScope.launch {
-            if (hasNetwork(requireContext()) && hasInternet()) {
-                try {
-                    val hashesResponse = get<ApiRepository>().getHashes(hashPrefix)
-                    displayResult(getHashCount(hashesResponse, hashSuffix))
-                }
-                catch (e: Exception) {
-                    // Handle other exceptions
-                    ExceptionErrorBottomSheet(
-                        exception = e,
-                        onPositiveBtnClick = { checkPassword() },
-                        onNegativeBtnClick = {
-                            fragmentBinding.progressIndicator.hide()
-                        }
-                    ).show(parentFragmentManager, "ExceptionErrorBottomSheet")
-                }
-                fragmentBinding.progressIndicator.hide()
-            }
-            else {
-                NoNetworkBottomSheet(
-                    onPositiveBtnClick = { checkPassword() },
-                    onNegativeBtnClick = {
-                        fragmentBinding.progressIndicator.hide()
-                    }
-                ).show(parentFragmentManager, "NoNetworkBottomSheet")
-            }
-        }
     }
     
     private val exportToFilePicker =

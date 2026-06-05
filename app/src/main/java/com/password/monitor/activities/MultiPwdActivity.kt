@@ -17,12 +17,15 @@
 
 package com.password.monitor.activities
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.Window
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.core.view.isVisible
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import com.google.android.material.button.MaterialButton
@@ -33,8 +36,15 @@ import com.password.monitor.objects.MultiPwdList
 import com.password.monitor.preferences.PreferenceManager
 import com.password.monitor.preferences.PreferenceManager.Companion.GRID_VIEW
 import com.password.monitor.preferences.PreferenceManager.Companion.SORT_ASC
+import com.password.monitor.repositories.ApiRepository
+import com.password.monitor.utils.HashUtils.Companion.generateSHA1Hash
+import com.password.monitor.utils.HashUtils.Companion.getHashCount
 import com.password.monitor.utils.UiUtils.Companion.blockScreenshots
 import com.password.monitor.utils.UiUtils.Companion.setNavBarContrastEnforced
+import kotlinx.coroutines.async
+import kotlinx.coroutines.awaitAll
+import kotlinx.coroutines.launch
+import org.koin.android.ext.android.get
 import org.koin.android.ext.android.inject
 
 class MultiPwdActivity : AppCompatActivity() {
@@ -72,6 +82,7 @@ class MultiPwdActivity : AppCompatActivity() {
         
         // View
         activityBinding.viewButton.apply {
+            isEnabled = false
             setViewButtonIcon()
             setOnClickListener {
                 isGridView = !isGridView
@@ -81,11 +92,87 @@ class MultiPwdActivity : AppCompatActivity() {
         }
         
         // Sort
-        activityBinding.sortButton.setOnClickListener {
-            isAscSort = !isAscSort
-            navController.navigate(R.id.action_multiPwdFragment_self)
+        activityBinding.sortButton.apply {
+            isEnabled = false
+            setOnClickListener {
+                isAscSort = !isAscSort
+                navController.navigate(R.id.action_multiPwdFragment_self)
+            }
+        }
+        
+        lifecycleScope.launch {
+            val maxThreads = 12
+            val listSize = MultiPwdList.pwdList.size
+            
+            @SuppressLint("SetTextI18n")
+            activityBinding.scanningText.text = getString(R.string.scanning_passwords, listSize.toString())
+            
+            // Scan all passwords in batches of 12 (in parallel)
+            (0 until listSize step maxThreads).forEach {
+                val lastIndexInBatch = (it + maxThreads).coerceAtMost(listSize)
+                (it until lastIndexInBatch).map { index ->
+                    async {
+                        val sha1 = MultiPwdList.pwdList[index].password.generateSHA1Hash()
+                        val prefix = sha1.take(5).uppercase()
+                        val suffix = sha1.substring(5).uppercase()
+                        val hashesResponse = get<ApiRepository>().getHashes(prefix)
+                        val hashCount = getHashCount(hashesResponse, suffix)
+                        if (hashCount > 0) {
+                            MultiPwdList.pwdList[index].apply {
+                                breachedCount = hashCount
+                                isBreached = true
+                            }
+                        }
+                    }
+                }.awaitAll()
+            }
+            
+            activityBinding.loadingIndicator.hide()
+            activityBinding.scanningLayout.isVisible = false
+            
+            navController.navInflater.inflate(R.navigation.multi_pwd_fragments_nav_graph).apply {
+                navController.setGraph(this, intent.extras)
+            }
+            
+            activityBinding.multiPwdNavHost.isVisible = true
+            activityBinding.viewButton.isEnabled = true
+            activityBinding.sortButton.isEnabled = true
         }
     }
+    
+    /*private fun checkPassword() {
+        lifecycleScope.launch {
+            if (hasNetwork(requireContext()) && hasInternet()) {
+                try {
+                    //val hashesResponse = get<ApiRepository>().getHashes(hashPrefix)
+                    //displayResult(getHashCount(hashesResponse, hashSuffix))
+                }
+                catch (e: Exception) {
+                    // Handle other exceptions
+                    ExceptionErrorBottomSheet(
+                        exception = e,
+                        onPositiveBtnClick = { checkPassword() },
+                        onNegativeBtnClick = {
+                            *//*fragmentBinding.progressIndicator.hide()
+                            enableUiComponents(true)*//*
+                        }
+                    ).show(parentFragmentManager, "ExceptionErrorBottomSheet")
+                }
+                *//*fragmentBinding.progressIndicator.hide()
+                enableUiComponents(true)
+                fragmentBinding.checkBtn.isEnabled = false*//*
+            }
+            else {
+                NoNetworkBottomSheet(
+                    onPositiveBtnClick = { checkPassword() },
+                    onNegativeBtnClick = {
+                        *//*fragmentBinding.progressIndicator.hide()
+                        enableUiComponents(true)*//*
+                    }
+                ).show(parentFragmentManager, "NoNetworkBottomSheet")
+            }
+        }
+    }*/
     
     private fun MaterialButton.setViewButtonIcon() {
         icon = ContextCompat.getDrawable(this@MultiPwdActivity,
