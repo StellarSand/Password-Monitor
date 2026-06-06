@@ -17,7 +17,6 @@
 
 package com.password.monitor.activities
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.Window
 import androidx.activity.OnBackPressedCallback
@@ -31,6 +30,8 @@ import androidx.navigation.fragment.NavHostFragment
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.transition.platform.MaterialSharedAxis
 import com.password.monitor.R
+import com.password.monitor.bottomsheets.ExceptionErrorBottomSheet
+import com.password.monitor.bottomsheets.NoNetworkBottomSheet
 import com.password.monitor.databinding.ActivityMultiPwdBinding
 import com.password.monitor.objects.MultiPwdList
 import com.password.monitor.preferences.PreferenceManager
@@ -39,6 +40,8 @@ import com.password.monitor.preferences.PreferenceManager.Companion.SORT_ASC
 import com.password.monitor.repositories.ApiRepository
 import com.password.monitor.utils.HashUtils.Companion.generateSHA1Hash
 import com.password.monitor.utils.HashUtils.Companion.getHashCount
+import com.password.monitor.utils.NetworkUtils.Companion.hasInternet
+import com.password.monitor.utils.NetworkUtils.Companion.hasNetwork
 import com.password.monitor.utils.UiUtils.Companion.blockScreenshots
 import com.password.monitor.utils.UiUtils.Companion.setNavBarContrastEnforced
 import kotlinx.coroutines.async
@@ -49,6 +52,7 @@ import org.koin.android.ext.android.inject
 
 class MultiPwdActivity : AppCompatActivity() {
     
+    private lateinit var activityBinding: ActivityMultiPwdBinding
     private lateinit var navController: NavController
     private val prefManager by inject<PreferenceManager>()
     var isGridView = false
@@ -64,7 +68,7 @@ class MultiPwdActivity : AppCompatActivity() {
         }
         super.onCreate(savedInstanceState)
         onBackPressedDispatcher.addCallback(this, onBackPressedCallback)
-        val activityBinding = ActivityMultiPwdBinding.inflate(layoutInflater)
+        activityBinding = ActivityMultiPwdBinding.inflate(layoutInflater)
         setContentView(activityBinding.root)
         
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.multi_pwd_nav_host) as NavHostFragment
@@ -100,79 +104,78 @@ class MultiPwdActivity : AppCompatActivity() {
             }
         }
         
-        lifecycleScope.launch {
-            val maxThreads = 12
-            val listSize = MultiPwdList.pwdList.size
-            
-            @SuppressLint("SetTextI18n")
-            activityBinding.scanningText.text = getString(R.string.scanning_passwords, listSize.toString())
-            
-            // Scan all passwords in batches of 12 (in parallel)
-            (0 until listSize step maxThreads).forEach {
-                val lastIndexInBatch = (it + maxThreads).coerceAtMost(listSize)
-                (it until lastIndexInBatch).map { index ->
-                    async {
-                        val sha1 = MultiPwdList.pwdList[index].password.generateSHA1Hash()
-                        val prefix = sha1.take(5).uppercase()
-                        val suffix = sha1.substring(5).uppercase()
-                        val hashesResponse = get<ApiRepository>().getHashes(prefix)
-                        val hashCount = getHashCount(hashesResponse, suffix)
-                        if (hashCount > 0) {
-                            MultiPwdList.pwdList[index].apply {
-                                breachedCount = hashCount
-                                isBreached = true
-                            }
-                        }
-                    }
-                }.awaitAll()
-            }
-            
-            activityBinding.loadingIndicator.hide()
-            activityBinding.scanningLayout.isVisible = false
-            
-            navController.navInflater.inflate(R.navigation.multi_pwd_fragments_nav_graph).apply {
-                navController.setGraph(this, intent.extras)
-            }
-            
-            activityBinding.multiPwdNavHost.isVisible = true
-            activityBinding.viewButton.isEnabled = true
-            activityBinding.sortButton.isEnabled = true
-        }
+        scanAllPasswords()
     }
     
-    /*private fun checkPassword() {
+    private fun scanAllPasswords() {
         lifecycleScope.launch {
-            if (hasNetwork(requireContext()) && hasInternet()) {
+            val listSize = MultiPwdList.pwdList.size
+            activityBinding.scanningText.text = getString(R.string.scanning_passwords, "$listSize")
+            
+            if (hasNetwork(this@MultiPwdActivity) && hasInternet()) {
                 try {
-                    //val hashesResponse = get<ApiRepository>().getHashes(hashPrefix)
-                    //displayResult(getHashCount(hashesResponse, hashSuffix))
+                    val maxThreads = 12
+                    var completedItems = 0
+                    
+                    // Scan all passwords in batches of 12 (in parallel)
+                    (0 until listSize step maxThreads).forEach {
+                        val lastIndexInBatch = (it + maxThreads).coerceAtMost(listSize)
+                        
+                        (it until lastIndexInBatch).map { index ->
+                            async {
+                                val sha1 = MultiPwdList.pwdList[index].password.generateSHA1Hash()
+                                val prefix = sha1.take(5).uppercase()
+                                val suffix = sha1.substring(5).uppercase()
+                                val hashesResponse = get<ApiRepository>().getHashes(prefix)
+                                val hashCount = getHashCount(hashesResponse, suffix)
+                                if (hashCount > 0) {
+                                    MultiPwdList.pwdList[index].apply {
+                                        breachedCount = hashCount
+                                        isBreached = true
+                                    }
+                                }
+                            }
+                        }.awaitAll()
+                        
+                        val itemsInBatch = lastIndexInBatch - it
+                        completedItems += itemsInBatch
+                        activityBinding.multiScanProgressIndicator.setProgress(
+                            (completedItems * 100) / listSize,
+                            true
+                        )
+                    }
+                    
+                    afterScanComplete()
                 }
                 catch (e: Exception) {
-                    // Handle other exceptions
                     ExceptionErrorBottomSheet(
                         exception = e,
-                        onPositiveBtnClick = { checkPassword() },
-                        onNegativeBtnClick = {
-                            *//*fragmentBinding.progressIndicator.hide()
-                            enableUiComponents(true)*//*
-                        }
-                    ).show(parentFragmentManager, "ExceptionErrorBottomSheet")
+                        onPositiveBtnClick = { scanAllPasswords() },
+                        onNegativeBtnClick = { finishAfterTransition() }
+                    ).show(supportFragmentManager, "ExceptionErrorBottomSheet")
                 }
-                *//*fragmentBinding.progressIndicator.hide()
-                enableUiComponents(true)
-                fragmentBinding.checkBtn.isEnabled = false*//*
             }
             else {
                 NoNetworkBottomSheet(
-                    onPositiveBtnClick = { checkPassword() },
-                    onNegativeBtnClick = {
-                        *//*fragmentBinding.progressIndicator.hide()
-                        enableUiComponents(true)*//*
-                    }
-                ).show(parentFragmentManager, "NoNetworkBottomSheet")
+                    onPositiveBtnClick = { scanAllPasswords() },
+                    onNegativeBtnClick = { finishAfterTransition() }
+                ).show(supportFragmentManager, "NoNetworkBottomSheet")
             }
         }
-    }*/
+    }
+    
+    private fun afterScanComplete() {
+        activityBinding.multiScanProgressIndicator.hide()
+        activityBinding.scanningLayout.isVisible = false
+        
+        navController.navInflater.inflate(R.navigation.multi_pwd_fragments_nav_graph).apply {
+            navController.setGraph(this, intent.extras)
+        }
+        
+        activityBinding.multiPwdNavHost.isVisible = true
+        activityBinding.viewButton.isEnabled = true
+        activityBinding.sortButton.isEnabled = true
+    }
     
     private fun MaterialButton.setViewButtonIcon() {
         icon = ContextCompat.getDrawable(this@MultiPwdActivity,
