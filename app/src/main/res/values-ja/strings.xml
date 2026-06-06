@@ -49,6 +49,7 @@
     <!--#########################################################################################-->
 
     <!--Multi password activity-->
+    <string name="scanning_passwords">%1$s個のパスワードをスキャン中</string>
     <string name="back">Back</string>
     <string name="view">表示</string>
     <string name="sort">ソート</string>

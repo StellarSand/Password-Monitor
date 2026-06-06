@@ -64,6 +64,7 @@
     <!--#########################################################################################-->
 
     <!--Multi password activity-->
+    <string name="scanning_passwords">%1$s \u015Fifre taran\u0131yor</string>
     <string name="back">Back</string>
     <string name="view">G\u00F6r\u00FCn\u00FCm</string>
     <string name="sort">S\u0131rala</string>

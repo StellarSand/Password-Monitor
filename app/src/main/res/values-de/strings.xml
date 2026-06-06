@@ -58,6 +58,7 @@
     <!--#########################################################################################-->
 
     <!--Multi password activity-->
+    <string name="scanning_passwords">%1$s Passw\u00F6rter werden gescannt</string>
     <string name="back">Back</string>
     <string name="view">Siehe</string>
     <string name="sort">Sortieren</string>

@@ -58,6 +58,7 @@
     <!--#########################################################################################-->
 
     <!--Multi password activity-->
+    <string name="scanning_passwords">Skannar %1$s l\u00F6senord</string>
     <string name="back">Back</string>
     <string name="view">Utsikt</string>
     <string name="sort">Sortera</string>

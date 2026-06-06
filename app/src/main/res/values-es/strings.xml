@@ -59,6 +59,7 @@
     <!--#########################################################################################-->
 
     <!--Multi password activity-->
+    <string name="scanning_passwords">Analizando %1$s contrase\u00F1as</string>
     <string name="back">Back</string>
     <string name="view">Ver</string>
     <string name="sort">Ordenar</string>

@@ -58,6 +58,7 @@
     <!--#########################################################################################-->
 
     <!--Multi password activity-->
+    <string name="scanning_passwords">Analisi di %1$s password</string>
     <string name="back">Back</string>
     <string name="view">Vista</string>
     <string name="sort">Ordinamento</string>

@@ -49,6 +49,7 @@
     <!--#########################################################################################-->
 
     <!--Multi password activity-->
+    <string name="scanning_passwords">正在扫描 %1$s 个密码</string>
     <string name="back">Back</string>
     <string name="view">查看</string>
     <string name="sort">排序</string>
