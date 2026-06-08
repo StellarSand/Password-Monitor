@@ -41,6 +41,7 @@ import com.password.monitor.bottomsheets.ExceptionErrorBottomSheet
 import com.password.monitor.bottomsheets.NoNetworkBottomSheet
 import com.password.monitor.bottomsheets.ScanMultiPwdBottomSheet
 import com.password.monitor.fragments.common.BaseResultsFragment
+import com.password.monitor.objects.AppState
 import com.password.monitor.preferences.PreferenceManager
 import com.password.monitor.preferences.PreferenceManager.Companion.INCOG_KEYBOARD
 import com.password.monitor.repositories.ApiRepository
@@ -51,15 +52,18 @@ import com.password.monitor.utils.NetworkUtils.Companion.hasInternet
 import com.password.monitor.utils.NetworkUtils.Companion.hasNetwork
 import com.password.monitor.utils.UiUtils.Companion.convertDpToPx
 import com.password.monitor.utils.UiUtils.Companion.setFoundInBreachSubtitleText
+import com.password.monitor.utils.UiUtils.Companion.showSupportAnimBtmSheet
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.get
+import org.koin.android.ext.android.inject
 import kotlin.time.Duration.Companion.milliseconds
 
 class ScanFragment : BaseResultsFragment() {
     
     private lateinit var mainActivity: MainActivity
+    private val prefManager by inject<PreferenceManager>()
     private var isInitialLaunch = true
     private var collapsingToolbarLargeHeightInPx = 0
     private var collapsingToolbarTopInsets = -1
@@ -135,7 +139,7 @@ class ScanFragment : BaseResultsFragment() {
         })
         
         fragmentBinding.passwordText.apply {
-            if (get<PreferenceManager>().getBoolean(INCOG_KEYBOARD)) {
+            if (prefManager.getBoolean(INCOG_KEYBOARD)) {
                 imeOptions = IME_FLAG_NO_PERSONALIZED_LEARNING
                 inputType = TYPE_TEXT_VARIATION_PASSWORD
             }
@@ -192,10 +196,11 @@ class ScanFragment : BaseResultsFragment() {
             setOnClickListener {
                 enableUiComponents(false)
                 fragmentBinding.progressIndicator.show()
-                getHashPrefixAndSuffix(fragmentBinding.passwordText.text.toString()).let {
-                    hashPrefix = it.first
-                    hashSuffix = it.second
-                }
+                getHashPrefixAndSuffix(fragmentBinding.passwordText.text.toString())
+                    .let {
+                        hashPrefix = it.first
+                        hashSuffix = it.second
+                    }
                 checkPassword()
             }
         }
@@ -231,11 +236,16 @@ class ScanFragment : BaseResultsFragment() {
     
     override fun displayResults(breachedCount: Int) {
         super.displayResults(breachedCount)
-        if (isInitialLaunch) {
-            isInitialLaunch = false
-            fragmentBinding.appBar.setExpanded(false, true)
-            fragmentBinding.detailsCard.isVisible = true
-            setCollapsingToolbarHeight(collapsingToolbarTopInsets + collapsingToolbarLargeHeightInPx)
+        lifecycleScope.launch {
+            if (!isInitialLaunch && AppState.showSupportBtmSheet) {
+                showSupportAnimBtmSheet(parentFragmentManager, prefManager)
+            }
+            if (isInitialLaunch) {
+                isInitialLaunch = false
+                fragmentBinding.appBar.setExpanded(false, true)
+                fragmentBinding.detailsCard.isVisible = true
+                setCollapsingToolbarHeight(collapsingToolbarTopInsets + collapsingToolbarLargeHeightInPx)
+            }
         }
     }
     

@@ -71,4 +71,5 @@ dependencies {
     implementation(libs.bundles.ktor)
     implementation(libs.androidx.work.runtime)
     implementation(libs.androidFastScrollKt)
+    implementation(libs.lottie)
 }

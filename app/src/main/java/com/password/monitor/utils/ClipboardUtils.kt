@@ -45,7 +45,7 @@ class ClipboardUtils {
             }
         }
         
-        // Create work request to clear clipboard after specified delay
+        // Work request to clear clipboard after specified delay
         fun scheduleClipboardClear(context: Context) {
             val clearClipboardRequest =
                 OneTimeWorkRequest

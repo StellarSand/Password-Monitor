@@ -30,12 +30,17 @@ import com.password.monitor.preferences.PreferenceManager.Companion.BLOCK_SS
 import com.password.monitor.R
 import com.password.monitor.bottomsheets.DevVerfWarnBottomSheet
 import com.password.monitor.databinding.ActivityMainBinding
+import com.password.monitor.objects.AppState
 import com.password.monitor.preferences.PreferenceManager
+import com.password.monitor.preferences.PreferenceManager.Companion.LAST_SUPPORT_SHOWN_TIME
 import com.password.monitor.preferences.PreferenceManager.Companion.MATERIAL_YOU
+import com.password.monitor.preferences.PreferenceManager.Companion.ONE_MONTH_DONE
 import com.password.monitor.preferences.PreferenceManager.Companion.SHOW_DEV_VERF_WARNING
 import com.password.monitor.utils.UiUtils.Companion.blockScreenshots
 import com.password.monitor.utils.UiUtils.Companion.setNavBarContrastEnforced
 import org.koin.android.ext.android.inject
+import kotlin.time.DurationUnit
+import kotlin.time.toDuration
 
 class MainActivity : AppCompatActivity() {
     
@@ -61,6 +66,19 @@ class MainActivity : AppCompatActivity() {
         onBackPressedDispatcher.addCallback(this, onBackPressedCallback)
         activityBinding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(activityBinding.root)
+        
+        val lastSavedTimestamp = prefManager.getLong(LAST_SUPPORT_SHOWN_TIME)
+        if (lastSavedTimestamp != 0L) {
+            // For the first time, show support bottom sheet after 1 month
+            // After that show every 3 months
+            val isOneMonthDone = prefManager.getBoolean(ONE_MONTH_DONE, defValue = false)
+            val elapsedTime = System.currentTimeMillis() - lastSavedTimestamp
+            AppState.showSupportBtmSheet =
+                savedInstanceState?.getBoolean("showSupportBtmSheet") ?:
+                if (isOneMonthDone) hasExceededDays(elapsedTime, 90L)
+                else hasExceededDays(elapsedTime, 30L)
+        }
+        else prefManager.setLong(key = LAST_SUPPORT_SHOWN_TIME, value = System.currentTimeMillis())
         
         navHostFragment = supportFragmentManager.findFragmentById(R.id.main_nav_host) as NavHostFragment
         navController = navHostFragment.navController
@@ -108,6 +126,10 @@ class MainActivity : AppCompatActivity() {
             navController.navigate(action)
         }
         
+    }
+    
+    private fun hasExceededDays(elapsedTime: Long, days: Long): Boolean {
+        return elapsedTime.toDuration(DurationUnit.MILLISECONDS).inWholeDays > days
     }
     
     override fun onSaveInstanceState(outState: Bundle) {

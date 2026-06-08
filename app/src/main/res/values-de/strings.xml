@@ -92,7 +92,9 @@
     <string name="cancel">Abbrechen</string>
     <string name="dismiss">Schließen</string>
     <string name="retry">Wiederholung</string>
+    <string name="not_now">Jetzt nicht</string>
     <string name="done">Erledigt</string>
+    <string name="proceed">Fortfahren</string>
 
     <!--Developer verification warning-->
     <string name="dev_verf_warn_desc">Google hat angekündigt, dass ab 2026/2027 alle Apps auf zertifizierten Android-Geräten von den Entwicklern verlangen, dass sie persönliche Identitätsdaten direkt an Google übermitteln. \n\nDa die Entwickler dieser App dieser Anforderung nicht zustimmen, funktioniert diese App <b>nach diesem Zeitpunkt</b> möglicherweise nicht mehr auf zertifizierten Android-Geräten.</string>

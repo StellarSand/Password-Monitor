@@ -88,7 +88,9 @@
     <string name="cancel">Annuleren</string>
     <string name="dismiss">Ontsla</string>
     <string name="retry">Opnieuw proberen</string>
+    <string name="not_now">Niet nu</string>
     <string name="done">Gedaan</string>
+    <string name="proceed">Doorgaan</string>
 
     <!--Developer verification warning-->
     <string name="dev_verf_warn_desc">Google has announced that starting from 2026/2027, all apps on certified Android devices will require the developers to submit personal identity details directly to Google.

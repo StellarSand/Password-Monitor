@@ -27,6 +27,7 @@ navigationKtx = "2.9.8"
 ktor = "3.5.0"
 workRuntime = "2.11.2"
 androidFastscrollKt = "v1.0.8"
+lottie = "6.7.1"
 
 [libraries]
 androidx-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appcompat" }
@@ -41,6 +42,7 @@ ktor = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }
 ktor-engine = { module = "io.ktor:ktor-client-okhttp", version.ref = "ktor" }
 androidx-work-runtime = { module = "androidx.work:work-runtime", version.ref = "workRuntime" }
 androidFastScrollKt = { module = "com.github.StellarSand:AndroidFastScroll-kt", version.ref = "androidFastscrollKt" }
+lottie = { module = "com.airbnb.android:lottie", version.ref = "lottie" }
 
 [bundles]
 androidxCoreComponents = ["androidx-appcompat", "androidx-core-ktx", "androidx-core-splashscreen"]

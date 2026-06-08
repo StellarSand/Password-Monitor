@@ -34,10 +34,14 @@ import com.password.monitor.activities.DetailsActivity
 import com.password.monitor.activities.MultiPwdActivity
 import com.password.monitor.adapters.MultiPwdAdapter
 import com.password.monitor.databinding.RecyclerViewBinding
+import com.password.monitor.objects.AppState
 import com.password.monitor.objects.MultiPwdList
+import com.password.monitor.preferences.PreferenceManager
 import com.password.monitor.utils.UiUtils.Companion.convertDpToPx
+import com.password.monitor.utils.UiUtils.Companion.showSupportAnimBtmSheet
 import kotlinx.coroutines.launch
 import me.stellarsand.android.fastscroll.FastScrollerBuilder
+import org.koin.android.ext.android.get
 
 class MultiPwdFragment : Fragment(), MultiPwdAdapter.OnItemClickListener {
     
@@ -72,9 +76,13 @@ class MultiPwdFragment : Fragment(), MultiPwdAdapter.OnItemClickListener {
                 MultiPwdList.sortPwdList(multiPwdActivity.isAscSort)
                 adapter = MultiPwdAdapter(MultiPwdList.pwdList, this@MultiPwdFragment)
                 layoutManager =
-                    if (! multiPwdActivity.isGridView) LinearLayoutManager(requireContext())
+                    if (!multiPwdActivity.isGridView) LinearLayoutManager(requireContext())
                     else StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
                 FastScrollerBuilder(this).build()
+            }
+            
+            if (AppState.showSupportBtmSheet) {
+                showSupportAnimBtmSheet(parentFragmentManager, get<PreferenceManager>())
             }
         }
     }

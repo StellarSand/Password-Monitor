@@ -32,6 +32,8 @@ class PreferenceManager(context: Context) {
         const val CLEAR_CLIPBOARD_TIME = "clear_clipboard_time"
         const val BLOCK_SS = "block_ss"
         const val INCOG_KEYBOARD = "incog_keyboard"
+        const val LAST_SUPPORT_SHOWN_TIME = "last_support_shown_time"
+        const val ONE_MONTH_DONE = "one_month_done"
     }
     
     private val sharedPreferences =
