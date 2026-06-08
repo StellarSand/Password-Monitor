@@ -21,10 +21,12 @@ import com.password.monitor.api.ApiManager.Companion.apiBuilder
 import com.password.monitor.preferences.PreferenceManager
 import com.password.monitor.repositories.ApiRepository
 import org.koin.dsl.module
+import java.text.NumberFormat
 
 val appModule =
     module {
         single { PreferenceManager(get()) }
         single { apiBuilder() }
         single { ApiRepository(get()) }
+        single { NumberFormat.getInstance() }
     }

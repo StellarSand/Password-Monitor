@@ -33,6 +33,7 @@
         android:layout_marginBottom="64dp"/>
 
     <com.google.android.material.dockedtoolbar.DockedToolbarLayout
+        android:id="@+id/detailsDockedToolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom">

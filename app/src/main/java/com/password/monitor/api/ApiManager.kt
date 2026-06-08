@@ -20,6 +20,7 @@ package com.password.monitor.api
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.okhttp.OkHttp
 import io.ktor.client.plugins.HttpCallValidator
+import io.ktor.client.plugins.UserAgent
 import io.ktor.http.isSuccess
 import kotlinx.io.IOException
 import okhttp3.CertificatePinner
@@ -46,6 +47,9 @@ class ApiManager {
                                 .build()
                         )
                     }
+                }
+                install(UserAgent) {
+                    agent = "com.password.monitor (https://github.com/StellarSand/Password-Monitor)"
                 }
                 install(HttpCallValidator) {
                     validateResponse { response ->

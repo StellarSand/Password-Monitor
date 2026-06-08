@@ -17,22 +17,13 @@
 
 package com.password.monitor.fragments.main
 
-import android.annotation.SuppressLint
-import android.content.ClipData
-import android.content.ClipboardManager
-import android.content.Context
-import android.os.Build
-import android.os.Bundle
 import android.text.InputType.TYPE_TEXT_VARIATION_PASSWORD
 import android.util.TypedValue
 import android.view.ActionMode
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -45,62 +36,41 @@ import androidx.core.widget.doOnTextChanged
 import androidx.lifecycle.lifecycleScope
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.chip.Chip
-import com.password.monitor.R
 import com.password.monitor.activities.MainActivity
 import com.password.monitor.bottomsheets.ExceptionErrorBottomSheet
-import com.password.monitor.databinding.FragmentScanBinding
 import com.password.monitor.bottomsheets.NoNetworkBottomSheet
 import com.password.monitor.bottomsheets.ScanMultiPwdBottomSheet
-import com.password.monitor.fragments.common.getFormattedResultsText
+import com.password.monitor.fragments.common.BaseResultsFragment
 import com.password.monitor.preferences.PreferenceManager
 import com.password.monitor.preferences.PreferenceManager.Companion.INCOG_KEYBOARD
 import com.password.monitor.repositories.ApiRepository
-import com.password.monitor.utils.ClipboardUtils.Companion.hideSensitiveContent
 import com.password.monitor.utils.ClipboardUtils.Companion.scheduleClipboardClear
-import com.password.monitor.utils.FormatUtils.Companion.generateNewFilename
-import com.password.monitor.utils.HashUtils.Companion.generateSHA1Hash
 import com.password.monitor.utils.HashUtils.Companion.getHashCount
-import com.password.monitor.utils.IntentUtils.Companion.openURL
-import com.password.monitor.utils.IntentUtils.Companion.shareText
+import com.password.monitor.utils.HashUtils.Companion.getHashPrefixAndSuffix
 import com.password.monitor.utils.NetworkUtils.Companion.hasInternet
 import com.password.monitor.utils.NetworkUtils.Companion.hasNetwork
 import com.password.monitor.utils.UiUtils.Companion.convertDpToPx
 import com.password.monitor.utils.UiUtils.Companion.setFoundInBreachSubtitleText
-import com.password.monitor.utils.UiUtils.Companion.showSnackbar
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.get
-import java.text.NumberFormat
 import kotlin.time.Duration.Companion.milliseconds
 
-class ScanFragment : Fragment() {
+class ScanFragment : BaseResultsFragment() {
     
-    private var _binding: FragmentScanBinding? = null
-    private val fragmentBinding get() = _binding!!
     private lateinit var mainActivity: MainActivity
     private var isInitialLaunch = true
     private var collapsingToolbarLargeHeightInPx = 0
     private var collapsingToolbarTopInsets = -1
-    private lateinit var naString: String
-    private lateinit var breachedSuggestionString: String
-    private lateinit var notBreachedSuggestionString: String
     private var hashPrefix = ""
     private var hashSuffix = ""
     
-    override fun onCreateView(inflater: LayoutInflater,
-                              container: ViewGroup?,
-                              savedInstanceState: Bundle?): View {
-        _binding = FragmentScanBinding.inflate(inflater, container, false)
-        return fragmentBinding.root
-    }
-    
-    @SuppressLint("SetTextI18n")
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        
+    override fun setupFragmentContent() {
         mainActivity = requireActivity() as MainActivity
         var job: Job? = null
         val displayMetrics = resources.displayMetrics
+        
         TypedValue().let {
             requireContext().theme.resolveAttribute(
                 com.google.android.material.R.attr.collapsingToolbarLayoutLargeSize,
@@ -109,10 +79,6 @@ class ScanFragment : Fragment() {
             )
             collapsingToolbarLargeHeightInPx = TypedValue.complexToDimensionPixelSize(it.data, displayMetrics)
         }
-        val clipboardManager = requireContext().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-        naString = getString(R.string.na)
-        breachedSuggestionString = getString(R.string.breached_suggestion)
-        notBreachedSuggestionString = getString(R.string.not_breached_suggestion)
         
         // Adjust UI components for edge to edge
         ViewCompat.setOnApplyWindowInsetsListener(fragmentBinding.collapsingToolbar) { _, windowInsets ->
@@ -210,7 +176,7 @@ class ScanFragment : Fragment() {
                 override fun onActionItemClicked(mode: ActionMode?, item: MenuItem?): Boolean {
                     when (item?.itemId) {
                         android.R.id.copy -> {
-                            clipboardManager.copyToClipboard(text.toString())
+                            copyToClipboard(text.toString())
                             scheduleClipboardClear(requireContext())
                         }
                     }
@@ -226,43 +192,17 @@ class ScanFragment : Fragment() {
             setOnClickListener {
                 enableUiComponents(false)
                 fragmentBinding.progressIndicator.show()
-                fragmentBinding.passwordText.text.toString().generateSHA1Hash().apply {
-                    hashPrefix = take(5).uppercase() // First 5 chars
-                    hashSuffix = substring(5).uppercase() // Rest of the hash
+                getHashPrefixAndSuffix(fragmentBinding.passwordText.text.toString()).let {
+                    hashPrefix = it.first
+                    hashSuffix = it.second
                 }
                 checkPassword()
             }
         }
         
-        // Copy
-        fragmentBinding.copyChip.setOnClickListener {
-            clipboardManager.copyToClipboard(fragmentBinding.getFormattedResultsText(requireContext()))
-            scheduleClipboardClear(requireContext())
-        }
-        
-        // Share
-        fragmentBinding.shareChip.setOnClickListener {
-            requireActivity().shareText(fragmentBinding.getFormattedResultsText(requireContext()))
-        }
-        
-        // Export
-        fragmentBinding.exportChip.setOnClickListener {
-            exportToFilePicker.launch(generateNewFilename())
-        }
-        
-        // Tap here
-        fragmentBinding.tapHereBtn.apply {
-            setOnClickListener {
-                openURL(mainActivity,
-                        getString(R.string.app_wiki_url),
-                        mainActivity.activityBinding.mainCoordLayout,
-                        fragmentBinding.scanMultipleFab)
-            }
-        }
-        
         // Fab
         fragmentBinding.scanMultipleFab.setOnClickListener {
-            ScanMultiPwdBottomSheet().show(parentFragmentManager, "ScanMultiplePwdBottomSheet")
+            ScanMultiPwdBottomSheet().show(parentFragmentManager, "ScanMultiPwdBottomSheet")
         }
     }
     
@@ -289,22 +229,8 @@ class ScanFragment : Fragment() {
         }
     }
     
-    private fun displayResult(count: Int) {
-        if (count > 0) {
-            fragmentBinding.apply {
-                foundInBreachSubtitle.setFoundInBreachSubtitleText(context = requireContext(), isFound = true)
-                timesFoundSubtitle.text = NumberFormat.getInstance().format(count)
-                suggestionSubtitle.text = breachedSuggestionString
-            }
-        }
-        else {
-            fragmentBinding.apply {
-                foundInBreachSubtitle.setFoundInBreachSubtitleText(context = requireContext(), isFound = false)
-                timesFoundSubtitle.text = naString
-                suggestionSubtitle.text = notBreachedSuggestionString
-            }
-        }
-        
+    override fun displayResults(breachedCount: Int) {
+        super.displayResults(breachedCount)
         if (isInitialLaunch) {
             isInitialLaunch = false
             fragmentBinding.appBar.setExpanded(false, true)
@@ -318,10 +244,9 @@ class ScanFragment : Fragment() {
             if (hasNetwork(requireContext()) && hasInternet()) {
                 try {
                     val hashesResponse = get<ApiRepository>().getHashes(hashPrefix)
-                    displayResult(getHashCount(hashesResponse, hashSuffix))
+                    displayResults(getHashCount(hashesResponse, hashSuffix))
                 }
                 catch (e: Exception) {
-                    // Handle other exceptions
                     ExceptionErrorBottomSheet(
                         exception = e,
                         onPositiveBtnClick = { checkPassword() },
@@ -347,43 +272,12 @@ class ScanFragment : Fragment() {
         }
     }
     
-    private fun ClipboardManager.copyToClipboard(copiedText: CharSequence) {
-        val clipData = ClipData.newPlainText("", copiedText)
-        clipData.hideSensitiveContent()
-        setPrimaryClip(clipData)
-        // Show snackbar only if 12L or lower to avoid duplicate notifications
-        // https://developer.android.com/develop/ui/views/touch-and-input/copy-paste#duplicate-notifications
-        if (Build.VERSION.SDK_INT <= 32) {
-            showSnackbar(mainActivity.activityBinding.mainCoordLayout,
-                         requireContext().getString(R.string.copied_to_clipboard),
-                         fragmentBinding.scanMultipleFab)
-        }
+    override fun getCoordinatorLayout(): CoordinatorLayout {
+        return mainActivity.activityBinding.mainCoordLayout
     }
     
-    private val exportToFilePicker =
-        registerForActivityResult(
-            ActivityResultContracts.CreateDocument("text/plain")
-        ) { uri ->
-            uri?.let {
-                try {
-                    requireContext().contentResolver.openOutputStream(it)?.use { outputStream ->
-                        outputStream.write(fragmentBinding.getFormattedResultsText(requireContext()).toByteArray())
-                    }
-                    showSnackbar(mainActivity.activityBinding.mainCoordLayout,
-                                 getString(R.string.export_success),
-                                 fragmentBinding.scanMultipleFab)
-                }
-                catch (_: Exception) {
-                    showSnackbar(mainActivity.activityBinding.mainCoordLayout,
-                                 getString(R.string.export_fail),
-                                 fragmentBinding.scanMultipleFab)
-                }
-            }
-        }
-    
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+    override fun getSnackbarAnchorView(): View {
+        return fragmentBinding.scanMultipleFab
     }
     
 }

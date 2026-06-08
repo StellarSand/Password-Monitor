@@ -38,8 +38,8 @@ import com.password.monitor.preferences.PreferenceManager
 import com.password.monitor.preferences.PreferenceManager.Companion.GRID_VIEW
 import com.password.monitor.preferences.PreferenceManager.Companion.SORT_ASC
 import com.password.monitor.repositories.ApiRepository
-import com.password.monitor.utils.HashUtils.Companion.generateSHA1Hash
 import com.password.monitor.utils.HashUtils.Companion.getHashCount
+import com.password.monitor.utils.HashUtils.Companion.getHashPrefixAndSuffix
 import com.password.monitor.utils.NetworkUtils.Companion.hasInternet
 import com.password.monitor.utils.NetworkUtils.Companion.hasNetwork
 import com.password.monitor.utils.UiUtils.Companion.blockScreenshots
@@ -123,17 +123,16 @@ class MultiPwdActivity : AppCompatActivity() {
                         
                         (it until lastIndexInBatch).map { index ->
                             async {
-                                val sha1 = MultiPwdList.pwdList[index].password.generateSHA1Hash()
-                                val prefix = sha1.take(5).uppercase()
-                                val suffix = sha1.substring(5).uppercase()
-                                val hashesResponse = get<ApiRepository>().getHashes(prefix)
-                                val hashCount = getHashCount(hashesResponse, suffix)
-                                if (hashCount > 0) {
-                                    MultiPwdList.pwdList[index].apply {
-                                        breachedCount = hashCount
-                                        isBreached = true
+                                val (prefix, suffix) = getHashPrefixAndSuffix(MultiPwdList.pwdList[index].password)
+                                getHashCount(get<ApiRepository>().getHashes(prefix), suffix)
+                                    .let { hashCount ->
+                                        if (hashCount > 0) {
+                                            MultiPwdList.pwdList[index].apply {
+                                                breachedCount = hashCount
+                                                isBreached = true
+                                            }
+                                        }
                                     }
-                                }
                             }
                         }.awaitAll()
                         

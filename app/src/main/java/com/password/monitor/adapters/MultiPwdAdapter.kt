@@ -60,9 +60,10 @@ class MultiPwdAdapter(private val aListViewItems: List<MultiPwd>,
     }
     
     override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
-        val pwdItem = aListViewItems[position]
-        holder.passwordLine.text = pwdItem.password
-        if (pwdItem.isBreached) holder.breachedStatusIcon.setImageResource(R.drawable.ic_found_in_breach)
+        aListViewItems[position].let {
+            holder.passwordLine.text = it.password
+            if (it.isBreached) holder.breachedStatusIcon.setImageResource(R.drawable.ic_found_in_breach)
+        }
     }
     
     override fun getItemCount(): Int {

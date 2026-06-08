@@ -17,84 +17,49 @@
 
 package com.password.monitor.fragments.details
 
-import android.annotation.SuppressLint
-import android.content.ClipData
-import android.content.ClipboardManager
-import android.content.Context
 import android.os.Build
-import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.result.contract.ActivityResultContracts
+import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.isVisible
 import androidx.core.view.updateLayoutParams
 import androidx.core.view.updatePadding
-import androidx.fragment.app.Fragment
 import com.password.monitor.R
 import com.password.monitor.activities.DetailsActivity
-import com.password.monitor.databinding.FragmentScanBinding
-import com.password.monitor.fragments.common.getFormattedResultsText
+import com.password.monitor.fragments.common.BaseResultsFragment
 import com.password.monitor.models.MultiPwd
-import com.password.monitor.utils.ClipboardUtils.Companion.hideSensitiveContent
-import com.password.monitor.utils.ClipboardUtils.Companion.scheduleClipboardClear
-import com.password.monitor.utils.FormatUtils.Companion.generateNewFilename
-import com.password.monitor.utils.IntentUtils.Companion.openURL
-import com.password.monitor.utils.IntentUtils.Companion.shareText
 import com.password.monitor.utils.UiUtils.Companion.convertDpToPx
-import com.password.monitor.utils.UiUtils.Companion.setFoundInBreachSubtitleText
-import com.password.monitor.utils.UiUtils.Companion.showSnackbar
-import java.text.NumberFormat
 
-class DetailsFragment : Fragment() {
+class DetailsFragment : BaseResultsFragment() {
     
-    private var _binding: FragmentScanBinding? = null
-    private val fragmentBinding get() = _binding!!
     private lateinit var detailsActivity: DetailsActivity
-    private lateinit var naString: String
-    private lateinit var breachedSuggestionString: String
-    private lateinit var notBreachedSuggestionString: String
     
-    override fun onCreateView(inflater: LayoutInflater,
-                              container: ViewGroup?,
-                              savedInstanceState: Bundle?): View {
-        // Inflate the layout for this fragment
-        _binding = FragmentScanBinding.inflate(inflater, container, false)
-        return fragmentBinding.root
-    }
-    
-    @SuppressLint("SetTextI18n")
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        
+    override fun setupFragmentContent() {
         detailsActivity = (requireActivity() as DetailsActivity)
-        val clipboardManager = requireContext().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
         val pwdItem =
             if (Build.VERSION.SDK_INT >= 33) arguments?.getParcelable("PwdItem", MultiPwd::class.java)!!
             else arguments?.getParcelable("PwdItem")!!
-        naString = getString(R.string.na)
-        breachedSuggestionString = getString(R.string.breached_suggestion)
-        notBreachedSuggestionString = getString(R.string.not_breached_suggestion)
+        
+        // Adjust UI components for edge to edge
+        ViewCompat.setOnApplyWindowInsetsListener(fragmentBinding.passwordBox) { v, windowInsets ->
+            val insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars()
+                                                        or WindowInsetsCompat.Type.displayCutout())
+            v.updatePadding(left = insets.left, right = insets.right)
+            v.updateLayoutParams<ViewGroup.MarginLayoutParams> {
+                topMargin = insets.top + convertDpToPx(requireContext(), 12f)
+            }
+            WindowInsetsCompat.CONSUMED
+        }
+        ViewCompat.setOnApplyWindowInsetsListener(fragmentBinding.scrollView) { v, windowInsets ->
+            val insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars()
+                                                        or WindowInsetsCompat.Type.displayCutout())
+            v.updatePadding(left = insets.left, right = insets.right, bottom = insets.bottom)
+            WindowInsetsCompat.CONSUMED
+        }
         
         fragmentBinding.apply {
-            // Adjust UI components for edge to edge
-            ViewCompat.setOnApplyWindowInsetsListener(fragmentBinding.passwordBox) { v, windowInsets ->
-                val insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars()
-                                                            or WindowInsetsCompat.Type.displayCutout())
-                v.updatePadding(left = insets.left, right = insets.right)
-                v.updateLayoutParams<ViewGroup.MarginLayoutParams> {
-                    topMargin = insets.top + convertDpToPx(requireContext(), 12f)
-                }
-                WindowInsetsCompat.CONSUMED
-            }
-            ViewCompat.setOnApplyWindowInsetsListener(fragmentBinding.scrollView) { v, windowInsets ->
-                val insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars()
-                                                            or WindowInsetsCompat.Type.displayCutout())
-                v.updatePadding(left = insets.left, right = insets.right, bottom = insets.bottom)
-                WindowInsetsCompat.CONSUMED
-            }
-            
             passwordBox.hint = getString(R.string.password)
             passwordText.apply {
                 setText(pwdItem.password)
@@ -103,85 +68,18 @@ class DetailsFragment : Fragment() {
             }
             checkBtn.isVisible = false
             scanMultipleFab.isVisible = false
-            
-            if (pwdItem.isBreached) {
-                fragmentBinding.apply {
-                    foundInBreachSubtitle.setFoundInBreachSubtitleText(context = requireContext(), isFound = true)
-                    timesFoundSubtitle.text = NumberFormat.getInstance().format(pwdItem.breachedCount)
-                    suggestionSubtitle.text = breachedSuggestionString
-                }
-            }
-            else {
-                fragmentBinding.apply {
-                    foundInBreachSubtitle.setFoundInBreachSubtitleText(context = requireContext(), isFound = false)
-                    timesFoundSubtitle.text = naString
-                    suggestionSubtitle.text = notBreachedSuggestionString
-                }
-            }
-            
-            fragmentBinding.detailsCard.isVisible = true
-            
-            // Copy
-            fragmentBinding.copyChip.setOnClickListener {
-                val clipData = ClipData.newPlainText("", fragmentBinding.getFormattedResultsText(requireContext()))
-                clipData.hideSensitiveContent()
-                clipboardManager.setPrimaryClip(clipData)
-                // Show snackbar only if 12L or lower to avoid duplicate notifications
-                // https://developer.android.com/develop/ui/views/touch-and-input/copy-paste#duplicate-notifications
-                if (Build.VERSION.SDK_INT <= 32) {
-                    showSnackbar(detailsActivity.activityBinding.detailsCoordLayout,
-                                 requireContext().getString(R.string.copied_to_clipboard),
-                                 fragmentBinding.scanMultipleFab)
-                }
-                scheduleClipboardClear(requireContext())
-            }
-            
-            // Share
-            fragmentBinding.shareChip.setOnClickListener {
-                requireActivity().shareText(fragmentBinding.getFormattedResultsText(requireContext()))
-            }
-            
-            // Export
-            fragmentBinding.exportChip.setOnClickListener {
-                exportToFilePicker.launch(generateNewFilename())
-            }
-            
-            // Tap here
-            tapHereBtn.apply {
-                setOnClickListener {
-                    openURL(detailsActivity,
-                            getString(R.string.app_wiki_url),
-                            detailsActivity.activityBinding.detailsCoordLayout,
-                            fragmentBinding.scanMultipleFab)
-                }
-            }
         }
         
+        displayResults(pwdItem.breachedCount)
+        
+        fragmentBinding.detailsCard.isVisible = true
     }
     
-    private val exportToFilePicker =
-        registerForActivityResult(
-            ActivityResultContracts.CreateDocument("text/plain")
-        ) { uri ->
-            uri?.let {
-                try {
-                    requireContext().contentResolver.openOutputStream(it)?.use { outputStream ->
-                        outputStream.write(fragmentBinding.getFormattedResultsText(requireContext()).toByteArray())
-                    }
-                    showSnackbar(detailsActivity.activityBinding.detailsCoordLayout,
-                                 getString(R.string.export_success),
-                                 fragmentBinding.scanMultipleFab)
-                }
-                catch (_: Exception) {
-                    showSnackbar(detailsActivity.activityBinding.detailsCoordLayout,
-                                 getString(R.string.export_fail),
-                                 fragmentBinding.scanMultipleFab)
-                }
-            }
-        }
+    override fun getCoordinatorLayout(): CoordinatorLayout {
+        return detailsActivity.activityBinding.detailsCoordLayout
+    }
     
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+    override fun getSnackbarAnchorView(): View {
+        return detailsActivity.activityBinding.detailsDockedToolbar
     }
 }

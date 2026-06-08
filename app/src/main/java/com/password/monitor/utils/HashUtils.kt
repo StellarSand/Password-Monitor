@@ -22,21 +22,28 @@ import java.security.MessageDigest
 class HashUtils {
     
     companion object {
-       
-       private const val ITEM_NOT_FOUND = -1
         
-        fun String.generateSHA1Hash(): String {
+        private const val ITEM_NOT_FOUND = -1
+        
+        private fun String.generateSHA1Hash(): String {
             val messageDigest = MessageDigest.getInstance("SHA-1")
             val bytes = messageDigest.digest(toByteArray())
             return bytes.joinToString("") { "%02x".format(it) }
         }
         
+        fun getHashPrefixAndSuffix(password: String): Pair<String, String> {
+            val hash = password.generateSHA1Hash().uppercase()
+            
+            // Prefix = first 5 chars
+            // Suffix = rest of the hash
+            return hash.take(5) to hash.drop(5)
+        }
+        
         fun getHashCount(response: String?, suffix: String): Int {
-            val matchingLine = response?.lines()?.firstOrNull {
-                val parts = it.split(":")
-                parts.firstOrNull()?.endsWith(suffix) == true
-            }
-            return matchingLine?.split(":")?.get(1)?.toIntOrNull() ?: ITEM_NOT_FOUND
+            return response?.lines()
+                       ?.find { it.substringBefore(":").endsWith(suffix) }
+                       ?.substringAfter(":")?.toIntOrNull()
+                   ?: ITEM_NOT_FOUND
         }
         
     }
