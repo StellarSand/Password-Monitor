@@ -20,6 +20,6 @@ package com.password.monitor.models
 data class SupportMethod(
     val title: String,
     val titleIcon: Int,
-    val qr: Int,
+    val qrDrawable: Int,
     val url: String
 )

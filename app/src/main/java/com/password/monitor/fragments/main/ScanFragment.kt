@@ -196,12 +196,14 @@ class ScanFragment : BaseResultsFragment() {
             setOnClickListener {
                 enableUiComponents(false)
                 fragmentBinding.progressIndicator.show()
-                getHashPrefixAndSuffix(fragmentBinding.passwordText.text.toString())
-                    .let {
-                        hashPrefix = it.first
-                        hashSuffix = it.second
-                    }
-                checkPassword()
+                lifecycleScope.launch {
+                    getHashPrefixAndSuffix(fragmentBinding.passwordText.text.toString())
+                        .let {
+                            hashPrefix = it.first
+                            hashSuffix = it.second
+                        }
+                    checkPassword()
+                }
             }
         }
         

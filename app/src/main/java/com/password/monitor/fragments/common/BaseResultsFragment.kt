@@ -46,9 +46,9 @@ abstract class BaseResultsFragment : Fragment() {
     private var _binding: FragmentScanBinding? = null
     protected val fragmentBinding get() = _binding!!
     protected lateinit var clipboardManager: ClipboardManager
-    protected lateinit var naString: String
-    private lateinit var breachedSuggestionString: String
-    private lateinit var notBreachedSuggestionString: String
+    protected val naString by lazy { getString(R.string.na) }
+    private val breachedSuggestionString by lazy { getString(R.string.breached_suggestion) }
+    private val notBreachedSuggestionString by lazy { getString(R.string.not_breached_suggestion) }
     
     override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?,
@@ -61,9 +61,6 @@ abstract class BaseResultsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         
         clipboardManager = requireContext().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-        naString = getString(R.string.na)
-        breachedSuggestionString = getString(R.string.breached_suggestion)
-        notBreachedSuggestionString = getString(R.string.not_breached_suggestion)
         
         setupFragmentContent()
         
@@ -135,8 +132,12 @@ abstract class BaseResultsFragment : Fragment() {
             append("${fragmentBinding.passwordText.text.toString()}\n\n")
             append("## ${requireContext().getString(R.string.found_in_breach)}\n")
             append("${fragmentBinding.foundInBreachSubtitle.text}\n\n")
-            append("## ${requireContext().getString(R.string.times_found)}\n")
-            append("${fragmentBinding.timesFoundSubtitle.text}\n\n")
+            fragmentBinding.timesFoundSubtitle.text
+                .takeIf { !it.equals(naString) }
+                ?.let {
+                    append("## ${requireContext().getString(R.string.times_found)}\n")
+                    append("${it}\n\n")
+                }
             append("## ${requireContext().getString(R.string.suggestion)}\n")
             append("${fragmentBinding.suggestionSubtitle.text}\n\n")
         }
