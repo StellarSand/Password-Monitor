@@ -17,7 +17,6 @@
 
 plugins {
     alias(libs.plugins.android.application)
-    alias(libs.plugins.android.kotlin)
     id("kotlin-parcelize")
 }
 
@@ -27,25 +26,24 @@ kotlin {
 
 android {
     namespace = "com.password.monitor"
-    compileSdk = 36
+    compileSdk = 37
     
     defaultConfig {
         applicationId = "com.password.monitor"
         minSdk = 26
-        targetSdk = 36
-        versionCode = 102
-        versionName = "1.0.2"
-        extensions.getByType<BasePluginExtension>().archivesName.set("PasswordMonitor_v$versionName")
+        targetSdk = 37
+        versionCode = 105
+        versionName = "1.0.5"
     }
     
     buildTypes {
-        getByName("release") {
+        release {
             isMinifyEnabled = true
             isShrinkResources = true
             vcsInfo.include = false // https://f-droid.org/docs/Reproducible_Builds/#vcs-info
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
-        /*getByName("debug") {
+        /*debug {
             isMinifyEnabled = true
             isShrinkResources = true
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
@@ -61,6 +59,10 @@ android {
         viewBinding = true
         buildConfig = true
     }
+}
+
+base {
+    archivesName.set("PasswordMonitor_v${android.defaultConfig.versionName}")
 }
 
 dependencies {
