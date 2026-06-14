@@ -49,7 +49,6 @@ import com.password.monitor.utils.ClipboardUtils.Companion.scheduleClipboardClea
 import com.password.monitor.utils.HashUtils.Companion.getHashCount
 import com.password.monitor.utils.HashUtils.Companion.getHashPrefixAndSuffix
 import com.password.monitor.utils.NetworkUtils.Companion.hasInternet
-import com.password.monitor.utils.NetworkUtils.Companion.hasNetwork
 import com.password.monitor.utils.UiUtils.Companion.convertDpToPx
 import com.password.monitor.utils.UiUtils.Companion.setFoundInBreachSubtitleText
 import com.password.monitor.utils.UiUtils.Companion.showSupportAnimBtmSheet
@@ -57,13 +56,11 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.get
-import org.koin.android.ext.android.inject
 import kotlin.time.Duration.Companion.milliseconds
 
 class ScanFragment : BaseResultsFragment() {
     
     private lateinit var mainActivity: MainActivity
-    private val prefManager by inject<PreferenceManager>()
     private var isInitialLaunch = true
     private var collapsingToolbarLargeHeightInPx = 0
     private var collapsingToolbarTopInsets = -1
@@ -139,7 +136,7 @@ class ScanFragment : BaseResultsFragment() {
         })
         
         fragmentBinding.passwordText.apply {
-            if (prefManager.getBoolean(INCOG_KEYBOARD)) {
+            if (get<PreferenceManager>().getBoolean(INCOG_KEYBOARD)) {
                 imeOptions = IME_FLAG_NO_PERSONALIZED_LEARNING
                 inputType = TYPE_TEXT_VARIATION_PASSWORD
             }
@@ -240,7 +237,7 @@ class ScanFragment : BaseResultsFragment() {
         super.displayResults(breachedCount)
         lifecycleScope.launch {
             if (!isInitialLaunch && AppState.showSupportBtmSheet) {
-                showSupportAnimBtmSheet(parentFragmentManager, prefManager)
+                showSupportAnimBtmSheet(parentFragmentManager)
             }
             if (isInitialLaunch) {
                 isInitialLaunch = false
@@ -253,7 +250,7 @@ class ScanFragment : BaseResultsFragment() {
     
     private fun checkPassword() {
         lifecycleScope.launch {
-            if (hasNetwork(requireContext()) && hasInternet()) {
+            if (hasInternet(requireContext())) {
                 try {
                     val hashesResponse = get<ApiRepository>().getHashes(hashPrefix)
                     displayResults(getHashCount(hashesResponse, hashSuffix))

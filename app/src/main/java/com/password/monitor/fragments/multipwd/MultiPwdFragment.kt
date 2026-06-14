@@ -36,12 +36,10 @@ import com.password.monitor.adapters.MultiPwdAdapter
 import com.password.monitor.databinding.RecyclerViewBinding
 import com.password.monitor.objects.AppState
 import com.password.monitor.objects.MultiPwdList
-import com.password.monitor.preferences.PreferenceManager
 import com.password.monitor.utils.UiUtils.Companion.convertDpToPx
 import com.password.monitor.utils.UiUtils.Companion.showSupportAnimBtmSheet
 import kotlinx.coroutines.launch
 import me.stellarsand.android.fastscroll.FastScrollerBuilder
-import org.koin.android.ext.android.get
 
 class MultiPwdFragment : Fragment(), MultiPwdAdapter.OnItemClickListener {
     
@@ -82,7 +80,7 @@ class MultiPwdFragment : Fragment(), MultiPwdAdapter.OnItemClickListener {
             }
             
             if (AppState.showSupportBtmSheet) {
-                showSupportAnimBtmSheet(parentFragmentManager, get<PreferenceManager>())
+                showSupportAnimBtmSheet(parentFragmentManager)
             }
         }
     }

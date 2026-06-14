@@ -41,7 +41,6 @@ import com.password.monitor.repositories.ApiRepository
 import com.password.monitor.utils.HashUtils.Companion.getHashCount
 import com.password.monitor.utils.HashUtils.Companion.getHashPrefixAndSuffix
 import com.password.monitor.utils.NetworkUtils.Companion.hasInternet
-import com.password.monitor.utils.NetworkUtils.Companion.hasNetwork
 import com.password.monitor.utils.UiUtils.Companion.blockScreenshots
 import com.password.monitor.utils.UiUtils.Companion.setNavBarContrastEnforced
 import kotlinx.coroutines.async
@@ -112,7 +111,7 @@ class MultiPwdActivity : AppCompatActivity() {
             val listSize = MultiPwdList.pwdList.size
             activityBinding.scanningText.text = getString(R.string.scanning_passwords, "$listSize")
             
-            if (hasNetwork(this@MultiPwdActivity) && hasInternet()) {
+            if (hasInternet(this@MultiPwdActivity)) {
                 try {
                     val maxThreads = 12
                     var completedItems = 0
