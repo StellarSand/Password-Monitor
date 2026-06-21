@@ -34,9 +34,9 @@ import com.password.monitor.BuildConfig
 import com.password.monitor.R
 import com.password.monitor.activities.MainActivity
 import com.password.monitor.databinding.FragmentSettingsBinding
-import com.password.monitor.bottomsheets.LicensesBottomSheet
-import com.password.monitor.bottomsheets.SupportMethodsBottomSheet
-import com.password.monitor.bottomsheets.ThemeBottomSheet
+import com.password.monitor.bottomsheets.main.settings.LicensesBottomSheet
+import com.password.monitor.bottomsheets.main.settings.SupportMethodsBottomSheet
+import com.password.monitor.bottomsheets.main.settings.ThemeBottomSheet
 import com.password.monitor.preferences.PreferenceManager
 import com.password.monitor.preferences.PreferenceManager.Companion.BLOCK_SS
 import com.password.monitor.preferences.PreferenceManager.Companion.CLEAR_CLIPBOARD_TIME

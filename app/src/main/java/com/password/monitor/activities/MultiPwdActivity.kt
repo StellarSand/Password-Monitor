@@ -30,8 +30,8 @@ import androidx.navigation.fragment.NavHostFragment
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.transition.platform.MaterialSharedAxis
 import com.password.monitor.R
-import com.password.monitor.bottomsheets.ExceptionErrorBottomSheet
-import com.password.monitor.bottomsheets.NoNetworkBottomSheet
+import com.password.monitor.bottomsheets.common.ExceptionErrorBottomSheet
+import com.password.monitor.bottomsheets.common.NoNetworkBottomSheet
 import com.password.monitor.databinding.ActivityMultiPwdBinding
 import com.password.monitor.objects.MultiPwdList
 import com.password.monitor.preferences.PreferenceManager

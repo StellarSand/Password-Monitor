@@ -15,7 +15,7 @@
  *     along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.password.monitor.bottomsheets
+package com.password.monitor.bottomsheets.main.settings
 
 import android.app.Dialog
 import android.os.Bundle
@@ -69,6 +69,16 @@ class LicensesBottomSheet : BottomSheetDialogFragment() {
                 add(License(title = getString(R.string.fastscroll),
                             desc = "${getString(R.string.copyright_fastscroll)}\n\n${getString(R.string.apache_2_0_license)}",
                             url = getString(R.string.fastscroll_license_url)))
+                
+                // lottie-android
+                add(License(getString(R.string.lottie_android),
+                            getString(R.string.apache_2_0_license),
+                            getString(R.string.lottie_android_license_url)))
+                
+                // LottieFiles
+                add(License(getString(R.string.lottie_files),
+                            getString(R.string.lottie_files_license),
+                            getString(R.string.lottie_files_license_url)))
                 
                 // Liberapay
                 add(License(title = getString(R.string.liberapay_icon),

@@ -15,68 +15,61 @@
  *     along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.password.monitor.bottomsheets
+package com.password.monitor.bottomsheets.common
 
+import android.app.Dialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.isVisible
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.password.monitor.R
-import com.password.monitor.activities.MainActivity
-import com.password.monitor.databinding.BottomSheetDevVerfWarnBinding
+import com.password.monitor.bottomsheets.main.settings.SupportMethodsBottomSheet
 import com.password.monitor.databinding.BottomSheetFooterBinding
 import com.password.monitor.databinding.BottomSheetHeaderBinding
-import com.password.monitor.preferences.PreferenceManager
-import com.password.monitor.preferences.PreferenceManager.Companion.SHOW_DEV_VERF_WARNING
-import com.password.monitor.utils.IntentUtils.Companion.openURL
-import org.koin.android.ext.android.get
+import com.password.monitor.databinding.BottomSheetSupportAnimatedBinding
 
-class DevVerfWarnBottomSheet : BottomSheetDialogFragment() {
+class SupportAnimBottomSheet : BottomSheetDialogFragment() {
     
-    private var _binding: BottomSheetDevVerfWarnBinding? = null
+    private var _binding: BottomSheetSupportAnimatedBinding? = null
     private val bottomSheetBinding get() = _binding!!
+    
+    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+        return (super.onCreateDialog(savedInstanceState) as BottomSheetDialog).apply {
+            setCanceledOnTouchOutside(false)
+        }
+    }
     
     override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
-        
-        _binding = BottomSheetDevVerfWarnBinding.inflate(inflater, container, false)
+        _binding = BottomSheetSupportAnimatedBinding.inflate(inflater, container, false)
         return bottomSheetBinding.root
     }
     
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         
         val footerBinding = BottomSheetFooterBinding.bind(bottomSheetBinding.root)
-        val mainActivity = requireActivity() as MainActivity
         
         // Title
-        BottomSheetHeaderBinding.bind(bottomSheetBinding.root).bottomSheetTitle.isVisible = false
+        BottomSheetHeaderBinding.bind(bottomSheetBinding.root).bottomSheetTitle.text = getString(R.string.support)
         
-        // Details
-        bottomSheetBinding.warnDetailsCard.setOnClickListener {
-            openURL(mainActivity, getString(R.string.dev_verf_warn_details_url))
-        }
-        
-        // Solutions
-        bottomSheetBinding.warnSolutionsCard.setOnClickListener {
-            openURL(mainActivity, getString(R.string.dev_verf_warn_solutions_url))
-        }
-        
-        // Don't show again
-        bottomSheetBinding.warnHideCheckbox.setOnCheckedChangeListener { _, isChecked ->
-            get<PreferenceManager>().setBoolean(SHOW_DEV_VERF_WARNING, !isChecked)
-        }
-        
-        footerBinding.positiveButton.isVisible = false
-        
-        // Dismiss
-        footerBinding.negativeButton.apply {
-            text = getString(R.string.dismiss)
+        // Proceed
+        footerBinding.positiveButton.apply {
+            visibility = View.VISIBLE
+            isEnabled = true
+            text = getString(R.string.proceed)
             setOnClickListener {
                 dismiss()
+                SupportMethodsBottomSheet().show(parentFragmentManager, "SupportBottomSheet")
             }
+        }
+        
+        // Cancel
+        footerBinding.negativeButton.apply {
+            text = getString(R.string.not_now)
+            setOnClickListener { dismiss() }
         }
     }
     

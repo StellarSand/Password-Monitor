@@ -30,7 +30,7 @@ import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textview.MaterialTextView
 import com.password.monitor.R
-import com.password.monitor.bottomsheets.SupportAnimBottomSheet
+import com.password.monitor.bottomsheets.common.SupportAnimBottomSheet
 import com.password.monitor.objects.AppState
 import com.password.monitor.preferences.PreferenceManager
 import com.password.monitor.preferences.PreferenceManager.Companion.LAST_SUPPORT_SHOWN_TIME

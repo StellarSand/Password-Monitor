@@ -37,9 +37,9 @@ import androidx.lifecycle.lifecycleScope
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.chip.Chip
 import com.password.monitor.activities.MainActivity
-import com.password.monitor.bottomsheets.ExceptionErrorBottomSheet
-import com.password.monitor.bottomsheets.NoNetworkBottomSheet
-import com.password.monitor.bottomsheets.ScanMultiPwdBottomSheet
+import com.password.monitor.bottomsheets.common.ExceptionErrorBottomSheet
+import com.password.monitor.bottomsheets.common.NoNetworkBottomSheet
+import com.password.monitor.bottomsheets.main.ScanMultiPwdBottomSheet
 import com.password.monitor.fragments.common.BaseResultsFragment
 import com.password.monitor.objects.AppState
 import com.password.monitor.preferences.PreferenceManager

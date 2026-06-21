@@ -15,7 +15,7 @@
  *     along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.password.monitor.bottomsheets
+package com.password.monitor.bottomsheets.common
 
 import com.password.monitor.R
 import kotlin.toString

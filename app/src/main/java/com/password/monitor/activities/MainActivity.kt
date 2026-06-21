@@ -28,7 +28,7 @@ import com.google.android.material.color.DynamicColors
 import com.password.monitor.appmanager.ApplicationManager
 import com.password.monitor.preferences.PreferenceManager.Companion.BLOCK_SS
 import com.password.monitor.R
-import com.password.monitor.bottomsheets.DevVerfWarnBottomSheet
+import com.password.monitor.bottomsheets.main.DevVerfWarnBottomSheet
 import com.password.monitor.databinding.ActivityMainBinding
 import com.password.monitor.objects.AppState
 import com.password.monitor.preferences.PreferenceManager
