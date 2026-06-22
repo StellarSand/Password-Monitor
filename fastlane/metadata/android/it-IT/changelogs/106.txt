@@ -1,0 +1,7 @@
+- Supporto per Android 16 e 17.
+- Copia, condivisione ed esportazione dei risultati della scansione.
+- Aggiunta l'opzione per cancellare automaticamente gli elementi copiati.
+- Risolvi i problemi di connessione durante l'utilizzo di proxy.
+- Formattazione dei numeri localizzata.
+- Scansione preliminare di più password aggiunte e visualizzazione dello stato di violazione nell'elenco.
+- Numerose ottimizzazioni.

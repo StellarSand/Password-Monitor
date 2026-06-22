@@ -1,0 +1,7 @@
+- Stöd för Android 16 och 17.
+- Kopiera, dela och exportera skanningsresultat.
+- Ny funktion för att automatiskt rensa kopierade objekt.
+- Åtgärda anslutningsproblem vid användning av proxyservrar.
+- Lokaliserad nummerformatering.
+- Förhandsgranska flera tillagda lösenord och visa säkerhetsstatus i listan.
+- Flera optimeringar.

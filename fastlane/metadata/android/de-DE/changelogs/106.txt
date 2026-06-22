@@ -1,0 +1,7 @@
+- Unterstützung für Android 16 und 17.
+- Scanergebnisse kopieren, teilen und exportieren.
+- Option zum automatischen Löschen kopierter Elemente hinzugefügt.
+- Verbindungsprobleme bei der Verwendung von Proxys beheben.
+- Lokalisierte Zahlenformatierung.
+- Vorab-Scan mehrerer hinzugefügter Passwörter und Anzeige des Sicherheitsstatus in der Liste.
+- Zahlreiche Optimierungen.

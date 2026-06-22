@@ -1,0 +1,7 @@
+- Android 16 ve 17 desteği.
+- Tarama sonuçlarını kopyalama, paylaşma ve dışa aktarma.
+- Kopyalanan öğeleri otomatik olarak silme seçeneği eklendi.
+- Proxy kullanırken yaşanan bağlantı sorunlarını giderin.
+- Yerelleştirilmiş sayı biçimlendirme.
+- Birden fazla şifreyi önceden tarama ve ihlal durumunu listede gösterme.
+- Çeşitli optimizasyonlar.

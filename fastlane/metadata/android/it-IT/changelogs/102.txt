@@ -1,1 +1,0 @@
-- Supporto per Android 15.

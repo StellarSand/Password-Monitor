@@ -1,0 +1,7 @@
+- Prise en charge d'Android 16 et 17.
+- Copier, partager et exporter les résultats de l'analyse.
+- Ajout d'une option permettant d'effacer automatiquement les éléments copiés.
+- Corriger les problèmes de connexion lors de l'utilisation de proxys.
+- Formatage localisé des nombres.
+- Analyse préalable de plusieurs mots de passe ajoutés et affichage de leur statut de violation dans la liste.
+- Diverses optimisations.

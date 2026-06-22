@@ -1,0 +1,7 @@
+- Compatibilidad con Android 16 y 17.
+- Copiar, compartir y exportar los resultados de los escaneos.
+- Se ha añadido la opción de borrar automáticamente los elementos copiados.
+- Soluciona problemas de conexión al utilizar proxies.
+- Formato de números adaptado al mercado local.
+- Escaneo previo de varias contraseñas añadidas y visualización del estado de las filtraciones en la lista.
+- Varias optimizaciones.

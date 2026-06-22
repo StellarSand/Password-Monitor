@@ -1,0 +1,7 @@
+- Ondersteuning voor Android 16 en 17.
+- Scanresultaten kopiëren, delen en exporteren.
+- Optie toegevoegd om gekopieerde items automatisch te wissen.
+- Los verbindingsproblemen op bij het gebruik van proxy's.
+- Aangepaste getalnotatie.
+- Meerdere toegevoegde wachtwoorden vooraf scannen en de status van inbreuken in de lijst weergeven.
+- Diverse optimalisaties.

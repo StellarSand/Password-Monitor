@@ -1,1 +1,0 @@
-- Prise en charge d'Android 15.
