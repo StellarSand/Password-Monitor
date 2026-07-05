@@ -31,7 +31,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal"
-            android:paddingHorizontal="@dimen/margin_16">
+            android:paddingHorizontal="@dimen/margin_16"
+            android:paddingVertical="@dimen/margin_8">
 
                 <ImageView
                     android:id="@+id/breached_status_icon"
@@ -48,11 +49,10 @@
                     android:id="@+id/password_line"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingHorizontal="@dimen/margin_12"
-                    android:paddingVertical="@dimen/margin_25"
+                    android:layout_marginStart="@dimen/margin_16"
+                    android:layout_gravity="center_vertical"
                     android:ellipsize="marquee"
                     android:text="@string/password"
-                    android:textAlignment="viewStart"
                     android:textColor="?attr/colorOnSurface"
                     android:textSize="@dimen/text_17" />
 

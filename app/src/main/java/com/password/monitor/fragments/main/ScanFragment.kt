@@ -62,8 +62,8 @@ class ScanFragment : BaseResultsFragment() {
     
     private lateinit var mainActivity: MainActivity
     private var isInitialLaunch = true
-    private var collapsingToolbarLargeHeightInPx = 0
-    private var collapsingToolbarTopInsets = -1
+    private var toolbarHeightInPx = 0
+    private var toolbarTopInsets = -1
     private var hashPrefix = ""
     private var hashSuffix = ""
     
@@ -74,21 +74,21 @@ class ScanFragment : BaseResultsFragment() {
         
         TypedValue().let {
             requireContext().theme.resolveAttribute(
-                com.google.android.material.R.attr.collapsingToolbarLayoutLargeSize,
+                android.R.attr.actionBarSize,
                 it,
                 true
             )
-            collapsingToolbarLargeHeightInPx = TypedValue.complexToDimensionPixelSize(it.data, displayMetrics)
+            toolbarHeightInPx = TypedValue.complexToDimensionPixelSize(it.data, displayMetrics)
         }
         
         // Adjust UI components for edge to edge
-        ViewCompat.setOnApplyWindowInsetsListener(fragmentBinding.collapsingToolbar) { _, windowInsets ->
-            if (collapsingToolbarTopInsets == -1) {
+        ViewCompat.setOnApplyWindowInsetsListener(fragmentBinding.toolbar) { _, windowInsets ->
+            if (toolbarTopInsets == -1) {
                 val insets =
                     windowInsets.getInsets(
                         WindowInsetsCompat.Type.systemBars() or WindowInsetsCompat.Type.displayCutout()
                     )
-                collapsingToolbarTopInsets = insets.top
+                toolbarTopInsets = insets.top
             }
             WindowInsetsCompat.CONSUMED
         }
@@ -117,23 +117,24 @@ class ScanFragment : BaseResultsFragment() {
             WindowInsetsCompat.CONSUMED
         }
         
-        // Set collapsing toolbar to center of screen for first time
+        // Set toolbar height to half height of whole screen (excluding status & nav bars),
+        // so that editText + button is at center of screen for first time.
+        // Half height because:
+        // everything inside toolbar has gravity = bottom, to account for button below it.
         // Don't move this within setOnApplyWindowInsetsListener() above
-        setCollapsingToolbarHeight(
-            (collapsingToolbarTopInsets + displayMetrics.heightPixels) / 2
-            - (64f * resources.displayMetrics.density).toInt()
+        setToolbarHeight(
+            (displayMetrics.heightPixels / 2) -
+            convertDpToPx(requireContext(), 64f)
+            // Bottom navigation bar height = 64dp
         )
         
         // Prevent dragging of appbar when scrollview is not visible
-        val appBarLayoutBehavior =
-            AppBarLayout.Behavior().also {
-                (fragmentBinding.appBar.layoutParams as CoordinatorLayout.LayoutParams).behavior = it
-            }
-        appBarLayoutBehavior.setDragCallback(object : AppBarLayout.Behavior.DragCallback() {
-            override fun canDrag(appBarLayout: AppBarLayout): Boolean {
-                return !isInitialLaunch
-            }
-        })
+        (((fragmentBinding.appBar.layoutParams as CoordinatorLayout.LayoutParams).behavior) as AppBarLayout.Behavior)
+            .setDragCallback(object : AppBarLayout.Behavior.DragCallback() {
+                override fun canDrag(appBarLayout: AppBarLayout): Boolean {
+                    return !isInitialLaunch
+                }
+            })
         
         fragmentBinding.passwordText.apply {
             if (get<PreferenceManager>().getBoolean(INCOG_KEYBOARD)) {
@@ -210,8 +211,8 @@ class ScanFragment : BaseResultsFragment() {
         }
     }
     
-    private fun setCollapsingToolbarHeight(height: Int) {
-        fragmentBinding.collapsingToolbar.apply {
+    private fun setToolbarHeight(height: Int) {
+        fragmentBinding.toolbar.apply {
             val params = layoutParams
             params.height = height
             layoutParams = params
@@ -241,9 +242,8 @@ class ScanFragment : BaseResultsFragment() {
             }
             if (isInitialLaunch) {
                 isInitialLaunch = false
-                fragmentBinding.appBar.setExpanded(false, true)
                 fragmentBinding.detailsCard.isVisible = true
-                setCollapsingToolbarHeight(collapsingToolbarTopInsets + collapsingToolbarLargeHeightInPx)
+                setToolbarHeight(toolbarTopInsets + toolbarHeightInPx)
             }
         }
     }
