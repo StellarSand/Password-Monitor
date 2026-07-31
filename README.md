@@ -49,7 +49,9 @@ This app seamlessly integrates with [Have I Been Pwned?](https://haveibeenpwned.
 
 
 ## Download
-**Disclaimer**: The Google Play account is not owned by me.
+> [!NOTE]
+> - The Google Play account is not owned by me.
+> - This app will be no longer be available on Google Play after September 2026. I don't agree to Google's new developer verification policy requirements. [Keep Android Open](https://keepandroidopen.org/).
 
 Reproducible builds are enabled, allowing you to install and upgrade the app from any of the following sources (except Google Play), interchangeably:
 
