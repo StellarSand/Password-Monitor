@@ -31,6 +31,12 @@ class ApiManager {
     
     companion object {
         
+        private val pwnedPassCerts =
+            arrayOf(
+            "sha256/kIdp6NNEd8wsugYyyIYFsi1ylMCED3hZbSR8ZFsa/A4=", // WE1
+            "sha256/mEflZT5enoR1FuXLgYYGqnVEoZvmf9c2bVBpiOjYQ0c=" // GTS Root R4
+        )
+        
         private val httpClient =
             HttpClient(OkHttp) {
                 engine {
@@ -43,7 +49,7 @@ class ApiManager {
                         connectionSpecs(listOf(ConnectionSpec.RESTRICTED_TLS, ConnectionSpec.MODERN_TLS))
                         certificatePinner(
                             CertificatePinner.Builder()
-                                .add("api.pwnedpasswords.com","sha256/mEflZT5enoR1FuXLgYYGqnVEoZvmf9c2bVBpiOjYQ0c=") // GTS Root R4
+                                .add("api.pwnedpasswords.com", *pwnedPassCerts)
                                 .build()
                         )
                     }
