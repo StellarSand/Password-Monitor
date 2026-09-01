@@ -36,6 +36,7 @@
     <dimen name="margin_6">6dp</dimen>
     <dimen name="margin_4">4dp</dimen>
     <dimen name="margin_2">2dp</dimen>
+    <dimen name="margin_1">1dp</dimen>
 
     <!--Text-->
     <dimen name="text_20">20sp</dimen>
@@ -44,5 +45,6 @@
     <dimen name="text_17">17sp</dimen>
     <dimen name="text_16">16sp</dimen>
     <dimen name="text_15">15sp</dimen>
+    <dimen name="text_14">15sp</dimen>
 
 </resources>

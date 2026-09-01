@@ -51,7 +51,15 @@
                     android:id="@+id/passwordBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:passwordToggleEnabled="true">
+                    app:passwordToggleEnabled="true"
+                    app:boxCornerRadiusTopStart="@dimen/margin_30"
+                    app:boxCornerRadiusTopEnd="@dimen/margin_30"
+                    app:boxCornerRadiusBottomStart="@dimen/margin_30"
+                    app:boxCornerRadiusBottomEnd="@dimen/margin_30"
+                    app:boxStrokeWidthFocused="0dp"
+                    app:boxStrokeWidth="0dp"
+                    app:boxBackgroundColor="?attr/colorSurfaceContainerHigh"
+                    style="?attr/textInputFilledStyle">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/passwordText"
@@ -69,13 +77,18 @@
                     android:id="@+id/progressIndicator"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_2"
+                    android:layout_marginTop="@dimen/margin_1"
+                    android:layout_marginHorizontal="@dimen/margin_22"
                     android:indeterminate="true"
                     app:showAnimationBehavior="inward"
                     app:hideAnimationBehavior="escape"
                     app:minHideDelay="400"
                     android:visibility="invisible"
                     tools:visibility="visible"/>
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/margin_2"/>
 
             </LinearLayout>
 
@@ -137,6 +150,7 @@
                         android:id="@+id/copyChip"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        app:chipStrokeColor="@color/chip_stroke_color"
                         app:chipIcon="@drawable/ic_copy"
                         android:text="@string/copy"
                         android:textSize="@dimen/text_15"/>
@@ -145,6 +159,7 @@
                         android:id="@+id/shareChip"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        app:chipStrokeColor="@color/chip_stroke_color"
                         app:chipIcon="@drawable/ic_share"
                         android:text="@string/share"
                         android:textSize="@dimen/text_15"/>
@@ -153,6 +168,7 @@
                         android:id="@+id/exportChip"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        app:chipStrokeColor="@color/chip_stroke_color"
                         app:chipIcon="@drawable/ic_export"
                         android:text="@string/export"
                         android:textSize="@dimen/text_15"/>
@@ -302,6 +318,8 @@
         android:layout_marginEnd="@dimen/margin_16"
         android:layout_marginBottom="@dimen/margin_25"
         android:src="@drawable/ic_scan_multiple_fab"
-        android:contentDescription="@string/scan_multi_pwds"/>
+        android:contentDescription="@string/scan_multi_pwds"
+        style="?attr/floatingActionButtonStyle"
+        app:materialThemeOverlay="@style/ThemeOverlay.Material3Expressive.FloatingActionButton.Primary"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

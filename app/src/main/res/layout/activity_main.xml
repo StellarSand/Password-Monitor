@@ -39,8 +39,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        app:itemTextAppearanceActive="@style/NavTextActive"
-        app:labelVisibilityMode="selected"
+        app:itemTextAppearanceActive="@style/NavItemTextActive"
+        app:itemTextAppearanceInactive="@style/NavItemTextInactive"
         app:menu="@menu/menu_bottom_nav"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

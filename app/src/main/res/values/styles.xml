@@ -27,9 +27,15 @@
     <!--#########################################################################################-->
 
     <!--Bottom Nav-->
-    <style name="NavTextActive" parent="MediumBoldText">
-        <item name="android:textSize">@dimen/text_15</item>
+    <style name="BaseNavItemText" parent="TextAppearance.Material3.LabelMedium">
+        <item name="android:textSize">@dimen/text_14</item>
     </style>
+
+    <style name="NavItemTextActive" parent="BaseNavItemText">
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="NavItemTextInactive" parent="BaseNavItemText"/>
 
     <!--#########################################################################################-->
 
@@ -42,7 +48,8 @@
 
     <!--Base theme chip style-->
     <style name="BaseThemeChipStyle" parent="Widget.Material3.Chip.Filter">
-        <item name="chipBackgroundColor">@color/chip_bg_color</item>
+        <item name="chipStrokeColor">@color/theme_chip_stroke_color</item>
+        <item name="chipBackgroundColor">@color/theme_chip_bg_color</item>
         <item name="chipSurfaceColor">@android:color/transparent</item>
         <item name="closeIconStartPadding">@dimen/margin_4</item>
         <item name="closeIconSize">24dp</item>

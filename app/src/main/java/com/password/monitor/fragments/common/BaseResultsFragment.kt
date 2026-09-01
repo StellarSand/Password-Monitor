@@ -17,6 +17,7 @@
 
 package com.password.monitor.fragments.common
 
+import android.animation.ArgbEvaluator
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
@@ -28,6 +29,8 @@ import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.fragment.app.Fragment
+import com.google.android.material.appbar.AppBarLayout
+import com.google.android.material.color.MaterialColors
 import com.password.monitor.R
 import com.password.monitor.databinding.FragmentScanBinding
 import com.password.monitor.utils.ClipboardUtils.Companion.hideSensitiveContent
@@ -61,8 +64,35 @@ abstract class BaseResultsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         
         clipboardManager = requireContext().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+        val argbEvaluator = ArgbEvaluator()
+        val colorSurfaceContainerHigh =
+            MaterialColors.getColor(
+                fragmentBinding.passwordBox,
+                com.google.android.material.R.attr.colorSurfaceContainerHigh
+            )
+        val colorSurfaceContainerHighest =
+            MaterialColors.getColor(
+                fragmentBinding.passwordBox,
+                com.google.android.material.R.attr.colorSurfaceContainerHighest
+            )
         
         fragmentBinding.passwordText.isSingleLine = true
+        
+        // Set surfaceContainerHighest color for text box background when appbar is lifted
+        // to prevent contrast issues
+        // This is also the default behavior of Material SearchView
+        fragmentBinding.appBar.addLiftOnScrollProgressListener(
+            object : AppBarLayout.LiftOnScrollProgressListener() {
+                override fun onUpdate(elevation: Float, backgroundColor: Int, progress: Float) {
+                    fragmentBinding.passwordBox.boxBackgroundColor =
+                        argbEvaluator.evaluate(
+                            progress,
+                            colorSurfaceContainerHigh,
+                            colorSurfaceContainerHighest
+                        ) as Int
+                }
+            }
+        )
         
         setupFragmentContent()
         
