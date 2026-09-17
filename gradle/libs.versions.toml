@@ -16,15 +16,15 @@
 #
 
 [versions]
-androidGradle = "9.3.2"
+androidGradle = "9.4.0"
 kotlinGradle = "2.4.10" # https://github.com/JetBrains/kotlin/releases/latest (latest version is not auto detected)
 appcompat = "1.8.0"
 coreKtx = "1.19.0"
 splashscreen = "1.2.0"
 material3 = "1.14.0"
 koin = "4.1.1" # v4.2.0 & above causes issues with backstack
-navigationKtx = "2.10.0"
-ktor = "3.5.2"
+navigationKtx = "2.10.1"
+ktor = "3.6.0"
 workRuntime = "2.11.2"
 androidFastscrollKt = "v1.0.8"
 lottie = "6.7.1"
