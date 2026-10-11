@@ -67,6 +67,7 @@ class DetailsFragment : BaseResultsFragment() {
                 isCursorVisible = false
             }
             checkBtn.isVisible = false
+            space.isVisible = false
             scanMultipleFab.isVisible = false
         }
         

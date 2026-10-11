@@ -17,11 +17,15 @@
 
 package com.password.monitor.activities
 
+import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.view.Window
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.ViewCompat
+import com.google.android.material.transition.platform.MaterialContainerTransform
+import com.google.android.material.transition.platform.MaterialContainerTransformSharedElementCallback
 import com.google.android.material.transition.platform.MaterialSharedAxis
 import com.password.monitor.R
 import com.password.monitor.databinding.ActivityDetailsBinding
@@ -39,15 +43,32 @@ class DetailsActivity : AppCompatActivity() {
     
     override fun onCreate(savedInstanceState: Bundle?) {
         enableEdgeToEdge()
+        val position = intent.getIntExtra("ItemPos", -1)
+        val sharedTransitionName = if (position != -1) "item_$position" else ""
         window.apply {
             setNavBarContrastEnforced()
             requestFeature(Window.FEATURE_CONTENT_TRANSITIONS)
             enterTransition = MaterialSharedAxis(MaterialSharedAxis.Z, true)
             returnTransition = MaterialSharedAxis(MaterialSharedAxis.Z, false)
+            setEnterSharedElementCallback(MaterialContainerTransformSharedElementCallback())
+            setExitSharedElementCallback(MaterialContainerTransformSharedElementCallback())
+            MaterialContainerTransform()
+                .apply {
+                    addTarget(sharedTransitionName)
+                    duration = 300L
+                    scrimColor = Color.TRANSPARENT
+                    fadeMode = MaterialContainerTransform.FADE_MODE_CROSS
+                }
+                .let {
+                    sharedElementEnterTransition = it
+                    sharedElementReturnTransition = it
+                }
         }
         super.onCreate(savedInstanceState)
         activityBinding = ActivityDetailsBinding.inflate(layoutInflater)
         setContentView(activityBinding.root)
+        
+        ViewCompat.setTransitionName(activityBinding.root, sharedTransitionName)
         
         // Disable screenshots and screen recordings
         window.blockScreenshots(get<PreferenceManager>().getBoolean(BLOCK_SS))

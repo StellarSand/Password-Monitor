@@ -92,10 +92,18 @@ class MultiPwdFragment : Fragment(), MultiPwdAdapter.OnItemClickListener {
     }
     
     // On click
-    override fun onItemClick(position: Int) {
-        startActivity(Intent(multiPwdActivity, DetailsActivity::class.java)
-                          .putExtra("PwdItem", MultiPwdList.pwdList[position]),
-                      ActivityOptions.makeSceneTransitionAnimation(multiPwdActivity).toBundle())
+    override fun onItemClick(itemView: View, position: Int) {
+        startActivity(
+            Intent(multiPwdActivity, DetailsActivity::class.java)
+                .putExtra("PwdItem", MultiPwdList.pwdList[position])
+                .putExtra("ItemPos", position),
+            
+            ActivityOptions.makeSceneTransitionAnimation(
+                multiPwdActivity,
+                itemView,
+                "item_$position"
+            ).toBundle()
+        )
     }
     
     override fun onDestroyView() {

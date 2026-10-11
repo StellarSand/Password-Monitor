@@ -32,7 +32,7 @@ class MultiPwdAdapter(private val aListViewItems: List<MultiPwd>,
                       private val clickListener: OnItemClickListener): RecyclerView.Adapter<ListViewHolder>(), PopupTextProvider {
     
     interface OnItemClickListener {
-        fun onItemClick(position: Int)
+        fun onItemClick(itemView: View, position: Int)
     }
     
     inner class ListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
@@ -48,7 +48,7 @@ class MultiPwdAdapter(private val aListViewItems: List<MultiPwd>,
         override fun onClick(v: View?) {
             val position = bindingAdapterPosition
             if (position != RecyclerView.NO_POSITION) {
-                clickListener.onItemClick(position)
+                clickListener.onItemClick(v!!, position)
             }
         }
         

@@ -28,6 +28,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import com.google.android.material.button.MaterialButton
+import com.google.android.material.transition.platform.MaterialContainerTransformSharedElementCallback
 import com.google.android.material.transition.platform.MaterialSharedAxis
 import com.password.monitor.R
 import com.password.monitor.bottomsheets.common.ExceptionErrorBottomSheet
@@ -64,6 +65,11 @@ class MultiPwdActivity : AppCompatActivity() {
             requestFeature(Window.FEATURE_CONTENT_TRANSITIONS)
             enterTransition = MaterialSharedAxis(MaterialSharedAxis.Y, true)
             returnTransition = MaterialSharedAxis(MaterialSharedAxis.Y, false)
+            
+            // This prevents the clicked item from flickering after transition,
+            // when returning from DetailsActivity
+            setExitSharedElementCallback(MaterialContainerTransformSharedElementCallback())
+            reenterTransition = null
         }
         super.onCreate(savedInstanceState)
         onBackPressedDispatcher.addCallback(this, onBackPressedCallback)
@@ -176,9 +182,11 @@ class MultiPwdActivity : AppCompatActivity() {
     }
     
     private fun MaterialButton.setViewButtonIcon() {
-        icon = ContextCompat.getDrawable(this@MultiPwdActivity,
-                                         if (!isGridView) R.drawable.ic_view_grid
-                                         else R.drawable.ic_view_list)
+        icon =
+            ContextCompat.getDrawable(
+                this@MultiPwdActivity,
+                if (!isGridView) R.drawable.ic_view_grid else R.drawable.ic_view_list
+            )
     }
     
     // On back pressed
