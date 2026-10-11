@@ -126,14 +126,21 @@
                 android:text="@string/check"
                 android:textSize="@dimen/text_16"/>
 
+            <Space
+                android:id="@+id/space"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/margin_16"
+                app:layout_constraintTop_toBottomOf="@id/checkBtn"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/detailsCard"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:layout_constraintTop_toBottomOf="@id/checkBtn"
+                app:layout_constraintTop_toBottomOf="@id/space"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginTop="@dimen/margin_16"
                 android:visibility="gone"
                 tools:visibility="visible">
 

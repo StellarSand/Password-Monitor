@@ -36,31 +36,20 @@
         android:id="@+id/detailsDockedToolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom">
+        android:layout_gravity="bottom"
+        style="?attr/dockedToolbarVibrantStyle">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:gravity="center_vertical">
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/detailsBackBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:icon="@drawable/ic_back"
-                android:tooltipText="@string/back"
-                style="?attr/materialIconButtonStyle"/>
-
-            <com.google.android.material.textview.MaterialTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin_8"
-                android:text="@string/details"
-                android:textColor="?attr/colorOnSurface"
-                style="@style/TextAppearance.Material3.TitleLarge"/>
-
-        </LinearLayout>
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/detailsBackBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            app:icon="@drawable/ic_back"
+            app:iconPadding="@dimen/margin_8"
+            android:text="@string/back"
+            android:textSize="@dimen/text_16"
+            android:tooltipText="@string/back"
+            style="?attr/materialIconButtonStyle"/>
 
     </com.google.android.material.dockedtoolbar.DockedToolbarLayout>
 

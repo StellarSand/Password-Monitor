@@ -67,6 +67,7 @@
         android:layout_marginBottom="@dimen/margin_16"
         android:clickable="true"
         android:focusable="true"
+        style="?attr/floatingToolbarVibrantStyle"
         app:layout_behavior="com.google.android.material.behavior.HideViewOnScrollBehavior">
 
         <androidx.constraintlayout.widget.ConstraintLayout
