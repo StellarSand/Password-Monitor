@@ -1,0 +1,2 @@
+- Onödiga behörigheter som införts av WorkManager har tagits bort.
+- Mindre förbättringar av användargränssnittet.

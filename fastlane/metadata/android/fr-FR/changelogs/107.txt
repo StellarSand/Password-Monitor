@@ -1,0 +1,2 @@
+- Suppression des autorisations inutiles introduites par WorkManager.
+- Légères améliorations de l’interface utilisateur.

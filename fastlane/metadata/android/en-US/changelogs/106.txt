@@ -1,7 +1,0 @@
-- Support for Android 16 & 17.
-- Copy, share & export scan results.
-- Added option to automatically clear copied items.
-- Fix connection issues when using proxies.
-- Localized number formatting.
-- Pre scan multiple added passwords & show breach status in list.
-- Multiple optimizations.

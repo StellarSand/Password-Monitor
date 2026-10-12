@@ -1,0 +1,2 @@
+- Removed unnecessary permissions introduced by WorkManager.
+- Minor UI improvements.

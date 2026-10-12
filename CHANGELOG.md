@@ -1,6 +1,11 @@
 # CHANGELOG
 
 
+## v1.0.7
+- Removed unnecessary permissions introduced by WorkManager.
+- Minor UI improvements.
+
+
 ## v1.0.6
 - Support for Android 16 & 17.
 - Copy, share & export scan results.

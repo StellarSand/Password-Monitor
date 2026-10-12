@@ -1,0 +1,2 @@
+- Onnodige machtigingen verwijderd die door WorkManager waren toegevoegd.
+- Kleine verbeteringen aan de gebruikersinterface.
